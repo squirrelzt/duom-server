@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import auth from './../../common/auth';
 import './css/home.css';
-import { Menu, Icon, Breadcrumb, Table, Divider } from 'antd';
+import { Menu, Icon, Divider } from 'antd';
 const { SubMenu }  = Menu;
 
 let columns = [{
@@ -185,19 +185,6 @@ class Home extends Component {
                 <section>
                     <div className="menu-display">
                         <Icon type="menu-fold" onClick={this.onMenuFold}/>
-                    </div>
-                    <div className="container">
-                        <div className="content">
-                            <div className="breadcrumb">
-                                <Breadcrumb>
-                                    <Breadcrumb.Item key="user-manage">用户管理</Breadcrumb.Item>
-                                    <Breadcrumb.Item key="user-list">用户列表</Breadcrumb.Item>
-                                </Breadcrumb>
-                            </div>
-                            <div className="user-list-table">
-                                {context}
-                            </div>
-                        </div>
                     </div>
                 </section>
             </div>

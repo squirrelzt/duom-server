@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Breadcrumb } from 'antd';
 import Nav from './../component/nav/nav.js';
 import Ftp from './../component/ftp/ftp.js';
 import Login from './../component/login/login.js';
@@ -38,8 +39,16 @@ ReactDOM.render((
       <Route path="/ftp" component = { Ftp } />
       <Route path='/login' component = { Login }/>
       <Route path='/home' component = { Home } />
-      <Route path='/home/user' component = { userSubCategory }/>
-      <Route path='/home/detail' component = { userDetailCategory }/>
+      <div className="content-container">
+        <div className="breadcrumb">
+            <Breadcrumb>
+                <Breadcrumb.Item key="user-manage">用户管理</Breadcrumb.Item>
+                <Breadcrumb.Item key="user-list">用户列表</Breadcrumb.Item>
+            </Breadcrumb>
+        </div>
+        <Route path='/home/user' component = { User }/>
+        <Route path='/home/detail' component = { Detail }/>
+      </div>
     </div>
   </Router>
 ),document.getElementById('root')
