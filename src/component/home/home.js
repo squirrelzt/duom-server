@@ -55,7 +55,7 @@ class Home extends Component {
     };
 
     componentWillMount(){
-        this.fetch();
+        // this.fetch();
     };
 
     fileList(item) {
@@ -80,11 +80,15 @@ class Home extends Component {
 
     }
     render() {
+        console.log("======================");
+        const context = this.props.children;
         return (
             <div id="home-container">
                 <aside>
                     <div className="aside-space"></div>
-                    <Menu mode="inline">
+                    <Menu mode="inline"
+                          defaultSelectedKeys = {['user-list']}
+                          defaultOpenKeys={['user-manage-menu']}>
                         <SubMenu key="user-manage-menu"
                                 title={
                                     <span>
@@ -93,7 +97,7 @@ class Home extends Component {
                                     </span>
                                 }>
                             <Menu.Item key="user-list">用户列表</Menu.Item>
-                            <Menu.Item key="user-detail">用户列表</Menu.Item>
+                            <Menu.Item key="user-detail">用户详情</Menu.Item>
                         </SubMenu>
                         <SubMenu key="job-resource-manage"
                                 title={
@@ -185,15 +189,12 @@ class Home extends Component {
                         <div className="content">
                             <div className="breadcrumb">
                                 <Breadcrumb>
-                                    <Breadcrumb.Item>用户管理</Breadcrumb.Item>
-                                    <Breadcrumb.Item>用户列表</Breadcrumb.Item>
+                                    <Breadcrumb.Item key="user-manage">用户管理</Breadcrumb.Item>
+                                    <Breadcrumb.Item key="user-list">用户列表</Breadcrumb.Item>
                                 </Breadcrumb>
                             </div>
                             <div className="user-list-table">
-                            <Table columns={columns}
-                                rowKey={data => data.userId} 
-                                dataSource={this.state.data}
-                                 />
+                                {context}
                             </div>
                         </div>
                     </div>
