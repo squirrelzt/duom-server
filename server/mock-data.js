@@ -207,4 +207,70 @@ router.post('/user/listIncomeRecords', function(req, res, next) {
         
     );
 });
+
+// 一级团队
+router.post('/user/listTeam1', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        [
+            {
+                "teamId": "0001",
+                "userId": "2019053A01",
+                "username": "13112345678"
+            },{
+                "teamId": "0002",
+                "userId": "2019053A02",
+                "username": "13112345678"
+            },{
+                "teamId": "0003",
+                "userId": "2019053A03",
+                "username": "13112345678"
+            },{
+                "teamId": "0004",
+                "userId": "2019053A04",
+                "username": "13112345678"
+            }
+        ]
+        
+    );
+});
+
+// 二级团队
+router.post('/user/listTeam2', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        [
+            {
+                "teamId": "0001",
+                "userId": "2019053A01",
+                "username": "13112345678"
+            },{
+                "teamId": "0002",
+                "userId": "2019053A02",
+                "username": "13112345678"
+            },{
+                "teamId": "0003",
+                "userId": "2019053A03",
+                "username": "13112345678"
+            },{
+                "teamId": "0004",
+                "userId": "2019053A04",
+                "username": "13112345678"
+            }
+        ]
+        
+    );
+});
 module.exports = router;
