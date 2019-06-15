@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import auth from './../../common/auth';
 import './css/home.css';
 import { Menu, Icon, Breadcrumb, Table, Divider } from 'antd';
@@ -96,8 +97,8 @@ class Home extends Component {
                                         <span>用户管理</span>
                                     </span>
                                 }>
-                            <Menu.Item key="user-list">用户列表</Menu.Item>
-                            <Menu.Item key="user-detail">用户详情</Menu.Item>
+                            <Menu.Item key="user-list"><Link to="/home/user">用户列表</Link></Menu.Item>
+                            <Menu.Item key="user-detail"><Link to="/home/detail">用户详情</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="job-resource-manage"
                                 title={

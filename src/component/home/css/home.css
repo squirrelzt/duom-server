@@ -18,6 +18,12 @@ aside .ant-menu {
     color: #b8b8b8;
     background: #121828;
 }
+aside .ant-menu-item a {
+    color: #b8b8b8;
+}
+aside .ant-menu-item-selected a {
+    color: #ffffff;
+}
 aside .ant-menu-item:hover, aside .ant-menu-item-active, aside .ant-menu-submenu-active, aside .ant-menu-submenu-title:hover {
     color: #ffffff;
     background: #3B548C;
@@ -43,9 +49,6 @@ section {
     line-height: 80px;
     padding-left: 50px;
     cursor: pointer;
-}
-.container {
-    /* background: #b8b8b8; */
 }
 .content {
     margin: 30px;
