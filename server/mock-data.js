@@ -273,4 +273,49 @@ router.post('/user/listTeam2', function(req, res, next) {
         
     );
 });
+
+// 任务信息
+router.post('/user/listJobs', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        [
+            {
+                "jobListId": "0001",
+                "jobId": "0001",
+                "jobname": "亦跑新增注册人员",
+                "commission": "100",
+                "state": "已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "jobListId": "0002",
+                "jobId": "0002",
+                "jobname": "亦跑新增注册人员",
+                "commission": "100",
+                "state": "已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "jobListId": "0003",
+                "jobId": "0003",
+                "jobname": "亦跑新增注册人员",
+                "commission": "100",
+                "state": "已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "jobListId": "0004",
+                "jobId": "0004",
+                "jobname": "亦跑新增注册人员",
+                "commission": "100",
+                "state": "已通过",
+                "time": "2016-09-05 15:00"
+            }
+        ]
+        
+    );
+});
 module.exports = router;

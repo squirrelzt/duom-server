@@ -6,6 +6,7 @@ const { TabPane } = Tabs;
 import UserInfo from './detail/userinfo';
 import Balance from './detail/balance';
 import Team from './detail/team';
+import JobInfo from './detail/jobinfo';
 
 class Detail extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class Detail extends Component {
                     <TabPane tab="用户信息" key="1"><UserInfo/></TabPane>
                     <TabPane tab="余额信息" key="2"><Balance/></TabPane>
                     <TabPane tab="团队信息" key="3"><Team/></TabPane>
-                    <TabPane tab="任务信息" key="4">任务信息</TabPane>
+                    <TabPane tab="任务信息" key="4"><JobInfo/></TabPane>
                 </Tabs>
             </div>
         )
