@@ -14,8 +14,6 @@ class UserInfo extends Component {
     }
     fetch(params = {}) {
         auth.fetch('/user/userinfo','post',params,(result)=>{
-            console.log("------------------");
-            console.log(result);
             this.setState({
                 data: result
             })

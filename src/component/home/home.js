@@ -81,7 +81,6 @@ class Home extends Component {
 
     }
     render() {
-        console.log("======================");
         const context = this.props.children;
         return (
             <div id="home-container">

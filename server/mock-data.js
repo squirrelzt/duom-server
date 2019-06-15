@@ -109,4 +109,102 @@ router.post('/user/userinfo', function(req, res, next) {
         }
     );
 });
+
+// 提现记录
+router.post('/user/listDrawRecords', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        [
+            {
+                "drawId": "0001",
+                "drawAmount": "200.00",
+                "balance": "200.00",
+                "alipayCode": "XXXXXXX@qq.com",
+                "name": "张云飞",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "drawId": "0002",
+                "drawAmount": "200.00",
+                "balance": "200.00",
+                "alipayCode": "XXXXXXX@qq.com",
+                "name": "张云飞",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "drawId": "0003",
+                "drawAmount": "200.00",
+                "balance": "200.00",
+                "alipayCode": "XXXXXXX@qq.com",
+                "name": "张云飞",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "drawId": "0004",
+                "drawAmount": "200.00",
+                "balance": "200.00",
+                "alipayCode": "XXXXXXX@qq.com",
+                "name": "张云飞",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            }
+        ]
+        
+    );
+});
+
+// 收入记录
+router.post('/user/listIncomeRecords', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        [
+            {
+                "id": "0001",
+                "incomeAmount": "200.00",
+                "incomeType": "任务佣金",
+                "jobName": "XX拉新任务",
+                "teamMemberId": "13112345678",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "id": "0002",
+                "incomeAmount": "100.00",
+                "incomeType": "一级队员任务分佣",
+                "jobName": "XX拉新任务",
+                "teamMemberId": "13112345678",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "id": "0003",
+                "incomeAmount": "98.00",
+                "incomeType": "级队员任务分佣",
+                "jobName": "XX拉新任务",
+                "teamMemberId": "13112345678",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            },{
+                "id": "0004",
+                "incomeAmount": "72.00",
+                "incomeType": "任务佣金",
+                "jobName": "XX拉新任务",
+                "teamMemberId": "13112345678",
+                "state": " 已通过",
+                "time": "2016-09-05 15:00"
+            }
+        ]
+        
+    );
+});
 module.exports = router;

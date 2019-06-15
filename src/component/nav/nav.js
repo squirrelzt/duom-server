@@ -12,8 +12,6 @@ class Nav extends Component {
 
     render() {
         const context = this.props.children;
-        console.log('------------------------');
-        console.log(context);
         return (
             <div className="layout-aside" >
                 <div className="layout-main" >

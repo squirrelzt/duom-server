@@ -1,0 +1,23 @@
+.total {
+    height: 80px;
+    /* line-height: 80px; */
+    text-align: center;
+    background: #e8e8e8;
+}
+.total-section {
+    margin-top: 20px;
+    line-height: 20px;
+    float: left;
+    width: 33%;
+    text-align: center;
+}
+.drawed {
+    float: left;
+    width: 33%;
+    text-align: center;
+}
+.added {
+    float: right;
+    width: 33%;
+    text-align: center;
+}
