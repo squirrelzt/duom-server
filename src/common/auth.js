@@ -20,7 +20,8 @@ module.exports = {
     });
   },
   getPath(){
-    return '';
-      // return 'http://localhost:8080'
+    // return '';
+      // return 'http://localhost:8080';
+    return 'http://47.96.117.246/swagger-ui.html?from=singlemessage#'
   }
 }

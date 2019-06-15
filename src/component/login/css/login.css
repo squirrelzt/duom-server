@@ -1,0 +1,114 @@
+body {
+    /* margin: 0; */
+}
+#login-container {
+    width: 100%;
+    /* margin: 0 auto; */
+    color: #FFFFFF;
+    background: #373D4B;
+}
+nav {
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'SimHei';
+    margin-left: auto;
+    margin-right: auto;
+}
+.telephone {
+    margin-top: 80px;
+}
+.telephone, .verify-code {
+    margin-left: auto;
+    margin-right: auto;
+    width: 686px;
+    border-bottom: 2px solid #e9e9e9;
+}
+.telephone input, .verify-code input {
+    border: none;
+    margin-bottom: 20px;
+}
+.telephone input:focus, .verify-code input:focus {
+    outline: none;
+    border: none;
+}
+.telephone img:first {
+    float: left;
+    margin-left: 32px;
+}
+.verify-code img:last-child {
+    float: right;
+    cursor: pointer;
+    padding-top: 10px;
+}
+.telephone button, .verify-code button {
+    border: none;
+    background: transparent;
+}
+.telephone button:focus, .verify-code button:focus {
+    outline: none;
+    border: none;
+}
+.telephone button:hover, .verify-code button:hover {
+    cursor: pointer;
+}
+.telephone-input, .verify-code-input {
+    margin-left: 23px;
+    width: 460px;
+    font-size: 30px;
+    font-family: 'SourceHanSansCN light';
+    color: #999999;
+    background: #373D4B;
+}
+.verify-code {
+    margin-top: 111px;
+}
+.verify-code-send-btn {
+    float: right;
+    font-family: 'SourceHanSansCN light';
+    font-size: 26px;
+    color: #ffffff;
+}
+.error {
+    margin-left: auto;
+    margin-right: auto;
+    width: 686px;
+    margin-top: 13px;
+    font-family: 'SourceHanSansCN Nomal';
+    font-size: 20px;
+    color: #F20201;
+}
+.telephoneError {
+    visibility: hidden;
+}
+.verifyCodeError {
+    visibility: hidden;
+}
+.login-commit button {
+    text-align: center;
+}
+.login-commit button:hover {
+    background-color: #1890ff;
+    cursor: pointer;
+} 
+.login-btn {
+    outline: none;
+    margin-top: 80px;
+    width: 698px;
+    height: 100px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    font-size: 36px;
+    font-family: 'SourceHanSansCN light';
+    color: #FFFFFF;
+    background-color: #121828;
+    border: 1px solid #121828;
+    border-radius: 50px;
+}
+.tip {
+    width: 698px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
