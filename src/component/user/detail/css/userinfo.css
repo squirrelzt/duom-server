@@ -1,0 +1,27 @@
+.userinfo-container section {
+    margin-left: 0px;
+}
+.userinfo-detail-ul {
+    margin-left: 30px;
+}
+.userinfo-detail-li {
+    height: 45px;
+    line-height: 45px;
+}
+.copy {
+    margin-left: 50px;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    color: #ffffff;
+    background: #1890ff;
+    border: 1px solid #1890ff;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+}
+.copy:hover {
+    color: #e8e8e8;
+    background: #3B548C;
+    border: 1px solid #3B548C;
+}

@@ -27,7 +27,7 @@ app.use(history({
 
 app.use(express.static(__dirname + '../src/entry'));
 
-// app.use("/", mockData);
+app.use("/", mockData);
 
 app.get('*/', function(req, res) {
     res.sendFile(path.join(__dirname, './../dist/index.html'));

@@ -88,4 +88,25 @@ router.post('/user/listUsers', function(req, res, next) {
         ]
     );
 });
+
+// 用户详情
+router.post('/user/userinfo', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        {
+            "userId": "20190526A01",
+            "userName": "13112344321",
+            "registerTime": "2019-05-19 19:24:59",
+            "channel": "XXXX渠道",
+            "url": "https:www.xxxx.com/xxx/xxx",
+            "remark": "XXXXXXXXXXXX"
+        }
+    );
+});
 module.exports = router;

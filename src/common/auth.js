@@ -4,6 +4,7 @@ module.exports = {
   fetch(url, method, params, callback) {
     let api = this.getPath();
     reqwest({
+      mode:'no-cors',
       url: api+url,
       method: method,
       data: params,
@@ -20,8 +21,8 @@ module.exports = {
     });
   },
   getPath(){
-    // return '';
+    return '';
       // return 'http://localhost:8080';
-    return 'http://47.96.117.246/swagger-ui.html?from=singlemessage#'
+    // return 'http://47.96.117.246/swagger-ui.html?from=singlemessage#'
   }
 }

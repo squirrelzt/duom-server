@@ -3,6 +3,7 @@ import auth from './../../common/auth';
 import './css/detail.css';
 import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
 const { TabPane } = Tabs;
+import UserInfo from './detail/userinfo';
 
 class Detail extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class Detail extends Component {
         return (
             <div id="user-container">
                 <Tabs defaultActiveKey="1" onChange={this.callback}>
-                    <TabPane tab="用户信息" key="1">用户信息</TabPane>
+                    <TabPane tab="用户信息" key="1"><UserInfo/></TabPane>
                     <TabPane tab="余额信息" key="2">余额信息</TabPane>
                     <TabPane tab="团队信息" key="3">团队信息</TabPane>
                     <TabPane tab="任务信息" key="4">任务信息</TabPane>
