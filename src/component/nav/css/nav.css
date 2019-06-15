@@ -1,0 +1,20 @@
+.header {
+    height: 80px;
+    background-color: #0696d3;
+}
+
+.title{
+    color: #FFFFFF;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 80px;
+    text-align: center;
+}
+.layout-container {
+    width: 900px;
+    height: 1000px;
+}
+.layout-content {
+    width: 900px;
+    height: 1000px;
+}
