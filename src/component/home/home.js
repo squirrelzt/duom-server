@@ -1,8 +1,41 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import auth from './../../common/auth';
 import './css/home.css';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Breadcrumb, Table, Divider } from 'antd';
 const { SubMenu }  = Menu;
+
+let columns = [{
+    title: '用户ID',
+    dataIndex: 'userId'
+  },{
+    title: '用户名',
+    dataIndex: 'userName'
+  },{
+    title: '上级用户ID',
+    dataIndex: 'leaderId'
+  },{
+    title: '渠道',
+    dataIndex: 'channel'
+  },{
+    title: '状态',
+    dataIndex: 'state'
+  },{
+    title: '注册时间',
+    dataIndex: 'registerTime'
+  },{
+    title: '余额',
+    dataIndex: 'balance'
+  },{
+    title: '操作',
+    dataIndex: 'operation',
+    render(text, record) {
+        return <span>
+                    <a href="">冻结</a>
+                    <Divider type="vertical" />
+                    <a href="">查看详情</a>
+                </span>;
+    }
+  }];
 
 class Home extends Component {
     constructor(props) {
@@ -12,7 +45,7 @@ class Home extends Component {
         };
     }
     fetch(params = {}) {
-        auth.fetch('/ftp/listFiles','post',params,(result)=>{
+        auth.fetch('/user/listUsers','post',params,(result)=>{
             console.log("------------------");
             console.log(result);
             this.setState({
@@ -22,7 +55,7 @@ class Home extends Component {
     };
 
     componentWillMount(){
-        // this.fetch();
+        this.fetch();
     };
 
     fileList(item) {
@@ -32,7 +65,6 @@ class Home extends Component {
                     <div className="dir-img dir-img" />
                     <div className="monitor-file">{item.filename}</div>
                 </div>
-
             )
         } else {
             return (
@@ -148,6 +180,22 @@ class Home extends Component {
                 <section>
                     <div className="menu-display">
                         <Icon type="menu-fold" onClick={this.onMenuFold}/>
+                    </div>
+                    <div className="container">
+                        <div className="content">
+                            <div className="breadcrumb">
+                                <Breadcrumb>
+                                    <Breadcrumb.Item>用户管理</Breadcrumb.Item>
+                                    <Breadcrumb.Item>用户列表</Breadcrumb.Item>
+                                </Breadcrumb>
+                            </div>
+                            <div className="user-list-table">
+                            <Table columns={columns}
+                                rowKey={data => data.userId} 
+                                dataSource={this.state.data}
+                                 />
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
