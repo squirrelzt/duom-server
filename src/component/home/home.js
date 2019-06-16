@@ -45,18 +45,11 @@ class Home extends Component {
             data: []
         };
     }
-    fetch(params = {}) {
-        auth.fetch('/user/listUsers','post',params,(result)=>{
-            console.log("------------------");
-            console.log(result);
-            this.setState({
-                data: result
-            })
-        });
-    };
 
     componentWillMount(){
-        // this.fetch();
+        if (localStorage.token == null) {
+            this.props.history.push('/login');
+          }
     };
 
     fileList(item) {

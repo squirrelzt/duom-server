@@ -53,6 +53,9 @@ class JobSource extends Component {
     };
 
     componentWillMount(){
+        if (localStorage.token == null) {
+            this.props.history.push('/login');
+          }
         this.fetch();
     };
     callback() {

@@ -48,18 +48,22 @@ class User extends Component {
         };
     }
     fetch(params = {}) {
-        console.log(localStorage.token);
-        auth.fetch('/v1/users/c','get',params,(result)=>{
-            console.log("------------------");
-            console.log(result);
+      auth.fetch('/v1/users/c','get',params,(result)=>{
+          console.log("------------------");
+          console.log(result);
+          if ("1" != result) {
             this.setState({
-                data: result
-            })
-        });
+              data: result
+            });
+          }
+      });
     };
 
-    componentWillMount(){
-        this.fetch();
+    componentWillMount() {
+      if (localStorage.token == null) {
+        this.props.history.push('/login');
+      }
+      this.fetch();
     };
     callback() {
 

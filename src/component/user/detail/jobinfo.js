@@ -44,6 +44,9 @@ class JobInfo extends Component {
     };
 
     componentWillMount(){
+        if (localStorage.token == null) {
+            this.props.history.push('/login');
+          }
         this.fetch();
         this.props.form.validateFields();
     };
