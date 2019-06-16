@@ -47,7 +47,7 @@ module.exports = {
   getPath(){
     // return '';
       // return 'http://localhost:8080';
-    return 'http://47.96.117.246';
-    // return 'http://192.168.125.104:8080';
+    // return 'http://47.96.117.246';
+    return 'http://192.168.125.104:8080';
   }
 }

@@ -6,19 +6,28 @@ const { TabPane } = Tabs;
 
 let columns = [{
     title: '任务来源渠道ID',
-    dataIndex: 'jobSourceChannelId'
+    dataIndex: 'id'
   },{
     title: '任务来源渠道名',
-    dataIndex: 'jobSourceChannelName'
+    dataIndex: 'name'
+  },{
+    title: '余额',
+    dataIndex: 'balance'
   },{
     title: '状态',
-    dataIndex: 'state'
+    dataIndex: 'status'
   },{
     title: '平台服务费',
-    dataIndex: 'platformFee'
+    dataIndex: 'platformScale'
   },{
     title: '备注',
     dataIndex: 'remark'
+  },{
+    title: '是否删除',
+    dataIndex: 'isDeleted'
+  },{
+    title: '创建时间',
+    dataIndex: 'createTime'
   },{
     title: '操作',
     dataIndex: 'operation',
@@ -43,12 +52,14 @@ class JobSource extends Component {
         };
     }
     fetch(params = {}) {
-        auth.fetch('/jobsource/listJobSourceChannels','post',params,(result)=>{
+        auth.fetch('/v1/user/' + localStorage.userId + '/channelfroms','get',{},(result)=>{
             console.log("------------------");
             console.log(result);
-            this.setState({
-                data: result
-            })
+            if ("1" != result) {
+                this.setState({
+                    data: result
+                });
+            }
         });
     };
 
@@ -56,10 +67,15 @@ class JobSource extends Component {
         if (localStorage.token == null) {
             this.props.history.push('/login');
           }
-        this.fetch();
+        this.fetch({
+            "idList": []
+        });
     };
     callback() {
 
+    }
+    onQuery() {
+        
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -84,7 +100,7 @@ class JobSource extends Component {
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                            <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())} onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
@@ -97,7 +113,7 @@ class JobSource extends Component {
                </div>
                 <div className="user-list-table">
                     <Table columns={columns}
-                        rowKey={data => data.jobSourceChannelId} 
+                        rowKey={data => data.id} 
                         dataSource={this.state.data}
                         />
                 </div>
