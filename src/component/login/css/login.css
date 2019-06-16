@@ -103,6 +103,16 @@ nav {
 .verifyCodeError {
     visibility: hidden;
 }
+.login-error {
+    visibility: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    width: 686px;
+    margin-top: 13px;
+    font-family: 'SourceHanSansCN Nomal';
+    font-size: 20px;
+    color: #F20201;
+}
 .login-commit button {
     text-align: center;
 }

@@ -6,22 +6,25 @@ const { TabPane } = Tabs;
 
 let columns = [{
     title: '用户ID',
-    dataIndex: 'userId'
+    dataIndex: 'id'
   },{
     title: '用户名',
-    dataIndex: 'userName'
+    dataIndex: 'username'
   },{
     title: '上级用户ID',
-    dataIndex: 'leaderId'
+    dataIndex: 'userIdUpper'
   },{
-    title: '渠道',
-    dataIndex: 'channel'
+    title: '任务来源渠道',
+    dataIndex: 'channelFromId'
+  },{
+    title: '任务推广渠道',
+    dataIndex: 'channelToId'    
   },{
     title: '状态',
-    dataIndex: 'state'
+    dataIndex: 'status'
   },{
-    title: '注册时间',
-    dataIndex: 'registerTime'
+    title: '手机号',
+    dataIndex: 'phone'
   },{
     title: '余额',
     dataIndex: 'balance'
@@ -45,7 +48,8 @@ class User extends Component {
         };
     }
     fetch(params = {}) {
-        auth.fetch('/user/listUsers','post',params,(result)=>{
+        console.log(localStorage.token);
+        auth.fetch('/v1/users/c','get',params,(result)=>{
             console.log("------------------");
             console.log(result);
             this.setState({
@@ -55,7 +59,7 @@ class User extends Component {
     };
 
     componentWillMount(){
-        // this.fetch();
+        this.fetch();
     };
     callback() {
 
@@ -65,7 +69,7 @@ class User extends Component {
             <div id="user-container">
                 <div className="user-list-table">
                     <Table columns={columns}
-                        rowKey={data => data.userId} 
+                        rowKey={data => data.id} 
                         dataSource={this.state.data}
                         />
                 </div>

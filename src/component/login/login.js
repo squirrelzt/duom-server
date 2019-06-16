@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import $ from "jquery";
 import auth from './../../common/auth';
 import './css/login.css';
@@ -57,13 +56,17 @@ class Login extends Component {
     }
     fetch(params = {}) {
         auth.fetch('/v1/token','post',params,(result)=>{
-            if (result) {
-                localStorage.token = result.token;
-                localStorage.userId = result.userId;
-                this.props.history.push('/home/user')
-                // window.location.href="/home/user";
-                return <Redirect push to="/home/user" />;
-            }
+            localStorage.token = result.token;
+            localStorage.userId = result.userId;
+            this.props.history.push('/home/user');
+            // if ("200" == result) {
+            //     localStorage.token = result.token;
+            //     localStorage.userId = result.userId;
+            //     this.props.history.push('/home/user')
+            // } else {
+            //     $('.login-error').css('visibility', 'visible');
+            //     $('.login-error').val('登录失败' + result);
+            // }
         });
     };
     clearVerifyCode() {
@@ -117,6 +120,9 @@ class Login extends Component {
                 </div>
                 <div className="login-commit">
                     <button className="login-btn" onClick={this.login.bind(this)}>登录</button>
+                </div>
+                <div className="login-error">
+                    <p>登录失败</p>
                 </div>
             </div>
         )

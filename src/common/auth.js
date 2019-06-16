@@ -3,14 +3,16 @@ import reqwest from 'reqwest';
 module.exports = {
   fetch(url, method, params, callback) {
     let api = this.getPath();
+    let headers = this.getHeaders(url);
     reqwest({
-      url: api+url,
+      url: api + url,
       method: method,
+      headers:headers,
       data: params,
       type: 'json',
       success: (result) => {
-        // console.log("---------------------");
-        // console.log(result);
+        console.log("---------------------");
+        console.log(result);
         callback(result);
       },
       error: (err) => {
@@ -27,6 +29,20 @@ module.exports = {
        
       }
     });
+  },
+
+  // 判断header中是否有token
+  getHeaders(url) {
+    // 获取验证码接口和获取token接口
+    if (url.indexOf("/v1/token") != -1 || "/v1/token" == url) {
+      return {};
+    } else {
+      let headers = {
+        "Accept": "*/*",
+        "DUOM_HEADER": localStorage.token
+      };
+      return headers;
+    }
   },
   getPath(){
     // return '';
