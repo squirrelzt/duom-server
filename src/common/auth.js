@@ -9,13 +9,17 @@ module.exports = {
       data: params,
       type: 'json',
       success: (result) => {
-        console.log("---------------------");
-        console.log(result)
+        // console.log("---------------------");
+        // console.log(result);
         callback(result);
       },
       error: (err) => {
         if (err.status == 767) {
-          callback("send success");
+          callback(err.status);
+        } else if(err.status == 400) {
+          callback(err.status);
+        } else if (err.status == 401) {
+          window.location.href="/login";
         } else {
           console.log(err);
           callback({result:'1',msg:err});

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import $ from "jquery";
 import auth from './../../common/auth';
 import './css/login.css';
@@ -40,17 +41,31 @@ class Login extends Component {
                     time--;
                 }
             }, 1000);
-            if ("send success" == result) {
-                $('.send-success').css('visibility', 'visible');
-                $('.send-fail').css('visibility', 'hidden');
-            } else {
+            if ("767" == result) {
                 $('.send-success').css('visibility', 'hidden');
                 $('.send-fail').css('visibility', 'visible');
+                $('.send-fail').val('用户不存在');
+            }else if("200" == result) {
+                $('.send-success').css('visibility', 'visible');
+                $('.send-fail').css('visibility', 'hidden');
+            } else if ("400" == result) {
+                $('.send-success').css('visibility', 'hidden');
+                $('.send-fail').css('visibility', 'visible');
+                $('.send-fail').val('输入错误');
             }
-            
         });
     }
-
+    fetch(params = {}) {
+        auth.fetch('/v1/token','post',params,(result)=>{
+            if (result) {
+                localStorage.token = result.token;
+                localStorage.userId = result.userId;
+                this.props.history.push('/home/user')
+                // window.location.href="/home/user";
+                return <Redirect push to="/home/user" />;
+            }
+        });
+    };
     clearVerifyCode() {
         $('.verify-code-input').val('');
         $('.verifyCodeError').css('visibility', 'hidden');
@@ -68,12 +83,10 @@ class Login extends Component {
             return;
         }
         var verifyCode = $('.verify-code-input').val();
-        // TODO login ajax
-
-        // test
-        // if (verifyCode != '123456') {
-        //     $('.verifyCodeError').css('visibility', 'visible');
-        // }
+        this.fetch({
+            "phone": telephone,
+            "verifyCode": verifyCode
+        });
     }
 
     render() {
@@ -103,7 +116,7 @@ class Login extends Component {
                     <p>输入验证码错误</p>
                 </div>
                 <div className="login-commit">
-                    <button className="login-btn" onClick={this.login}>登录</button>
+                    <button className="login-btn" onClick={this.login.bind(this)}>登录</button>
                 </div>
             </div>
         )

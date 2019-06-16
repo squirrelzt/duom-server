@@ -55,7 +55,7 @@ class User extends Component {
     };
 
     componentWillMount(){
-        this.fetch();
+        // this.fetch();
     };
     callback() {
 
