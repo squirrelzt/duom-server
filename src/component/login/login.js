@@ -14,16 +14,6 @@ class Login extends Component {
     componentWillMount(){
     }
 
-    fetch(params = {}) {
-        auth.fetch('/v1/verfyCode','post',params,(result)=>{
-            console.log("------------------");
-            console.log(result);
-            this.setState({
-                data: result
-            })
-        });
-    };
-
     sendVerifyCode() {
         let flag = true;
         let reg = /^1[3|4|5|7|8][0-9]\d{8,11}$/;
@@ -37,28 +27,28 @@ class Login extends Component {
         if (!flag) {
             return;
         }
-        // this.fetch({
-        //     "phone": telephone
-        // });
-        auth.fetch('/v1/verfyCode','post',{"phone": telephone},(result)=>{
-            console.log("------------------");
-            console.log(result);
-            this.setState({
-                data: result
-            })
+        auth.fetch('/v1/verfyCode?phone='+telephone,'post', {}, (result)=>{
+            $('.verify-code-send-btn').attr('disabled', true);
+            let time = 60;
+            let timer = setInterval( function() {
+                if (time == 0) {
+                    clearInterval(timer);
+                    $('.verify-code-send-btn').text('重新发送');
+                    $('.verify-code-send-btn').attr('disabled', false);
+                } else {
+                    $('.verify-code-send-btn').text(time + '秒');
+                    time--;
+                }
+            }, 1000);
+            if ("send success" == result) {
+                $('.send-success').css('visibility', 'visible');
+                $('.send-fail').css('visibility', 'hidden');
+            } else {
+                $('.send-success').css('visibility', 'hidden');
+                $('.send-fail').css('visibility', 'visible');
+            }
+            
         });
-        $('.verify-code-send-btn').attr('disabled', true);
-        let time = 60;
-        let timer = setInterval( function() {
-             if (time == 0) {
-                 clearInterval(timer);
-                 $('.verify-code-send-btn').text('重新发送');
-                 $('.verify-code-send-btn').attr('disabled', false);
-             } else {
-                 $('.verify-code-send-btn').text(time + '秒');
-                 time--;
-             }
-        }, 1000);
     }
 
     clearVerifyCode() {
@@ -93,7 +83,13 @@ class Login extends Component {
                 <div className="telephone">
                     <img className="telephone-img" src={require("./images/ic_phone.png")}/>
                     <input className="telephone-input" placeholder="请输入手机号" />
-                    <button className="verify-code-send-btn" onClick={this.sendVerifyCode}>发送验证码</button>
+                    <button className="verify-code-send-btn" onClick={this.sendVerifyCode.bind(this)}>发送验证码</button>
+                </div>
+                <div className="send-success">
+                    <p>验证码发送成功</p>
+                </div>
+                <div className="send-fail">
+                    <p>验证码发送失败</p>
                 </div>
                 <div className="error telephoneError">
                     <p>手机号格式错误</p>
