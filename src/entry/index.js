@@ -8,6 +8,7 @@ import Login from './../component/login/login.js';
 import Home from './../component/home/home.js';
 import User from './../component/user/user.js';
 import Detail from './../component/user/detail.js';
+import JobSource from './../component/jobsource/jobsource.js';
 import './../common/lib.js';
 import './css/index.css';
 
@@ -48,6 +49,7 @@ ReactDOM.render((
         </div>
         <Route path='/home/user' component = { User }/>
         <Route path='/home/detail' component = { Detail }/>
+        <Route path='/home/jobsource' component = { JobSource }/>
       </div>
     </div>
   </Router>

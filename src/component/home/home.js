@@ -106,6 +106,7 @@ class Home extends Component {
                                         <span>任务来源渠道管理</span>
                                     </span>
                                 }>
+                            <Menu.Item key="channel-manage"><Link to="/home/jobsource">渠道管理</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-manage"
                                 title={

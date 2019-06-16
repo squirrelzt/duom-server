@@ -318,4 +318,51 @@ router.post('/user/listJobs', function(req, res, next) {
         
     );
 });
+
+// 渠道查询
+router.post('/jobsource/listJobSourceChannels', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        [
+            {
+                "jobSourceChannelId": "20190526A01",
+                "jobSourceChannelName": "QQ空间",
+                "state": "启用",
+                "platformFee": "20%",
+                "remark": "已通过"
+            }, {
+                "jobSourceChannelId": "20190526A09",
+                "jobSourceChannelName": "微信朋友圈",
+                "state": "启用",
+                "platformFee": "20%",
+                "remark": "已通过"
+            }, {
+                "jobSourceChannelId": "20190526A10",
+                "jobSourceChannelName": "百度新闻",
+                "state": "启用",
+                "platformFee": "20%",
+                "remark": "已通过"
+            }, {
+                "jobSourceChannelId": "20190526A11",
+                "jobSourceChannelName": "今日头条",
+                "state": "禁用",
+                "platformFee": "20%",
+                "remark": "已通过"
+            }, {
+                "jobSourceChannelId": "20190526A12",
+                "jobSourceChannelName": "新浪微博",
+                "state": "禁用",
+                "platformFee": "20%",
+                "remark": "已通过"
+            }
+        ]
+        
+    );
+});
 module.exports = router;

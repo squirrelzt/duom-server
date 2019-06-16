@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import auth from './../../../common/auth';
 import './css/jobinfo.css';
 import { Menu, Icon, Breadcrumb, Table, Divider, Form, Input, Button, DatePicker, Select } from 'antd';
-const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 let columns = [{
@@ -94,10 +93,10 @@ class JobInfo extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="状态">
-                            {getFieldDecorator('state')(
-                                <Select defaultValue="agree">
-                                    <Option value="agree">已通过</Option>
-                                    <Option value="reject">被驳回</Option>
+                            {getFieldDecorator('state', {initialValue: "已通过"})(
+                                <Select>
+                                    <Select.Option value="agree">已通过</Select.Option>
+                                    <Select.Option value="reject">被驳回</Select.Option>
                                 </Select>,
                             )}
                         </Form.Item>
@@ -120,7 +119,7 @@ class JobInfo extends Component {
                </div>
                <div className="">
                     <Table columns={columns}
-                            rowKey={data => data.drawId} 
+                            rowKey={data => data.jobListId} 
                             dataSource={this.state.data}
                             />
                </div>

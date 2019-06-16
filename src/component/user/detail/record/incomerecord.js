@@ -50,7 +50,7 @@ class IncomeRecord extends Component {
         return (
             <div id="incomerecord-container">
                <Table columns={columns}
-                        rowKey={data => data.userId} 
+                        rowKey={data => data.id} 
                         dataSource={this.state.data}
                         />
             </div>
