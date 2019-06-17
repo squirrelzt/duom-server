@@ -1,52 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../common/auth';
 import './css/home.css';
-import { Menu, Icon, Divider } from 'antd';
+import { Menu, Icon, Divider, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
-
-let columns = [{
-    title: '用户ID',
-    dataIndex: 'userId'
-  },{
-    title: '用户名',
-    dataIndex: 'userName'
-  },{
-    title: '上级用户ID',
-    dataIndex: 'leaderId'
-  },{
-    title: '渠道',
-    dataIndex: 'channel'
-  },{
-    title: '状态',
-    dataIndex: 'state'
-  },{
-    title: '注册时间',
-    dataIndex: 'registerTime'
-  },{
-    title: '余额',
-    dataIndex: 'balance'
-  },{
-    title: '操作',
-    dataIndex: 'operation',
-    render(text, record) {
-        return <span>
-                    <a href="">冻结</a>
-                    <Divider type="vertical" />
-                    <a href="">查看详情</a>
-                </span>;
-    }
-  }];
+import breadcrumbconfig from './breadcrumbconfig';
 
 class Home extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            currentPage: "",
+            defaultOpenKeys: []
         };
     }
 
     componentWillMount(){
+    //      // test
+    //   localStorage.token = "qweraetstetxdgsyewrywryewry";
+    //   localStorage.userId = "123";
+    //   // test
       if (localStorage.token == null) {
         this.props.history.push('/login');
       }
@@ -74,14 +47,53 @@ class Home extends Component {
 
     }
     render() {
-        const context = this.props.children;
+        // console.log("+++++++++++++++++++");
+        // console.log(this.props.location.pathname);
+        let url = this.props.location.pathname;
+        let breadcrumbItem = [];
+        let urlArray = [];
+        if (url.substr(0,1) == "/") {
+            urlArray = url.replace("/", "").split("/");
+        } else {
+            urlArray = url.split("/");
+        }
+        if (urlArray[urlArray.length - 1] == "") {              //如果URL最后一个元素是/,即数组最后一个元素为空，则删掉
+            urlArray.pop();
+        }
+        console.log('urlArray=' + urlArray);
+        breadcrumbconfig.getBreadcrumbUrl().map(item => {
+            let paramsUrl = "";
+            for (let i = 0; i < item.params.length; i++) {
+              paramsUrl += "/" + url[Number(item.catalog) + 1 + i]
+            }
+            if (urlArray[item.catalog] == item.key) {
+                if (item.catalog == "0") {
+                    breadcrumbItem.push(
+                        <Breadcrumb.Item key = {item.key}>{item.name}</Breadcrumb.Item>
+                      );
+                } else {
+                    breadcrumbItem.push(
+                        <Breadcrumb.Item key = {item.key}>
+                          <Link to = {item.path + paramsUrl}>{item.name}</Link>
+                        </Breadcrumb.Item>
+                    );
+                }
+                
+            }
+          });
+          this.state.currentPage = urlArray[1];
+          if (this.state.currentPage == "list" || this.state.currentPage == "detail") {
+            this.state.defaultOpenKeys.push("user-manage-menu");
+          } else if (this.state.currentPage == "channel") {
+            this.state.defaultOpenKeys.push("job-resource-manage");
+          }
         return (
             <div id="home-container">
                 <aside>
                     <div className="aside-space"></div>
                     <Menu mode="inline"
-                          defaultSelectedKeys = {['user-list']}
-                          defaultOpenKeys={['user-manage-menu']}>
+                          selectedKeys={[this.state.currentPage]}
+                          defaultOpenKeys={this.state.defaultOpenKeys}>
                         <SubMenu key="user-manage-menu"
                                 title={
                                     <span>
@@ -89,8 +101,8 @@ class Home extends Component {
                                         <span>用户管理</span>
                                     </span>
                                 }>
-                            <Menu.Item key="user-list"><Link to="/home/user">用户列表</Link></Menu.Item>
-                            <Menu.Item key="user-detail"><Link to="/home/detail">用户详情</Link></Menu.Item>
+                            <Menu.Item key="list"><Link to="/user/list">用户列表</Link></Menu.Item>
+                            <Menu.Item key="detail"><Link to="/user/detail">用户详情</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="job-resource-manage"
                                 title={
@@ -99,7 +111,7 @@ class Home extends Component {
                                         <span>任务来源渠道管理</span>
                                     </span>
                                 }>
-                            <Menu.Item key="channel-manage"><Link to="/home/jobsource">渠道管理</Link></Menu.Item>
+                            <Menu.Item key="channel"><Link to="/job/channel">渠道管理</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-manage"
                                 title={
@@ -180,6 +192,11 @@ class Home extends Component {
                         <Icon type="menu-fold" onClick={this.onMenuFold}/>
                     </div>
                 </section>
+                <div className="breadcrumb">
+                    <Breadcrumb>
+                        {breadcrumbItem}
+                    </Breadcrumb>
+                </div>
             </div>
         )
     }

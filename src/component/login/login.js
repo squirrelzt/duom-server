@@ -58,7 +58,7 @@ class Login extends Component {
         auth.fetch('/v1/token','post',params,(result)=>{
             localStorage.token = result.token;
             localStorage.userId = result.userId;
-            this.props.history.push('/home/user');
+            this.props.history.push('/user/list');
             // if ("200" == result) {
             //     localStorage.token = result.token;
             //     localStorage.userId = result.userId;

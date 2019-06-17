@@ -49,8 +49,8 @@ class User extends Component {
     }
     fetch(params = {}) {
       auth.fetch('/v1/users/c','get',params,(result)=>{
-          console.log("------------------");
-          console.log(result);
+          // console.log("------------------");
+          // console.log(result);
           if ("1" != result) {
             this.setState({
               data: result
@@ -60,13 +60,13 @@ class User extends Component {
     };
 
     componentWillMount() {
-      // test
-      localStorage.token = "qweraetstetxdgsyewrywryewry";
-      localStorage.userId = "123";
-      // test
-      // if (localStorage.token == null) {
-      //   this.props.history.push('/login');
-      // }
+      // // test
+      // localStorage.token = "qweraetstetxdgsyewrywryewry";
+      // localStorage.userId = "123";
+      // // test
+      if (localStorage.token == null) {
+        this.props.history.push('/login');
+      }
       this.fetch();
     };
     callback() {

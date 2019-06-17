@@ -18,7 +18,7 @@ module.exports = {
         // new CleanWebpackPlugin(),
     	new HtmlWebpackPlugin({
 				favicon:'./src/entry/images/favicon.ico',
-							title: '用户管理'
+							title: '后台管理系统'
 			}),
         new ManifestPlugin(),
         new webpack.NamedModulesPlugin(),

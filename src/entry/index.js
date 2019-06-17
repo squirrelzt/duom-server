@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Breadcrumb } from 'antd';
 import Login from './../component/login/login.js';
 import Home from './../component/home/home.js';
@@ -24,18 +24,14 @@ ReactDOM.render(
   (
   <Router>
     <div>
-    <Route path='/home' component = { Home } />
-      <Route path='/login' component = { Login }/>
+      <Switch>
+        <Route path='/login' component = { Login }/>
+        <Route path='/' component = { Home } />
+      </Switch>
         <div className="content-container">
-          <div className="breadcrumb">
-              <Breadcrumb>
-                  <Breadcrumb.Item key="user-manage">用户管理</Breadcrumb.Item>
-                  <Breadcrumb.Item key="user-list">用户列表</Breadcrumb.Item>
-              </Breadcrumb>
-          </div>
-          <Route path='/home/user' component = { User }/>
-          <Route path='/home/detail' component = { Detail }/>
-          <Route path='/home/jobsource' component = { JobSource }/>
+          <Route path='/user/list' component = { User }/>
+          <Route path='/user/detail' component = { Detail }/>
+          <Route path='/job/channel' component = { JobSource }/>
         </div>
     </div>
   </Router>

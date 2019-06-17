@@ -295,6 +295,50 @@ router.post('/user/listJobs', function(req, res, next) {
     );
 });
 
+// 渠道管理
+router.get('/v1/user/123/channelfroms', function(req, res, next) {
+    console.log("------------------------------");
+    // var language = req.body['language'];
+    // var token = req.body['token'];
+    // var returnUrl = req.body['returnUrl'];
+    // console.log(language);
+    // console.log(token);
+    // console.log(returnUrl);
+    res.json(
+        [
+            {
+                "id": "0001",
+                "name": "亦跑新增注册人员",
+                "balance": "100",
+                "status": "已通过",
+                "platformScale": "100",
+                "remark": "2016-09-05 15:00",
+                "isDeleted": "1",
+                "createTime": "2019-06-17 10:00:00"
+            }, {
+                "id": "0002",
+                "name": "亦跑新增注册人员",
+                "balance": "亦跑新增注册人员",
+                "status": "已通过",
+                "platformScale": "100",
+                "remark": "2016-09-05 15:00",
+                "isDeleted": "1",
+                "createTime": "2019-06-17 10:00:00"
+            }, {
+                "id": "0003",
+                "name": "亦跑新增注册人员",
+                "balance": "亦跑新增注册人员",
+                "status": "已通过",
+                "platformScale": "200",
+                "remark": "222",
+                "isDeleted": "1",
+                "createTime": "2019-06-17 10:00:00"
+            }
+        ]
+        
+    );
+});
+
 // 渠道查询
 router.post('/jobsource/listJobSourceChannels', function(req, res, next) {
     console.log("------------------------------");
