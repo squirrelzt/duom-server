@@ -47,9 +47,9 @@ class Home extends Component {
     }
 
     componentWillMount(){
-        if (localStorage.token == null) {
-            this.props.history.push('/login');
-          }
+      if (localStorage.token == null) {
+        this.props.history.push('/login');
+      }
     };
 
     fileList(item) {

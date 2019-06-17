@@ -1,40 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
 
-router.post('/ftp/listFiles', function(req, res, next) {
-    console.log("------------------------------");
-    // var language = req.body['language'];
-    // var token = req.body['token'];
-    // var returnUrl = req.body['returnUrl'];
-    // console.log(language);
-    // console.log(token);
-    // console.log(returnUrl);
-    res.json(
-        [
-            {
-                "filename":"1000",
-                "filePath":null,
-                "directory":true,
-                "subFiles":[
-                    {
-                        "filename":"2018",
-                        "filePath":null,
-                        "directory":true,
-                        "subFiles":null
-                    }
-                ]
-            }, {
-            "filename": "20190325.txt",
-            "filePath": null,
-            "directory": false,
-            "subFiles": null
-        }
-        ]
-    );
-});
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // 用户列表
-router.post('/user/listUsers', function(req, res, next) {
+router.get('/v1/users/c', urlencodedParser, function(req, res, next) {
     console.log("------------------------------");
     // var language = req.body['language'];
     // var token = req.body['token'];
@@ -45,45 +16,50 @@ router.post('/user/listUsers', function(req, res, next) {
     res.json(
         [
             {
-                "userId": "20190526A01",
+                "id": "20190526A01",
                 "userName": "13112344321",
-                "leaderId": "13112344321",
-                "channel": "XXXX渠道",
-                "state": "正常",
-                "registerTime": "2019-05-19 19:24:59",
+                "userIdUpper": "13112344321",
+                "channelFromId": "XXXX渠道",
+                "channelToId": "YYY渠道",
+                "status": "正常",
+                "phone": "13111111111",
                 "balance": "200.00"
             },{
-                "userId": "20190526A09",
+                "id": "20190526A02",
                 "userName": "13112344321",
-                "leaderId": "13112344321",
-                "channel": "XXXX渠道",
-                "state": "正常",
-                "registerTime": "2019-05-19 19:24:59",
-                "balance": "10,1000.00"
-            },{
-                "userId": "20190526A10",
-                "userName": "13112344321",
-                "leaderId": "13112344321",
-                "channel": "XXXX渠道",
-                "state": "正常",
-                "registerTime": "2019-05-19 19:24:59",
-                "balance": "10,1000.00"
-            },{
-                "userId": "20190526A11",
-                "userName": "13112344321",
-                "leaderId": "13112344321",
-                "channel": "XXXX渠道",
-                "state": "已冻结",
-                "registerTime": "2019-05-19 19:24:59",
+                "userIdUpper": "13112344321",
+                "channelFromId": "XXXX渠道",
+                "channelToId": "YYY渠道",
+                "status": "正常",
+                "phone": "13111111111",
                 "balance": "200.00"
             },{
-                "userId": "20190526A12",
+                "id": "20190526A03",
                 "userName": "13112344321",
-                "leaderId": "13112344321",
-                "channel": "XXXX渠道",
-                "state": "已冻结",
-                "registerTime": "2019-05-19 19:24:59",
-                "balance": "10,1000.00"
+                "userIdUpper": "13112344321",
+                "channelFromId": "XXXX渠道",
+                "channelToId": "YYY渠道",
+                "status": "正常",
+                "phone": "13111111111",
+                "balance": "200.00"
+            },{
+                "id": "20190526A04",
+                "userName": "13112344321",
+                "userIdUpper": "13112344321",
+                "channelFromId": "XXXX渠道",
+                "channelToId": "YYY渠道",
+                "status": "正常",
+                "phone": "13111111111",
+                "balance": "200.00"
+            },{
+                "id": "20190526A05",
+                "userName": "13112344321",
+                "userIdUpper": "13112344321",
+                "channelFromId": "XXXX渠道",
+                "channelToId": "YYY渠道",
+                "status": "异常",
+                "phone": "13111111111",
+                "balance": "200.00"
             }
         ]
     );

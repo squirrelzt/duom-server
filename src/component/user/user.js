@@ -60,9 +60,13 @@ class User extends Component {
     };
 
     componentWillMount() {
-      if (localStorage.token == null) {
-        this.props.history.push('/login');
-      }
+      // test
+      localStorage.token = "qweraetstetxdgsyewrywryewry";
+      localStorage.userId = "123";
+      // test
+      // if (localStorage.token == null) {
+      //   this.props.history.push('/login');
+      // }
       this.fetch();
     };
     callback() {

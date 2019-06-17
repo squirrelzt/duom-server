@@ -11,8 +11,8 @@ module.exports = {
       data: params,
       type: 'json',
       success: (result) => {
-        console.log("---------------------");
-        console.log(result);
+        // console.log("---------------------");
+        // console.log(result);
         callback(result);
       },
       error: (err) => {
@@ -42,12 +42,13 @@ module.exports = {
         "DUOM_HEADER": localStorage.token
       };
       return headers;
+      // return {};
     }
   },
   getPath(){
     // return '';
       // return 'http://localhost:8080';
-    // return 'http://47.96.117.246';
-    return 'http://192.168.125.104:8080';
+    return 'http://47.96.117.246';
+    // return 'http://192.168.125.104:8080';
   }
 }
