@@ -107,7 +107,7 @@ class Home extends Component {
                         <SubMenu key="job-resource-manage"
                                 title={
                                     <span>
-                                        <Icon type="edit"></Icon>
+                                        <Icon type="apartment"></Icon>
                                         <span>任务来源渠道管理</span>
                                     </span>
                                 }>
@@ -124,7 +124,7 @@ class Home extends Component {
                         <SubMenu key="channel-commission-list"
                                 title={
                                     <span>
-                                        <Icon type="setting"></Icon>
+                                        <Icon type="shopping-cart"></Icon>
                                         <span>用户推广渠道佣金列表</span>
                                     </span>
                                 }>
@@ -132,7 +132,7 @@ class Home extends Component {
                         <SubMenu key="extension-commison-record"
                                 title={
                                     <span>
-                                        <Icon type="setting"></Icon>
+                                        <Icon type="profile"></Icon>
                                         <span>用户推广渠道佣金发放记录</span>
                                     </span>
                                 }>
@@ -140,7 +140,7 @@ class Home extends Component {
                         <SubMenu key="finance-setting"
                                 title={
                                     <span>
-                                        <Icon type="setting"></Icon>
+                                        <Icon type="pay-circle"></Icon>
                                         <span>财务设置</span>
                                     </span>
                                 }>
@@ -148,7 +148,7 @@ class Home extends Component {
                         <SubMenu key="commission-withdraw-list"
                                 title={
                                     <span>
-                                        <Icon type="setting"></Icon>
+                                        <Icon type="export"></Icon>
                                         <span>佣金提现列表</span>
                                     </span>
                                 }>
@@ -156,7 +156,7 @@ class Home extends Component {
                         <SubMenu key="job-order-manage"
                                 title={
                                     <span>
-                                        <Icon type="setting"></Icon>
+                                        <Icon type="appstore"></Icon>
                                         <span>任务工单管理</span>
                                     </span>
                                 }>
@@ -164,7 +164,7 @@ class Home extends Component {
                         <SubMenu key="job-tab-manage"
                                 title={
                                     <span>
-                                        <Icon type="setting"></Icon>
+                                        <Icon type="projecthttps://www.baidu.com/?tn=39042058_41_oem_dg"></Icon>
                                         <span>任务标签管理</span>
                                     </span>
                                 }>
@@ -172,7 +172,7 @@ class Home extends Component {
                         <SubMenu key="finance-statis"
                                 title={
                                     <span>
-                                        <Icon type="setting"></Icon>
+                                        <Icon type="account-book"></Icon>
                                         <span>财务统计</span>
                                     </span>
                                 }>
