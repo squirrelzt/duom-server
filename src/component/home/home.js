@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './css/home.css';
-import { Menu, Icon, Divider, Breadcrumb } from 'antd';
+import { Menu, Icon, Button, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
 import breadcrumbconfig from './breadcrumbconfig';
 import $ from "jquery";
@@ -42,6 +42,11 @@ class Home extends Component {
         $('.menuFoldIcon').css('display', 'block');
         $('.menuUnFoldIcon').css('display', 'none');
     }
+    logout() {
+        localStorage.token = "";
+        localStorage.userId = "";
+        window.location.href="/login";
+    }
     render() {
         // console.log("+++++++++++++++++++");
         // console.log(this.props.location.pathname);
@@ -56,7 +61,7 @@ class Home extends Component {
         if (urlArray[urlArray.length - 1] == "") {              //如果URL最后一个元素是/,即数组最后一个元素为空，则删掉
             urlArray.pop();
         }
-        console.log('urlArray=' + urlArray);
+        // console.log('urlArray=' + urlArray);
         breadcrumbconfig.getBreadcrumbUrl().map(item => {
             let paramsUrl = "";
             for (let i = 0; i < item.params.length; i++) {
@@ -187,6 +192,10 @@ class Home extends Component {
                     <div className="menu-display">
                         <Icon className="menuFoldIcon" type="menu-fold" onClick={this.onMenuFold}/>
                         <Icon className="menuUnFoldIcon" type="menu-unfold" style={{display: 'none'}} onClick={this.onMenuUnFold}/>
+                        <div className="logout">
+                            <span>当前用户: {localStorage.userId}</span>
+                            <Button size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
+                        </div>
                     </div>
                 </section>
                 <div className="breadcrumb">
