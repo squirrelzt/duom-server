@@ -49,6 +49,7 @@ section {
     line-height: 80px;
     padding-left: 50px;
     cursor: pointer;
+    text-align: left;
 }
 .breadcrumb {
     margin-left: 240px;

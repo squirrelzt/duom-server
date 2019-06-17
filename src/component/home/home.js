@@ -4,6 +4,7 @@ import './css/home.css';
 import { Menu, Icon, Divider, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
 import breadcrumbconfig from './breadcrumbconfig';
+import $ from "jquery";
 
 class Home extends Component {
     constructor(props) {
@@ -25,26 +26,21 @@ class Home extends Component {
       }
     };
 
-    fileList(item) {
-        if (item.directory) {
-            return (
-                <div>
-                    <div className="dir-img dir-img" />
-                    <div className="monitor-file">{item.filename}</div>
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <div className="dir-img txt-img" />
-                    <div className="monitor-file">{item.filename}</div>
-                </div>
-            )
-        }
-    };
     onMenuFold() {
-        // console.log("------------------");
-
+        $('#home-container aside').css('display', 'none');
+        $('#home-container section').css('margin-left', '0');
+        $('#home-container > .breadcrumb').css('margin-left', '0');
+        $('.content-container').css('margin-left', '0');
+        $('.menuFoldIcon').css('display', 'none');
+        $('.menuUnFoldIcon').css('display', 'block');
+    }
+    onMenuUnFold() {
+        $('#home-container aside').css('display', 'block');
+        $('#home-container section').css('margin-left', '240px');
+        $('#home-container > .breadcrumb').css('margin-left', '240px');
+        $('.content-container').css('margin-left', '240px');
+        $('.menuFoldIcon').css('display', 'block');
+        $('.menuUnFoldIcon').css('display', 'none');
     }
     render() {
         // console.log("+++++++++++++++++++");
@@ -189,7 +185,8 @@ class Home extends Component {
                 </aside>
                 <section>
                     <div className="menu-display">
-                        <Icon type="menu-fold" onClick={this.onMenuFold}/>
+                        <Icon className="menuFoldIcon" type="menu-fold" onClick={this.onMenuFold}/>
+                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{display: 'none'}} onClick={this.onMenuUnFold}/>
                     </div>
                 </section>
                 <div className="breadcrumb">
