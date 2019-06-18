@@ -4,6 +4,7 @@ import './css/channelList.css';
 import { Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
 const { TabPane } = Tabs;
 import JobBasicInfo from './jobbasicinfo';
+import JobManage from './jobmanage';
 
 class ChannelList extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class ChannelList extends Component {
             <div id="channelList-container">
                 <Tabs defaultActiveKey="1" onChange={this.callback.bind(this)}>
                     <TabPane tab="基本信息" key="1"><JobBasicInfo  {...this.props} init={this.state.data}/></TabPane>
-                    <TabPane tab="任务信息" key="2">任务信息</TabPane>
+                    <TabPane tab="任务管理" key="2"><JobManage {...this.props} /></TabPane>
                     <TabPane tab="任务核销" key="3">任务核销</TabPane>
                     <TabPane tab="财务明细" key="4">财务明细</TabPane>
                 </Tabs>
