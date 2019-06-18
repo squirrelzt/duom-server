@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Breadcrumb } from 'antd';
 import Login from './../component/login/login.js';
 import Home from './../component/home/home.js';
 import User from './../component/user/user.js';
@@ -33,7 +32,7 @@ ReactDOM.render(
           <Route path='/user/list' component = { User }/>
           <Route path='/user/detail' component = { Detail }/>
           <Route path='/job/channel' component = { JobSource }/>
-          <Route path='/job/list/basicinfo' component = { ChannelList }/>
+          <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
         </div>
     </div>
   </Router>

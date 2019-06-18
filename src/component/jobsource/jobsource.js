@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import auth from './../../common/auth';
 import './css/jobsource.css';
 import { Table, Divider, Form, Input, Button, Select } from 'antd';
@@ -55,7 +56,7 @@ let columns = [{
         return <span>
                     <a href="">禁用</a>
                     <Divider type="vertical" />
-                    <a href="">查看详情</a>
+                    <Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link>
                 </span>;
     }
   }];
@@ -122,9 +123,9 @@ class JobSource extends Component {
     componentWillMount(){
         if (localStorage.token == null) {
             this.props.history.push('/login');
-          }
+        }
         this.fetch();
-    };
+    }
     onQuery(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {

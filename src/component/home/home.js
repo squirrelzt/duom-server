@@ -117,7 +117,6 @@ class Home extends Component {
                                     </span>
                                 }>
                             <Menu.Item key="channel"><Link to="/job/channel">渠道管理</Link></Menu.Item>
-                            <Menu.Item key="basicinfo"><Link to="/job/list/basicinfo">基本信息</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-manage"
                                 title={
