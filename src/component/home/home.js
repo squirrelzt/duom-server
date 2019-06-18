@@ -20,6 +20,7 @@ class Home extends Component {
     //      // test
     //   localStorage.token = "qweraetstetxdgsyewrywryewry";
     //   localStorage.userId = "123";
+       console.log(localStorage.token);
     //   // test
       if (localStorage.token == null) {
         this.props.history.push('/login');

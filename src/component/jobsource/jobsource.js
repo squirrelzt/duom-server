@@ -15,7 +15,17 @@ let columns = [{
     dataIndex: 'balance'
   },{
     title: '状态',
-    dataIndex: 'status'
+    dataIndex: 'status',
+    render(text) {
+        switch (text) {
+            case 0:
+              return <span>启用</span>;
+              break;
+            case 1:
+              return <span>禁用</span>;
+              break;
+          }
+    }
   },{
     title: '平台服务费',
     dataIndex: 'platformScale'
@@ -74,9 +84,16 @@ class JobSource extends Component {
     callback() {
 
     }
-    onQuery() {
-        
-    }
+    onQuery(e) {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+          if (!err) {
+            this.fetch({
+                params: JSON.stringify(values)
+            });
+          }
+        });
+      }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
@@ -87,20 +104,20 @@ class JobSource extends Component {
                  <div className="">
                      <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item label="任务来源渠道">
-                            {getFieldDecorator('jobSourceChannel')(
+                            {getFieldDecorator('id')(
                                 <Input placeholder="请输入渠道ID/渠道名" />,
                             )}
                         </Form.Item>
                         <Form.Item label="状态">
-                            {getFieldDecorator('state', {initialValue: "已通过"})(
+                            {getFieldDecorator('status', {initialValue: "0"})(
                                 <Select>
-                                    <Select.Option value="agree">已通过</Select.Option>
-                                    <Select.Option value="reject">被驳回</Select.Option>
+                                    <Select.Option value="0">启用</Select.Option>
+                                    <Select.Option value="1">禁用</Select.Option>
                                 </Select>,
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())} onClick={this.onQuery}>
+                            <Button type="primary" onClick={this.onQuery.bind(this)}>
                                 查询
                             </Button>
                         </Form.Item>
