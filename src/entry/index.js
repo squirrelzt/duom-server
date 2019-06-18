@@ -7,6 +7,7 @@ import Home from './../component/home/home.js';
 import User from './../component/user/user.js';
 import Detail from './../component/user/detail.js';
 import JobSource from './../component/jobsource/jobsource.js';
+import ChannelList from './../component/jobsource/channellist/channellist.js';
 import './../common/lib.js';
 import './css/index.css';
 
@@ -32,6 +33,7 @@ ReactDOM.render(
           <Route path='/user/list' component = { User }/>
           <Route path='/user/detail' component = { Detail }/>
           <Route path='/job/channel' component = { JobSource }/>
+          <Route path='/job/list/basicinfo' component = { ChannelList }/>
         </div>
     </div>
   </Router>

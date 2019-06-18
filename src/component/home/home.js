@@ -84,9 +84,12 @@ class Home extends Component {
             }
           });
           this.state.currentPage = urlArray[1];
-          if (this.state.currentPage == "list" || this.state.currentPage == "detail") {
+          if ((this.state.currentPage == "list" && urlArray[0] == "user") || this.state.currentPage == "detail") {
             this.state.defaultOpenKeys.push("user-manage-menu");
           } else if (this.state.currentPage == "channel") {
+            this.state.defaultOpenKeys.push("job-resource-manage");
+          } else if (urlArray[0] == "job" && this.state.currentPage == "list") {
+            this.state.currentPage = urlArray[2];
             this.state.defaultOpenKeys.push("job-resource-manage");
           }
         return (
@@ -114,6 +117,7 @@ class Home extends Component {
                                     </span>
                                 }>
                             <Menu.Item key="channel"><Link to="/job/channel">渠道管理</Link></Menu.Item>
+                            <Menu.Item key="basicinfo"><Link to="/job/list/basicinfo">基本信息</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-manage"
                                 title={
