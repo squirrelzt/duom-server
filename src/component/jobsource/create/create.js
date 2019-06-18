@@ -59,8 +59,8 @@ class Create extends Component {
         return (
             <Modal id="user-source-create-container"
                 title="新增渠道"
-                onOk = { this.handOk }
-                onCancel = { this.handleReset }
+                onOk = { this.handOk.bind(this) }
+                onCancel = { this.handleReset.bind(this) }
                 visible = { this.state.visible }
                 footer = {[]}>
                  <div className="">

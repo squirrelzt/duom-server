@@ -186,7 +186,7 @@ class JobSource extends Component {
                <div className="user-source-add">
                    <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
                </div>
-               <Create init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
+               <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 
