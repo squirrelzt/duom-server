@@ -1,0 +1,10 @@
+.form-btn {
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 200px;
+}
+.save {
+    float: left;
+    margin-right: 30px;
+}

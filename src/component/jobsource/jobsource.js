@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import auth from './../../common/auth';
 import './css/jobsource.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs, Form, Input, Button, DatePicker, Select } from 'antd';
-const { TabPane } = Tabs;
+import { Table, Divider, Form, Input, Button, Select } from 'antd';
+import Create from './create/create';
 
 let columns = [{
     title: '任务来源渠道ID',
@@ -34,7 +34,17 @@ let columns = [{
     dataIndex: 'remark'
   },{
     title: '是否删除',
-    dataIndex: 'isDeleted'
+    dataIndex: 'isDeleted',
+    render(text) {
+        switch (text) {
+            case 0:
+              return <span>否</span>;
+              break;
+            case 1:
+              return <span>是</span>;
+              break;
+          }
+    }
   },{
     title: '创建时间',
     dataIndex: 'createTime'
@@ -50,21 +60,57 @@ let columns = [{
     }
   }];
 
-  function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-  }
-
 class JobSource extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            createVisible: false
         };
     }
-    fetch(params = {}) {
-        auth.fetch('/v1/user/' + localStorage.userId + '/channelfroms','get',{},(result)=>{
-            console.log("------------------");
-            console.log(result);
+    fetch(params) {
+        let postParams = '';
+        if (params != null) {
+            let id = params.id;
+            let name = params.name;
+            let remark = params.remark;
+            let status = params.status;
+            let platformScale = params.platformScale;
+            
+            if (id != null) {
+                postParams += '?id=' + id;
+            }
+            if (name != null) {
+                if (postParams != '') {
+                    postParams += ('&name=' + name);
+                } else {
+                    postParams += '?name=' + name;
+                }
+            }
+            if (remark != null) {
+                if (postParams != '') {
+                    postParams += ('&remark=' + remark);
+                } else {
+                    postParams += '?remark=' + remark;
+                }
+            }
+            if (status != null) {
+                if (postParams != '') {
+                    postParams += ('&status=' + status);
+                } else {
+                    postParams += '?status=' + status;
+                }
+            }
+            if (platformScale != null) {
+                if (postParams != '') {
+                    postParams += ('&platformScale=' + platformScale);
+                } else {
+                    postParams += '?platformScale=' + platformScale;
+                }
+            }
+            
+        }
+        auth.fetch('/v1/channelfroms' + postParams,'get',{},(result)=>{
             if ("1" != result) {
                 this.setState({
                     data: result
@@ -77,32 +123,40 @@ class JobSource extends Component {
         if (localStorage.token == null) {
             this.props.history.push('/login');
           }
-        this.fetch({
-            "idList": []
-        });
+        this.fetch();
     };
-    callback() {
-
-    }
     onQuery(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            this.fetch({
-                params: JSON.stringify(values)
-            });
+            values.status = parseInt(values.status);
+            this.fetch(values);
           }
         });
       }
+    handleReset() {
+        this.props.form.resetFields();
+    }
+    onCreate() {
+        this.setState({
+            createVisible: true
+        });
+    }
+    onCreateCallback(params) {
+        this.setState({
+            createVisible: params.visible
+          });
+        this.fetch({
+            "idList": []
+        });
+    }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-        const usernameError = isFieldTouched('username') && getFieldError('username');
-        const passwordError = isFieldTouched('password') && getFieldError('password');
         return (
             <div id="jobsource-container">
                  <div className="">
-                     <Form layout="inline" onSubmit={this.handleSubmit}>
+                     <Form layout="inline">
                         <Form.Item label="任务来源渠道">
                             {getFieldDecorator('id')(
                                 <Input placeholder="请输入渠道ID/渠道名" />,
@@ -122,12 +176,16 @@ class JobSource extends Component {
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button >
+                            <Button onClick={this.handleReset.bind(this)}>
                                 重置
                             </Button>
                         </Form.Item>
                     </Form>
                </div>
+               <div className="user-source-add">
+                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
+               </div>
+               <Create init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 
