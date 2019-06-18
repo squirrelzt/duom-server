@@ -70,44 +70,26 @@ class JobSource extends Component {
         };
     }
     fetch(params) {
-        let postParams = '';
+        let postParams =  "?bUserId=" + localStorage.userId;
         if (params != null) {
             let id = params.id;
             let name = params.name;
-            let remark = params.remark;
             let status = params.status;
-            let platformScale = params.platformScale;
-            
             if (id != null) {
-                postParams += '?id=' + id;
+                postParams += '&id=' + parseInt(id);
             }
             if (name != null) {
-                if (postParams != '') {
-                    postParams += ('&name=' + name);
-                } else {
-                    postParams += '?name=' + name;
-                }
+                postParams += ('&name=' + name);
             }
-            if (remark != null) {
-                if (postParams != '') {
-                    postParams += ('&remark=' + remark);
-                } else {
-                    postParams += '?remark=' + remark;
-                }
-            }
+            
             if (status != null) {
-                if (postParams != '') {
-                    postParams += ('&status=' + status);
-                } else {
-                    postParams += '?status=' + status;
-                }
+                postParams += ('&status=' + parseInt(status));
             }
-            if (platformScale != null) {
-                if (postParams != '') {
-                    postParams += ('&platformScale=' + platformScale);
-                } else {
-                    postParams += '?platformScale=' + platformScale;
-                }
+            if (offset != null) {
+                postParams += ('&offset=' + parseInt(offset));
+            }
+            if (size != null) {
+                postParams += ('&size=' + parseInt(size));
             }
             
         }
