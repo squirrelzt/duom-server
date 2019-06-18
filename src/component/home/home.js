@@ -84,7 +84,7 @@ class Home extends Component {
             }
           });
           this.state.currentPage = urlArray[1];
-          if ((this.state.currentPage == "list" && urlArray[0] == "user") || this.state.currentPage == "detail") {
+          if ((this.state.currentPage == "list" && urlArray[0] == "user") || this.state.currentPage == "lists") {
             this.state.defaultOpenKeys.push("user-manage-menu");
           } else if (this.state.currentPage == "channel") {
             this.state.defaultOpenKeys.push("job-resource-manage");
@@ -106,7 +106,7 @@ class Home extends Component {
                                         <span>用户管理</span>
                                     </span>
                                 }>
-                            <Menu.Item key="list"><Link to="/user/list">用户列表</Link></Menu.Item>
+                            <Menu.Item key="lists"><Link to="/user/lists">用户列表</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="job-resource-manage"
                                 title={

@@ -36,7 +36,7 @@ let columns = [{
         return <span>
                     <a href="">冻结</a>
                     <Divider type="vertical" />
-                    <Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link>
+                    <Link to={"/user/list/detail/" + record.id}>查看详情</Link>
                 </span>;
     }
   }];
