@@ -50,7 +50,7 @@ class Home extends Component {
     }
     render() {
         // console.log("+++++++++++++++++++");
-        // console.log(this.props.location.pathname);
+        
         let url = this.props.location.pathname;
         let breadcrumbItem = [];
         let urlArray = [];

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import auth from './../../../common/auth';
 import './css/userinfo.css';
 import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
@@ -9,13 +10,12 @@ class UserInfo extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
         };
     }
-    fetch(params = {}) {
-        auth.fetch('/user/userinfo','post',params,(result)=>{
+    fetch(params) {
+        auth.fetch('/v1/users/' + params + '/c','get',{},(result)=>{
             this.setState({
-                data: result
+                data: result.user
             })
         });
     };
@@ -24,7 +24,6 @@ class UserInfo extends Component {
         if (localStorage.token == null) {
             this.props.history.push('/login');
           }
-        this.fetch();
     };
 
     callback() {
@@ -36,15 +35,19 @@ class UserInfo extends Component {
     render() {
         return (
             <div id="userinfo-container">
-               <ul className="userinfo-detail-ul"></ul>
-                <li className="userinfo-detail-li">用户ID:<span>{this.state.data.userId}</span></li>
-                <li className="userinfo-detail-li">用户名:<span>{this.state.data.userName}</span></li>
-                <li className="userinfo-detail-li">注册时间:<span>{this.state.data.registerTime}</span></li>
-                <li className="userinfo-detail-li">来源渠道:<span>{this.state.data.channel}</span></li>
-                <li className="userinfo-detail-li">推广链接:<span>{this.state.data.url}</span>
-                    <button className="copy" onClick={this.copy.bind(this)}>复制</button>
-                </li>
-                <li className="userinfo-detail-li">备注:<span>{this.state.data.remark}</span></li>
+                {this.props.init == null ?<div></div>
+               :<ul className="userinfo-detail-ul">
+               <li className="userinfo-detail-li">用户ID:&nbsp;<span>{this.props.init.id}</span></li>
+               <li className="userinfo-detail-li">用户名:&nbsp;<span>{this.props.init.username}</span></li>
+               <li className="userinfo-detail-li">余额:&nbsp;<span>{this.props.init.balance}</span></li>
+               <li className="userinfo-detail-li">手机号:&nbsp;<span>{this.props.init.phone}</span></li>
+               <li className="userinfo-detail-li">创建时间:&nbsp;<span>{this.props.init.createTime}</span></li>
+               <li className="userinfo-detail-li">来源渠道:&nbsp;<span>{this.props.init.channelFromId}</span></li>
+               <li className="userinfo-detail-li">来源渠道:&nbsp;<span>{this.props.init.channelToId}</span></li>
+               <li className="userinfo-detail-li">备注:&nbsp;<span>{this.props.init.remark}</span></li>
+               </ul>
+               }
+               
             </div>
         )
     }
