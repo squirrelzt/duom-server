@@ -107,7 +107,6 @@ class Home extends Component {
                                     </span>
                                 }>
                             <Menu.Item key="list"><Link to="/user/list">用户列表</Link></Menu.Item>
-                            <Menu.Item key="detail"><Link to="/user/detail">用户详情</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="job-resource-manage"
                                 title={

@@ -17,9 +17,9 @@ module.exports = {
           "params": []
         }, {
           "key": "detail",
-          "path": "/user/detail",
+          "path": "/user/list/detail",
           "name": "用户详情",
-          "catalog": "1",
+          "catalog": "2",
           "params": []
       }, {
           "key": "job",

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import auth from './../../common/auth';
 import './css/user.css';
 import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
@@ -35,7 +36,7 @@ let columns = [{
         return <span>
                     <a href="">冻结</a>
                     <Divider type="vertical" />
-                    <a href="">查看详情</a>
+                    <Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link>
                 </span>;
     }
   }];

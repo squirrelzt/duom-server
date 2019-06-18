@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import auth from './../../common/auth';
 import './css/detail.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
+import { Tabs } from 'antd';
 const { TabPane } = Tabs;
 import UserInfo from './detail/userinfo';
 import Balance from './detail/balance';

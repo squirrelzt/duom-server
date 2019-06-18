@@ -30,7 +30,7 @@ ReactDOM.render(
       </Switch>
         <div className="content-container">
           <Route path='/user/list' component = { User }/>
-          <Route path='/user/detail' component = { Detail }/>
+          <Route path='/user/detail/:id' component = { Detail }/>
           <Route path='/job/channel' component = { JobSource }/>
           <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
         </div>
