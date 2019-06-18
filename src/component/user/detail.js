@@ -16,7 +16,8 @@ class Detail extends Component {
             withdrawData: [],
             incomeData: [],
             team1Data: [],
-            team2Data: []
+            team2Data: [],
+            jobData: []
         };
     }
     fetch(params) {
@@ -45,6 +46,15 @@ class Detail extends Component {
         });
     };
 
+    fetchJob(params) {
+        auth.fetch('/v1/tasks/c/users/' + params,'get',{},(result)=>{
+            console.log('-----------------------');
+            console.log(result);
+            this.setState({
+                jobData: result
+            })
+        });
+    };
     componentWillMount(){
         if (localStorage.token == null) {
             this.props.history.push('/login');
@@ -52,6 +62,7 @@ class Detail extends Component {
         this.fetch(this.props.match.params.id);
         this.fetchWithdraw(this.props.match.params.id);
         this.fetchIncome(this.props.match.params.id);
+        this.fetchJob(this.props.match.params.id);
     };
 
     callback() {
@@ -65,7 +76,7 @@ class Detail extends Component {
                     <TabPane tab="用户信息" key="1"><UserInfo {...this.props} init={this.state.data}/></TabPane>
                     <TabPane tab="余额信息" key="2"><Balance {...this.props} init = {{withdrawData: this.state.withdrawData,incomeData:this.state.incomeData}}/></TabPane>
                     <TabPane tab="团队信息" key="3"><Team {...this.props} init = {{team1Data:this.state.team1Data,team2Data:this.state.team2Data}}/></TabPane>
-                    <TabPane tab="任务信息" key="4"><JobInfo {...this.props} init = {this.state.data}/></TabPane>
+                    <TabPane tab="任务信息" key="4"><JobInfo {...this.props}/></TabPane>
                 </Tabs>
             </div>
         )

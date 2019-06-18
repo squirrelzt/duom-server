@@ -22,7 +22,17 @@ let columns = [{
     dataIndex: 'channelToId'    
   },{
     title: '状态',
-    dataIndex: 'status'
+    dataIndex: 'status',
+    render(text) {
+      switch (text) {
+          case 0:
+            return <span>启用</span>;
+            break;
+          case 1:
+            return <span>禁用</span>;
+            break;
+        }
+    }
   },{
     title: '手机号',
     dataIndex: 'phone'
