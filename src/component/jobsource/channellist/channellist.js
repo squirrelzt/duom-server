@@ -9,7 +9,8 @@ class ChannelList extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            jobData: []
         };
     }
     fetch(params) {
@@ -22,6 +23,15 @@ class ChannelList extends Component {
         });
     };
 
+    fetchAllJob(params) {
+        auth.fetch('/v1/taskFormType','get', {} ,(result)=>{
+            console.log("------------------");
+            console.log(result);
+            this.setState({
+                data: result
+            })
+        });
+    };
     componentWillMount(){
         this.fetch(this.props.match.params.id);
     };

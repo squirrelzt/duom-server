@@ -4,21 +4,33 @@ import './css/channelList.css';
 import { Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
 const { TabPane } = Tabs;
 
-class JobBasicInfo extends Component {
+class JobManage extends Component {
     constructor(props) {
         super();
         this.state = {
             data: []
         };
     }
+    fetch(params) {
+        auth.fetch('/v1/taskFormType','get', {} ,(result)=>{
+            console.log("------------------");
+            console.log(result);
+            this.setState({
+                data: result
+            })
+        });
+    };
 
     componentWillMount(){
+        // this.fetch(this.props.match.params.id);
     };
  
     callback() {
 
     }   
     render() {
+        console.log('++++++++++++++++++++');
+        console.log(this.props.init);
         return (
             <div id="jobbasicinfo-container">
                 {this.props.init[0] == null ?<div></div>
@@ -38,4 +50,4 @@ class JobBasicInfo extends Component {
         )
     }
 }
-export default JobBasicInfo;
+export default JobManage;
