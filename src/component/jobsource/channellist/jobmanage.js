@@ -3,6 +3,7 @@ import auth from './../../../common/auth';
 import './css/channelList.css';
 import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
 const { TabPane } = Tabs;
+import Create from './create/create';
 
 let columns = [{
     title: '任务来源渠道ID',
@@ -28,13 +29,12 @@ class JobManage extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            createVisible: false
         };
     }
     fetch(params) {
         auth.fetch('/v1/tasks/c','get', {} ,(result)=>{
-            console.log("------------------");
-            console.log(result);
             this.setState({
                 data: result
             })
@@ -56,9 +56,18 @@ class JobManage extends Component {
     handleReset() {
         this.props.form.resetFields();
     }
+    onCreate() {
+        this.setState({
+            createVisible: true
+        });
+    }
+    onCreateCallback(params) {
+        this.setState({
+            createVisible: params.visible
+          });
+        this.fetch();
+    }
     render() {
-        console.log('-----------------')
-        console.log(this.props);
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         return (
             <div id="jobmanage-container">
@@ -90,6 +99,10 @@ class JobManage extends Component {
                         </Form.Item>
                     </Form>
                </div>
+               <div className="job-source-add">
+                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
+               </div>
+               <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
                 <Table columns={columns}
                     rowKey={data => data.id} 
                     dataSource={this.state.data}
