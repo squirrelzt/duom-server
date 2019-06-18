@@ -3,8 +3,17 @@ import auth from './../../../common/auth';
 import './css/team.css';
 import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
 const { TabPane } = Tabs;
-import Team1 from './team/team1';
-import Team2 from './team/team2';
+
+let columns = [{
+    title: '团队ID',
+    dataIndex: 'id'
+  },{
+    title: '用户ID',
+    dataIndex: 'roleId'
+  },{
+    title: '用户名',
+    dataIndex: 'username'
+  }];
 
 class Team extends Component {
     constructor(props) {
@@ -13,19 +22,11 @@ class Team extends Component {
             data: []
         };
     }
-    fetch(params = {}) {
-        auth.fetch('/user/userinfo','post',params,(result)=>{
-            this.setState({
-                data: result
-            })
-        });
-    };
 
     componentWillMount(){
         if (localStorage.token == null) {
             this.props.history.push('/login');
           }
-        // this.fetch();
     };
 
     callback() {
@@ -50,9 +51,19 @@ class Team extends Component {
                     </div>
                </div>
                <div className="">
-               <Tabs defaultActiveKey="1" onChange={this.callback}>
-                    <TabPane tab="一级团队" key="1"><Team1/></TabPane>
-                    <TabPane tab="二级团队" key="2"><Team2/></TabPane>
+               <Tabs defaultActiveKey="team1" onChange={this.callback}>
+                    <TabPane tab="一级团队" key="team1">
+                        <Table columns={columns}
+                            rowKey={data => data.id} 
+                            dataSource={this.props.init.team1Data}
+                        />
+                    </TabPane>
+                    <TabPane tab="二级团队" key="team2">
+                        <Table columns={columns}
+                            rowKey={data => data.id} 
+                            dataSource={this.props.init.team2Data}
+                        />
+                    </TabPane>
                 </Tabs>
                </div>
             </div>

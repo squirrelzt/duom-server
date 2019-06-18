@@ -14,21 +14,23 @@ class Detail extends Component {
         this.state = {
             data: [],
             withdrawData: [],
-            incomeData: []
+            incomeData: [],
+            team1Data: [],
+            team2Data: []
         };
     }
     fetch(params) {
         auth.fetch('/v1/users/' + params + '/c','get',{},(result)=>{
             this.setState({
-                data: result.user
+                data: result.user,
+                team1Data: result.userLowers,
+                team2Data: result.userLower2s
             })
         });
     };
 
     fetchWithdraw(params) {
         auth.fetch('/v1/cashout/users/' + params,'get',{},(result)=>{
-            console.log('------------------------------');
-            console.log(result);
             this.setState({
                 withdrawData: result
             })
@@ -62,7 +64,7 @@ class Detail extends Component {
                 <Tabs defaultActiveKey="1" onChange={this.callback}>
                     <TabPane tab="用户信息" key="1"><UserInfo {...this.props} init={this.state.data}/></TabPane>
                     <TabPane tab="余额信息" key="2"><Balance {...this.props} init = {{withdrawData: this.state.withdrawData,incomeData:this.state.incomeData}}/></TabPane>
-                    <TabPane tab="团队信息" key="3"><Team {...this.props} init = {this.state.data}/></TabPane>
+                    <TabPane tab="团队信息" key="3"><Team {...this.props} init = {{team1Data:this.state.team1Data,team2Data:this.state.team2Data}}/></TabPane>
                     <TabPane tab="任务信息" key="4"><JobInfo {...this.props} init = {this.state.data}/></TabPane>
                 </Tabs>
             </div>
