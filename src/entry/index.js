@@ -8,6 +8,8 @@ import Detail from './../component/user/detail.js';
 import JobSource from './../component/jobsource/jobsource.js';
 import ChannelList from './../component/jobsource/channellist/channellist.js';
 import JobWorkOrder from './../component/jobworkorder/jobworkorder.js';
+import ChannelCommissionList from './../component/channelcommissionlist/channelcommissionlist.js';
+import CommissionDetail from './../component/channelcommissionlist/commissiondetail/commissiondetail.js';
 import './../common/lib.js';
 import './css/index.css';
 
@@ -35,6 +37,8 @@ ReactDOM.render(
           <Route path='/job/channel' component = { JobSource }/>
           <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
           <Route path='/workorder/manage' component = { JobWorkOrder }/>
+          <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>
+          <Route path='/channelcommission/commissionlist/comissiondetail/:id' component = { CommissionDetail }/>
         </div>
     </div>
   </Router>

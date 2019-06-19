@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import auth from './../../common/auth';
-import './css/jobworkorder.css';
+import './css/channelcommissionlist.css';
 import { Table, Divider, Form, Input, Button, Select } from 'antd';
 
 let columns = [{
@@ -25,6 +25,16 @@ let columns = [{
   },{
     title: '创建时间',
     dataIndex: 'createTime'
+  },{
+    title: '操作',
+    dataIndex: 'operation',
+    render(text, record) {
+        return <span>
+                    <Link to={"/channelcommission/commissionlist/comissiondetail/" + record.id}>查看详情</Link>
+                    <Divider type="vertical" />
+                    <a href="">发放佣金</a>
+                </span>;
+    }
   }];
 
 class ChannelCommissionList extends Component {
@@ -38,12 +48,9 @@ class ChannelCommissionList extends Component {
    
 
     fetch(params) {
-        let bUserId = localStorage.userId;
-        let url = '/v1/taskOrders/taskOrder/c/users/' + bUserId;
-        if (params != null) {
-            url += ('&taskId=' + params);
-        }
-        auth.fetch(url,'get', {} ,(result)=>{
+        auth.fetch('/v1/channelTo','get', {} ,(result)=>{
+          console.log('-------------------------------------');
+          console.log(result);
             if (400 != result && "1" != result) {
               this.setState({
                 data: result
@@ -54,7 +61,7 @@ class ChannelCommissionList extends Component {
       };
   
       componentWillMount(){
-        // this.fetch();
+        this.fetch();
       };
    
       onQuery(e) {
@@ -78,9 +85,9 @@ class ChannelCommissionList extends Component {
             <div id="audited-container">
               <div className="">
                      <Form layout="inline">
-                        <Form.Item label="任务">
+                        <Form.Item label="用户推广渠道ID">
                             {getFieldDecorator('taskId')(
-                                <Input placeholder="请输入任务ID" />,
+                                <Input placeholder="请输入用户推广渠道ID" />,
                             )}
                         </Form.Item>
                         {/* <Form.Item label="分类">

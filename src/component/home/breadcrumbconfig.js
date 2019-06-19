@@ -51,6 +51,24 @@ module.exports = {
         "name": "工单管理",
         "catalog": "1",
         "params": []
+      }, {
+        "key": "channelcommission",
+        "path": "/channelcommission",
+        "name": "用户推广渠道佣金列表",
+        "catalog": "0",
+        "params": []
+      }, {
+        "key": "channelcommission",
+        "path": "/channelcommission/commissionlists",
+        "name": "佣金列表",
+        "catalog": "1",
+        "params": []
+      }, {
+        "key": "comissiondetail",
+        "path": "/channelcommission/commissionlist/comissiondetail",
+        "name": "佣金详情",
+        "catalog": "2",
+        "params": []
       }
     ]
     return breadcrumbUrl;

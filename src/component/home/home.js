@@ -89,6 +89,11 @@ class Home extends Component {
           } else if (urlArray[0] == "job" && this.state.currentPage == "list") {
             this.state.currentPage = urlArray[2];
             this.state.defaultOpenKeys.push("job-resource-manage");
+          } else if (this.state.currentPage == "commissionlists" || this.state.currentPage == "commissionlist") {
+            this.state.defaultOpenKeys.push("channel-commission-list");
+            if (this.state.currentPage == "commissionlist") {
+                this.state.currentPage = urlArray[2];
+            }
           }
         return (
             <div id="home-container">
@@ -130,6 +135,7 @@ class Home extends Component {
                                         <span>用户推广渠道佣金列表</span>
                                     </span>
                                 }>
+                            <Menu.Item key="commissionlists"><Link to="/channelcommission/commissionlists">佣金列表</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="extension-commison-record"
                                 title={

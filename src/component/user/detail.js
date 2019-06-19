@@ -48,8 +48,6 @@ class Detail extends Component {
 
     fetchJob(params) {
         auth.fetch('/v1/tasks/c/users/' + params,'get',{},(result)=>{
-            console.log('-----------------------');
-            console.log(result);
             this.setState({
                 jobData: result
             })
