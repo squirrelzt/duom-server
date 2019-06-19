@@ -162,11 +162,12 @@ class Home extends Component {
                                         <span>任务工单管理</span>
                                     </span>
                                 }>
+                                <Menu.Item key="channel"><Link to="/workorder/manage">工单管理</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="job-tab-manage"
                                 title={
                                     <span>
-                                        <Icon type="projecthttps://www.baidu.com/?tn=39042058_41_oem_dg"></Icon>
+                                        <Icon type="project"></Icon>
                                         <span>任务标签管理</span>
                                     </span>
                                 }>

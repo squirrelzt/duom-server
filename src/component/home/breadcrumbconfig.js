@@ -39,6 +39,18 @@ module.exports = {
         "name": "基本信息",
         "catalog": "2",
         "params": []
+      }, {
+        "key": "workorder",
+        "path": "/workorder",
+        "name": "任务工单管理管理",
+        "catalog": "0",
+        "params": []
+      }, {
+        "key": "channel",
+        "path": "/workorder/manage",
+        "name": "工单管理",
+        "catalog": "1",
+        "params": []
       }
     ]
     return breadcrumbUrl;
