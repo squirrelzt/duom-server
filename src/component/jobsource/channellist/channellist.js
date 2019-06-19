@@ -5,6 +5,7 @@ import { Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
 const { TabPane } = Tabs;
 import JobBasicInfo from './jobbasicinfo';
 import JobManage from './jobmanage';
+import WorkOrder from './workorder';
 
 class ChannelList extends Component {
     constructor(props) {
@@ -16,8 +17,8 @@ class ChannelList extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/taskForm?idList=' + params,'get', {} ,(result)=>{
-            console.log("------------------");
-            console.log(result);
+            // console.log("------------------");
+            // console.log(result);
             this.setState({
                 data: result
             })
@@ -46,7 +47,7 @@ class ChannelList extends Component {
                 <Tabs defaultActiveKey="1" onChange={this.callback.bind(this)}>
                     <TabPane tab="基本信息" key="1"><JobBasicInfo  {...this.props} init={this.state.data}/></TabPane>
                     <TabPane tab="任务管理" key="2"><JobManage {...this.props} /></TabPane>
-                    <TabPane tab="任务核销" key="3">任务核销</TabPane>
+                    <TabPane tab="工单核销" key="3"><WorkOrder {...this.props}/></TabPane>
                     <TabPane tab="财务明细" key="4">财务明细</TabPane>
                 </Tabs>
             </div>

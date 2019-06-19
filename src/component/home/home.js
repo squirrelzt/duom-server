@@ -49,8 +49,6 @@ class Home extends Component {
         window.location.href="/login";
     }
     render() {
-        // console.log("+++++++++++++++++++");
-        
         let url = this.props.location.pathname;
         let breadcrumbItem = [];
         let urlArray = [];
