@@ -20,46 +20,40 @@ let withdrawColumns = [{
     title: '余额',
     dataIndex: 'balance'
   },{
-    title: '金额变动',
+    title: '提现金额',
     dataIndex: 'accountChanged'
   },{
     title: '状态',
     dataIndex: 'status'
   },{
-    title: '创建时间',
+    title: '时间',
     dataIndex: 'createTime'
-  },{
-    title: '更新时间',
-    dataIndex: 'updateTime'
   }];
 
   let incomeColumns = [{
     title: 'ID',
     dataIndex: 'id'
   },{
-    title: '金额',
+    title: '余额',
     dataIndex: 'balance'
   },{
-    title: '账户变动',
+    title: '收入金额',
     dataIndex: 'accountChanged'
-  },{
-    title: '任务ID',
-    dataIndex: 'taskId'
   },{
     title: '任务名称',
     dataIndex: 'taskName'
   },{
-    title: '用户ID',
+    title: '队员ID',
     dataIndex: 'userId'
   },{
-    title: '下级用户ID',
-    dataIndex: 'slaveUserId'
- },{
-    title: '创建时间',
-    dataIndex: 'createTime'
+    title: '状态',
+    dataIndex: 'status',
+    render(text) {
+      return <span>已通过</span>
+    }
   },{
-    title: '更新时间',
-    dataIndex: 'updateTime'
+    title: '时间',
+    dataIndex: 'createTime'
   }];
 
 class Balance extends Component {

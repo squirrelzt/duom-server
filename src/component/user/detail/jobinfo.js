@@ -6,25 +6,22 @@ const { RangePicker } = DatePicker;
 
 let columns = [{
     title: '任务单ID',
-    dataIndex: 'categoryId'
-  },{
-    title: '任务单名称',
-    dataIndex: 'categoryName'
+    dataIndex: 'id'
   },{
     title: '任务ID',
     dataIndex: 'taskId'
   },{
     title: '任务名称',
-    dataIndex: 'jobname'
+    dataIndex: 'taskName'
   },{
-    title: '佣金平台',
-    dataIndex: 'commissionPlatform'
-  },{
-    title: '佣金渠道',
-    dataIndex: 'commissionChannelTo'
+    title: '获得佣金',
+    dataIndex: 'commisionUser'
   },{
     title: '状态',
-    dataIndex: 'status'
+    dataIndex: 'status',
+    render(text) {
+        return <span>已通过</span>
+      }
   },{
     title: '时间',
     dataIndex: 'createTime'
@@ -42,11 +39,30 @@ class JobInfo extends Component {
         };
     }
     fetch(params) {
-        auth.fetch('/v1/tasks/c/users/' + params,'get',{},(result)=>{
-            // console.log('-----------------------');
-            // console.log(result);
+        let getParams = '';
+        if (params != null) {
+            if (params.id != null && params.id != '') {
+                getParams = '?id=' + params.id;
+            }
+            if (params.taskId != null && params.taskId != '') {
+                if (getParams == '') {
+                    getParams = '?taskId=' + params.taskId;
+                } else {
+                    getParams += ('&taskId=' + params.taskId);
+                }
+            }
+            // if (getParams == '') {
+            //     getParams = '?status=' + params.status;
+            // } else {
+            //     getParams += ('&status=' + params.status);
+            // }
+        }
+        console.log(getParams);
+        auth.fetch('/v1/taskOrders/c/users/' + localStorage.userId + getParams,'get',{},(result)=>{
+            console.log('-----------------------');
+            console.log(result);
             this.setState({
-                jobData: result
+                data: result
             })
         });
     };
@@ -55,7 +71,7 @@ class JobInfo extends Component {
         if (localStorage.token == null) {
             this.props.history.push('/login');
           }
-        this.fetch(this.props.match.params.id);
+        this.fetch();
         this.props.form.validateFields();
     };
 
@@ -70,7 +86,8 @@ class JobInfo extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             // console.log('Received values of form: ', values);
-            this.fetch(this.props.match.params.id);
+            console.log(values);
+            this.fetch(values);
           }
         });
     }
@@ -96,7 +113,7 @@ class JobInfo extends Component {
                <div className="">
                      <Form layout="inline" onSubmit={this.handleSubmit.bind(this)}>
                         <Form.Item label="任务单ID">
-                            {getFieldDecorator('categoryId')(
+                            {getFieldDecorator('id')(
                                 <Input placeholder="请输入用户单ID" />,
                             )}
                         </Form.Item>
@@ -105,14 +122,14 @@ class JobInfo extends Component {
                                 <Input placeholder="请输入任务ID" />,
                             )}
                         </Form.Item>
-                        <Form.Item label="状态">
-                            {getFieldDecorator('state', {initialValue: "0"})(
+                        {/* <Form.Item label="状态">
+                            {getFieldDecorator('status', {initialValue: "0"})(
                                 <Select>
                                     <Select.Option value="0">启用</Select.Option>
                                     <Select.Option value="1">禁用</Select.Option>
                                 </Select>,
                             )}
-                        </Form.Item>
+                        </Form.Item> */}
                         {/* <Form.Item label="领取时间">
                             {getFieldDecorator('createTime')(
                                 <RangePicker />,

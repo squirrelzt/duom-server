@@ -11,41 +11,44 @@ let columns = [{
   },{
     title: '任务来源渠道名',
     dataIndex: 'name'
-  },{
-    title: '余额',
-    dataIndex: 'balance'
-  },{
-    title: '状态',
-    dataIndex: 'status',
-    render(text) {
-        switch (text) {
-            case 0:
-              return <span>启用</span>;
-              break;
-            case 1:
-              return <span>禁用</span>;
-              break;
-          }
-    }
+//   },{
+//     title: '余额',
+//     dataIndex: 'balance'
+//   },{
+//     title: '状态',
+//     dataIndex: 'status',
+//     render(text) {
+//         switch (text) {
+//             case 0:
+//               return <span>启用</span>;
+//               break;
+//             case 1:
+//               return <span>禁用</span>;
+//               break;
+//           }
+//     }
   },{
     title: '平台服务费',
-    dataIndex: 'platformScale'
+    dataIndex: 'platformScale',
+    render(text) {
+        return <span>{text}%</span>
+    }
   },{
     title: '备注',
     dataIndex: 'remark'
-  },{
-    title: '是否删除',
-    dataIndex: 'isDeleted',
-    render(text) {
-        switch (text) {
-            case 0:
-              return <span>否</span>;
-              break;
-            case 1:
-              return <span>是</span>;
-              break;
-          }
-    }
+//   },{
+//     title: '是否删除',
+//     dataIndex: 'isDeleted',
+//     render(text) {
+//         switch (text) {
+//             case 0:
+//               return <span>否</span>;
+//               break;
+//             case 1:
+//               return <span>是</span>;
+//               break;
+//           }
+//     }
   },{
     title: '创建时间',
     dataIndex: 'createTime'

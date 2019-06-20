@@ -10,7 +10,7 @@ module.exports = {
           "catalog": "0",
           "params": []
       }, {
-          "key": "list",
+          "key": "lists",
           "path": "/user/lists",
           "name": "用户列表",
           "catalog": "1",

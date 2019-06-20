@@ -19,14 +19,22 @@ class Team extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            team1Count: 0,
+            team2Count: 0,
+            teamTotalCount: 0
         };
     }
 
     componentWillMount(){
         if (localStorage.token == null) {
             this.props.history.push('/login');
-          }
+        }
+        this.setState({
+            team1Count:this.props.init.team1Data.length,
+            team2Count:this.props.init.team2Data.length,
+            teamTotalCount: (this.props.init.team1Data.length + this.props.init.team2Data.length)
+        });
     };
 
     callback() {
@@ -39,15 +47,15 @@ class Team extends Component {
                <div className="total">
                     <div className="total-section">
                         <div>团队总数</div>
-                        <div>150</div>
+                        <div>{this.state.team1Count}</div>
                     </div>
                     <div className="total-section">
                         <div>一级团队人数</div>
-                        <div>50</div>
+                        <div>{this.state.team2Count}</div>
                     </div>
                     <div className="total-section">
                         <div>二级团队人数</div>
-                        <div>100</div>
+                        <div>{this.state.teamTotalCount}</div>
                     </div>
                </div>
                <div className="">
