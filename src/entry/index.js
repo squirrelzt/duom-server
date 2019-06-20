@@ -42,7 +42,7 @@ ReactDOM.render(
           <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>
           <Route path='/channelcommission/commissionlist/comissiondetail/:id' component = { CommissionDetail }/>
           <Route path='/extend/extendlists' component = { ChannelManage }/>
-          <Route path='/extend/extendlist/extenddetail' component = { ExtendDetail }/>
+          <Route path='/extend/extendlist/extenddetail/:id' component = { ExtendDetail }/>
         </div>
     </div>
   </Router>
