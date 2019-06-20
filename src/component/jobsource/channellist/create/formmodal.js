@@ -39,7 +39,7 @@ class FormModal extends Component {
                     formVisible: this.state.visible,
                     taskFormIds: this.state.taskFormIds,
                     taskFormTypeId: this.state.taskFormTypeId
-            });
+                });
             }
         });
     }
@@ -71,9 +71,11 @@ class FormModal extends Component {
     handleReset(e) {
         // e.preventDefault();
         this.props.form.resetFields();
-        this.setState({
-            visible: false
-        })
+        this.props.callbackParent({
+            formVisible: false,
+            taskFormIds: this.state.taskFormIds,
+            taskFormTypeId: this.state.taskFormTypeId
+        });
         // this.props.callbackParent({
         //     visible: false
         // });

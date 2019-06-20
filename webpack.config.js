@@ -20,7 +20,7 @@ module.exports = {
 				favicon:'./src/entry/images/favicon.ico',
 							title: '后台管理系统'
 			}),
-        new ManifestPlugin(),
+        // new ManifestPlugin(),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin()
 	],
