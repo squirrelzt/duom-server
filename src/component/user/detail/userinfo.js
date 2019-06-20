@@ -40,6 +40,7 @@ class UserInfo extends Component {
                <li className="userinfo-detail-li">用户ID:&nbsp;<span>{this.props.init.id}</span></li>
                <li className="userinfo-detail-li">用户名:&nbsp;<span>{this.props.init.username}</span></li>
                <li className="userinfo-detail-li">手机号:&nbsp;<span>{this.props.init.phone}</span></li>
+               <li className="userinfo-detail-li">推广渠道:&nbsp;<span>{this.props.init.channelToName}</span></li>
                <li className="userinfo-detail-li">创建时间:&nbsp;<span>{this.props.init.createTime}</span></li>
                </ul>
                }
