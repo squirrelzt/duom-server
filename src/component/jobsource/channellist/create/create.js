@@ -3,6 +3,7 @@ import moment from 'moment';
 import auth from './../../../../common/auth';
 // import './css/create.css';
 import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
+import FormModal from './formmodal.js';
 
 class Create extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class Create extends Component {
             taskFormIds: [],
             taskFormTypeId: '',
             startTime: '',
-            endTime: ''
+            endTime: '',
+            formVisible: false
         };
     }
     
@@ -76,7 +78,8 @@ class Create extends Component {
             values.status = parseInt(values.status);
             values.startTime = this.timeConvert(moment(values.startDate).format('YYYY-MM-DD'), this.state.startTime);
             values.endTime = this.timeConvert(moment(values.endDate).format('YYYY-MM-DD'), this.state.endTime);
-            this.fetchUpload(values);
+            // this.fetchUpload(values);
+            this.fetch(values);
           }
         });
     }
@@ -119,6 +122,20 @@ class Create extends Component {
         // console.log(time, timeString);
         this.setState({
             endTime: timeString
+        });
+    }
+    onCreateForm(e) {
+        this.setState({
+            formVisible: true
+        })
+    }
+    onCreateCallback(params) {
+        // console.log('^^^^^^^^^^^^^^^^^^');
+        // console.log(params);
+        this.setState({
+            formVisible: params.visible,
+            taskFormIds: params.taskFormIds,
+            taskFormTypeId: params.taskFormTypeId
         });
     }
     render() {
@@ -190,6 +207,10 @@ class Create extends Component {
                                 <Input placeholder=""  />,
                             )}
                         </Form.Item>
+                        <Form.Item>
+                            <Button className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
+                         </Form.Item>
+                        
                         <div className="form-btn">
                             <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
                                 保存
@@ -199,6 +220,8 @@ class Create extends Component {
                             </Button>
                            </div> 
                     </Form>
+                    <FormModal {...props} init={{visible:this.state.formVisible,uploadUrl: this.state.uploadUrl}}
+                    callbackParent = { this.onCreateCallback.bind(this) }/>
                </div>
             </Modal>
         )
