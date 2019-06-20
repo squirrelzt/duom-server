@@ -1,27 +1,62 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import auth from './../../../../common/auth';
 // import './css/create.css';
-import { Modal, Form, Input, Button, Select, message, Checkbox, DatePicker } from 'antd';
+import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload } from 'antd';
 
 class Create extends Component {
     constructor(props) {
         super();
         this.state = {
             data: [],
-            visible: false
+            visible: false,
+            uploadUrl: '',
+            taskFormIds: [],
+            taskFormTypeId: ''
         };
     }
-    fetch(params) {
-        let name = params.name;
-        let remark = params.remark;
-        let status = params.status;
-        let platformScale = params.platformScale;
-        let postParams = 'name=' + name + '&remark=' + remark + '&status=' + status + '&platformScale=' + platformScale;
-        auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
+    
+    fetchUpload(params) {
+        auth.fetch('/v1/taskForm?bUserId='+ localStorage.userId +'&taskFormTypeId=2&urlImg=' + this.state.uploadUrl,'post', {} ,(result)=>{
             // console.log("------------------");
             // console.log(result);
             if (200 != result) {
+               this.setState({
+                 taskFormIds: result
+               });
+            //    console.log(this.state.taskFormIds);
+               this.fetch(params);
+               
+            }
+        });
+    }
+    fetch(params) {
+        let name = params.name;
+        let taskLabelIds = params.taskLabelIds;
+        let count = params.count;
+        let commision = params.commision;
+        let startTime = params.startTime;
+        let endTime = params.endTime;
+        let taskDuration = params.taskDuration;
+        let postParams = 'name=' + name + '&taskLabelIds=' + taskLabelIds.join(',') + '&count=' + count + '&commision=' + commision
+        +'&bUserId='+localStorage.userId+'&channelFromId='+this.props.match.params.id+'&taskFormTypeId='+this.state.taskFormTypeId
+        +'&taskFormIds='+this.state.taskFormIds.join(',')+'&startTime='+startTime+'&endTime='+endTime+'&taskDuration='+taskDuration;
+        if (name != null) {
+            // postParams += 'name=' + name;
+        } else {
+            // postParams += 'name=' + name;
+        }
+        if (name != null) {
+
+        }
+        // console.log('++++++++++++++++++++++');
+        // console.log(postParams);
+        auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
+            console.log("------------------");
+            console.log(result);
+            if (200 != result) {
                 message.success('新增任务成功');
+                this.handleReset(e);
             } else if (1 != result) {
                 message.error('新增任务失败');
             }
@@ -38,8 +73,16 @@ class Create extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             values.status = parseInt(values.status);
-            this.fetch(values);
-            t.handleReset(e);
+            // console.log('--------------------------');
+            // console.log(values);
+            // console.log(this.state.uploadUrl);
+            // values.startTime = moment(values.startTime).format('YYYYMMDDss');
+            // values.endTime = moment(values.endTime).format('YYYYMMDDss');
+            values.startTime = moment().unix(values.startTime);
+            values.endTime = moment().unix(values.endTime);
+            // t.handleReset(e);
+            this.fetchUpload(values);
+            
           }
         });
     }
@@ -53,7 +96,29 @@ class Create extends Component {
             visible: false
         });
     }
+    onUploadChange(info) {
+        this.setState({
+            uploadUrl: info.file.response
+        });
+        if (info.file.type.search('image')) {
+            this.setState({
+                taskFormTypeId: 2
+            });
+        } else if (info.file.type.search('text')) {
+            this.setState({
+                taskFormTypeId: 1
+            });
+        }
+    }
     render() {
+        const props = {
+            name: 'file',
+            action: auth.getPath() + '/v1/file/upload',
+            headers: {
+              authorization: 'authorization-text',
+            },
+            onChange: this.onUploadChange.bind(this)
+        };
         this.state.visible = this.props.init.visible;
         const { getFieldDecorator, getFieldError, isFieldValidating, isFieldTouched, getFieldValue } = this.props.form;
         const config = {
@@ -83,27 +148,6 @@ class Create extends Component {
                                 </Checkbox.Group>,
                                 )}
                         </Form.Item>
-                        <Form.Item label="渠道来源">
-                            {getFieldDecorator('channelFromId')(
-                                <Input placeholder="" />,
-                            )}
-                        </Form.Item>
-                        <Form.Item label="任务来源类型ID">
-                            {getFieldDecorator('taskFormTypeId')(
-                                <Input placeholder="" />,
-                            )}
-                        </Form.Item>
-                        <Form.Item label="任务来源ID">
-                            {getFieldDecorator('taskFormIds')(
-                                <Input placeholder="" />,
-                            )}
-                        </Form.Item>
-                        <Form.Item label="开始时间">
-                            {getFieldDecorator('startTime', config)(<DatePicker />)}
-                        </Form.Item>
-                        <Form.Item label="结束时间">
-                            {getFieldDecorator('endTime', config)(<DatePicker />)}
-                        </Form.Item>
                         <Form.Item label="设置数量">
                             {getFieldDecorator('count')(
                                 <Input placeholder="" />,
@@ -114,9 +158,23 @@ class Create extends Component {
                                 <Input placeholder="" />,
                             )}
                         </Form.Item>
-                        <Form.Item label="任务时间">
+                        <Form.Item label="开始时间">
+                            {getFieldDecorator('startTime', config)(<DatePicker />)}
+                        </Form.Item>
+                        <Form.Item label="结束时间">
+                            {getFieldDecorator('endTime', config)(<DatePicker />)}
+                        </Form.Item>
+                        
+                        <Form.Item label="上传安装包">
+                        <Upload {...props}>
+                            <Button>
+                            <Icon type="upload" /> 点击上传
+                            </Button>
+                        </Upload>
+                        </Form.Item>
+                        <Form.Item label="任务领取后有效时间">
                             {getFieldDecorator('taskDuration')(
-                                <Input.TextArea  />,
+                                <Input placeholder=""  />,
                             )}
                         </Form.Item>
                         <div className="form-btn">

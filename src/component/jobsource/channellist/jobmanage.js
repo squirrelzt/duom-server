@@ -100,7 +100,7 @@ class JobManage extends Component {
                     </Form>
                </div>
                <div className="job-source-add">
-                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
+                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务</Button>
                </div>
                <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
                 <Table columns={columns}
