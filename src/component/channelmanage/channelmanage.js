@@ -45,8 +45,6 @@ let columns = [{
     dataIndex: 'operation',
     render(text, record) {
         return <span>
-                    <a href="">禁用</a>
-                    <Divider type="vertical" />
                     <Link to={"/extend/extendlist/extenddetail/" + record.id}>查看详情</Link>
                 </span>;
     }

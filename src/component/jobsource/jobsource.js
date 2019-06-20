@@ -54,8 +54,6 @@ let columns = [{
     dataIndex: 'operation',
     render(text, record) {
         return <span>
-                    <a href="">禁用</a>
-                    <Divider type="vertical" />
                     <Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link>
                 </span>;
     }
@@ -77,7 +75,7 @@ class JobSource extends Component {
             let status = params.status;
             let offset = params.offset;
             let size = params.size;
-            if (id != null) {
+            if (id != null && id != '') {
                 postParams += '&id=' + parseInt(id);
             }
             if (name != null) {
