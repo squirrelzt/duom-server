@@ -16,7 +16,7 @@ class ChannelList extends Component {
         };
     }
     fetch(params) {
-        auth.fetch('/v1/taskForm?idList=' + params,'get', {} ,(result)=>{
+        auth.fetch('/v1/channelfroms/' + params + '?bUserId=' + localStorage.userId,'get', {} ,(result)=>{
             // console.log("------------------");
             // console.log(result);
             this.setState({
@@ -25,15 +25,6 @@ class ChannelList extends Component {
         });
     };
 
-    fetchAllJob(params) {
-        auth.fetch('/v1/taskFormType','get', {} ,(result)=>{
-            console.log("------------------");
-            console.log(result);
-            this.setState({
-                data: result
-            })
-        });
-    };
     componentWillMount(){
         this.fetch(this.props.match.params.id);
     };

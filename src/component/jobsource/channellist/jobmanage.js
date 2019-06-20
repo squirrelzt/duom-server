@@ -6,20 +6,42 @@ const { TabPane } = Tabs;
 import Create from './create/create';
 
 let columns = [{
-    title: '任务来源渠道ID',
+    title: '任务ID',
     dataIndex: 'id'
   },{
-    title: '任务来源渠道名',
+    title: '任务名称',
     dataIndex: 'name'
   },{
-    title: '佣金',
-    dataIndex: 'commission'
+    title: '类型',
+    dataIndex: 'type',
+    render(text) {
+        switch (text) {
+            case 1:
+              return <span>APP普通任务</span>;
+              break;
+            case 2:
+              return <span>京东零元购</span>;
+              break;
+            case 3:
+              return <span>淘宝零元购</span>;
+              break;
+          } 
+    }
   },{
-    title: '渠道来源ID',
-    dataIndex: 'channelFromId'
+    title: '佣金',
+    dataIndex: 'commision'
+  },{
+    title: '渠道来源',
+    dataIndex: 'channelFromName'
   },{
     title: '数量',
     dataIndex: 'count'
+  },{
+    title: '开始时间',
+    dataIndex: 'startTime'
+  },{
+    title: '结束时间',
+    dataIndex: 'endTime'
   },{
     title: '创建时间',
     dataIndex: 'createTime'
@@ -35,6 +57,8 @@ class JobManage extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/tasks/c','get', {} ,(result)=>{
+            // console.log('---------------');
+            // console.log(result);
             this.setState({
                 data: result
             })
