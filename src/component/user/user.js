@@ -44,8 +44,6 @@ let columns = [{
     dataIndex: 'operation',
     render(text, record) {
         return <span>
-                    <a href="">冻结</a>
-                    <Divider type="vertical" />
                     <Link to={"/user/list/detail/" + record.id}>查看详情</Link>
                 </span>;
     }
