@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import auth from './../../../../common/auth';
 // import './css/create.css';
-import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload } from 'antd';
+import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
 
 class Create extends Component {
     constructor(props) {
@@ -12,7 +12,9 @@ class Create extends Component {
             visible: false,
             uploadUrl: '',
             taskFormIds: [],
-            taskFormTypeId: ''
+            taskFormTypeId: '',
+            startTime: '',
+            endTime: ''
         };
     }
     
@@ -49,14 +51,13 @@ class Create extends Component {
         if (name != null) {
 
         }
-        // console.log('++++++++++++++++++++++');
-        // console.log(postParams);
+        let t = this;
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
             console.log("------------------");
             console.log(result);
             if (200 != result) {
                 message.success('新增任务成功');
-                this.handleReset(e);
+                this.handleReset();
             } else if (1 != result) {
                 message.error('新增任务失败');
             }
@@ -73,24 +74,22 @@ class Create extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             values.status = parseInt(values.status);
-            // console.log('--------------------------');
-            // console.log(values);
-            // console.log(this.state.uploadUrl);
-            // values.startTime = moment(values.startTime).format('YYYYMMDDss');
-            // values.endTime = moment(values.endTime).format('YYYYMMDDss');
-            values.startTime = moment().unix(values.startTime);
-            values.endTime = moment().unix(values.endTime);
-            // t.handleReset(e);
+            values.startTime = this.timeConvert(moment(values.startDate).format('YYYY-MM-DD'), this.state.startTime);
+            values.endTime = this.timeConvert(moment(values.endDate).format('YYYY-MM-DD'), this.state.endTime);
             this.fetchUpload(values);
-            
           }
         });
+    }
+
+    timeConvert(date,time) {
+        let timestamp = (new Date(date + ' ' + time)).getTime()/1000;
+        return timestamp; 
     }
     handOk() {
 
     }
     handleReset(e) {
-        e.preventDefault();
+        // e.preventDefault();
         this.props.form.resetFields();
         this.props.callbackParent({
             visible: false
@@ -109,6 +108,18 @@ class Create extends Component {
                 taskFormTypeId: 1
             });
         }
+    }
+    onStartTimeChange(time, timeString) {
+        // console.log(time, timeString);
+        this.setState({
+            startTime: timeString
+        });
+    }
+    onEndTimeChange(time, timeString) {
+        // console.log(time, timeString);
+        this.setState({
+            endTime: timeString
+        });
     }
     render() {
         const props = {
@@ -159,10 +170,12 @@ class Create extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="开始时间">
-                            {getFieldDecorator('startTime', config)(<DatePicker />)}
+                        {getFieldDecorator('startDate', config)(<DatePicker />)}
+                        <TimePicker onChange={this.onStartTimeChange.bind(this)}/>
                         </Form.Item>
                         <Form.Item label="结束时间">
-                            {getFieldDecorator('endTime', config)(<DatePicker />)}
+                        {getFieldDecorator('endDate', config)(<DatePicker />)}
+                        <TimePicker onChange={this.onEndTimeChange.bind(this)}/>
                         </Form.Item>
                         
                         <Form.Item label="上传安装包">
