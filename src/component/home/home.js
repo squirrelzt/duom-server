@@ -127,6 +127,7 @@ class Home extends Component {
                                         <span>用户推广渠道管理</span>
                                     </span>
                                 }>
+                            <Menu.Item key="channel"><Link to="/extend/extendlist">推广渠道列表</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-commission-list"
                                 title={
