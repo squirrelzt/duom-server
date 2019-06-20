@@ -75,6 +75,8 @@ class JobSource extends Component {
             let id = params.id;
             let name = params.name;
             let status = params.status;
+            let offset = params.offset;
+            let size = params.size;
             if (id != null) {
                 postParams += '&id=' + parseInt(id);
             }
