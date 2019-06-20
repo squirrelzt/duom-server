@@ -55,8 +55,8 @@ class Create extends Component {
         }
         let t = this;
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
-            console.log("------------------");
-            console.log(result);
+            // console.log("------------------");
+            // console.log(result);
             if (200 != result) {
                 message.success('新增任务成功');
                 this.handleReset();

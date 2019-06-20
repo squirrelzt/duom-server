@@ -16,7 +16,7 @@ class Create extends Component {
         let remark = params.remark;
         let status = params.status;
         let platformScale = params.platformScale;
-        let postParams = 'name=' + name + '&remark=' + remark + '&status=' + status + '&platformScale=' + platformScale;
+        let postParams = 'bUserId='+localStorage.userId +'&name=' + name + '&remark=' + remark + '&status=' + status + '&platformScale=' + platformScale;
         auth.fetch('/v1/channelfroms?' + postParams,'post', {} ,(result)=>{
             // console.log("------------------");
             // console.log(result);
