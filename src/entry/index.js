@@ -11,6 +11,7 @@ import JobWorkOrder from './../component/jobworkorder/jobworkorder.js';
 import ChannelCommissionList from './../component/channelcommissionlist/channelcommissionlist.js';
 import CommissionDetail from './../component/channelcommissionlist/commissiondetail/commissiondetail.js';
 import ChannelManage from './../component/channelmanage/channelmanage.js';
+import ExtendDetail from './../component/channelmanage/extenddetail.js';
 import './../common/lib.js';
 import './css/index.css';
 
@@ -40,7 +41,8 @@ ReactDOM.render(
           <Route path='/workorder/manage' component = { JobWorkOrder }/>
           <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>
           <Route path='/channelcommission/commissionlist/comissiondetail/:id' component = { CommissionDetail }/>
-          <Route path='/extend/extendlist' component = { ChannelManage }/>
+          <Route path='/extend/extendlists' component = { ChannelManage }/>
+          <Route path='/extend/extendlist/extenddetail' component = { ExtendDetail }/>
         </div>
     </div>
   </Router>

@@ -94,6 +94,8 @@ class Home extends Component {
             if (this.state.currentPage == "commissionlist") {
                 this.state.currentPage = urlArray[2];
             }
+          } else if (this.state.currentPage == "extendlists" || this.state.currentPage == "extendlist") {
+            this.state.defaultOpenKeys.push("channel-manage");
           }
         return (
             <div id="home-container">
@@ -127,7 +129,7 @@ class Home extends Component {
                                         <span>用户推广渠道管理</span>
                                     </span>
                                 }>
-                            <Menu.Item key="channel"><Link to="/extend/extendlist">推广渠道列表</Link></Menu.Item>
+                            <Menu.Item key="channel"><Link to="/extend/extendlists">推广渠道列表</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-commission-list"
                                 title={

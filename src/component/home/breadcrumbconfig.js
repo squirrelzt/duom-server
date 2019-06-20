@@ -69,6 +69,24 @@ module.exports = {
         "name": "佣金详情",
         "catalog": "2",
         "params": []
+      }, {
+        "key": "extend",
+        "path": "/extend",
+        "name": "用户推广渠道管理",
+        "catalog": "0",
+        "params": []
+      }, {
+        "key": "extendlists",
+        "path": "/extend/extendlists",
+        "name": "推广渠道列表",
+        "catalog": "1",
+        "params": []
+      }, {
+        "key": "extenddetail",
+        "path": "/extend/extendlist/extenddetail",
+        "name": "推广渠道详情",
+        "catalog": "2",
+        "params": []
       }
     ]
     return breadcrumbUrl;
