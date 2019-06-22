@@ -22,6 +22,8 @@ module.exports = {
           callback(err.status);
         } else if (err.status == 401) {
           window.location.href="/login";
+        } else if (err.status == 405) {
+          callback(err.status);
         } else {
           console.log(err);
           callback({result:'1',msg:err});

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import auth from './../../../../common/auth';
 import './css/workorder.css';
 import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
+import Check from './check.js';
 
 let columns = [{
   title: '任务单ID',
@@ -37,24 +38,24 @@ let columns = [{
   },{
     title: '创建时间',
     dataIndex: 'createTime'
-  },{
-    title: '操作',
-    dataIndex: 'operation',
-    render(text, record) {
-        return <span>
-                    <Link to={"/job/list/basicinfo/" + record.id}>查看</Link>
-                </span>;
-    }
   }];
 
 class UnAudited extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            checkData: [],
+            checkMoalVisible: false,
+            selectId:'',
+            selectChannelFromId:'',
+            selectTaskName: ''
         };
     }
 
+    onCheck(record) {
+      this.fetchCheck(record);
+    }
     fetch(params) {
       let channelFromId = this.props.match.params.id;
       let bUserId = localStorage.userId;
@@ -73,11 +74,39 @@ class UnAudited extends Component {
           
       });
     };
-
+    fetchCheck(params) {
+      let url = '/v1/tasks/formContent?userId=' + params.userId + '&taskId=' + params.taskId;
+      auth.fetch(url,'get', {} ,(result)=>{
+          if (200 != result) {
+            // console.log('----------------------');
+            // console.log(result);
+             this.setState({
+               checkData: result,
+               checkMoalVisible: true,
+               selectId: params.id,
+               selectChannelFromId: params.channelFromId,
+               selectTaskName: params.taskName
+             });
+          }
+      });
+  }
     componentWillMount(){
+      if(columns[columns.length-1].title != "操作"){
+        let opt ={
+          title:'操作',
+          render:this.renderFn.bind(this)
+        }
+        columns.push(opt);
+      }
       this.fetch();
     };
- 
+    renderFn(text,record,index){
+      return (
+        <span className="btn-margin">
+          <a onClick={this.onCheck.bind(this, record)}>查看</a>
+        </span>
+      )
+    }
     onQuery(e) {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
@@ -91,6 +120,13 @@ class UnAudited extends Component {
   handleReset() {
       this.props.form.resetFields();
   }
+  onCallback(params) {
+    // console.log('^^^^^^^^^^^^^^^^^^');
+    // console.log(params);
+    this.setState({
+        checkMoalVisible: params.visible
+    });
+}
     render() {
       const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         return (
@@ -128,6 +164,11 @@ class UnAudited extends Component {
                     rowKey={data => data.id}
                     dataSource={this.state.data}
                 />
+                <Check {...this.props} init={{visible:this.state.checkMoalVisible, data:this.state.checkData,
+                  id:this.state.selectId,
+                  channelFromId:this.state.selectChannelFromId,
+                  taskName:this.state.selectTaskName}} 
+                  callbackParent={this.onCallback.bind(this)}/>
             </div>
         )
     }

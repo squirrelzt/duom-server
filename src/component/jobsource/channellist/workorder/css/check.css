@@ -1,0 +1,18 @@
+#check-cancel-content-container {
+   font-family: 'SourceHanSansCN light';
+}
+.taskName {
+    height: 30px;
+    line-height: 30px;
+}
+.request-id {
+    height: 30px;
+    line-height: 30px;
+}
+.check-btn {
+    text-align: center;
+    margin-top: 30px;
+}
+.check-img {
+    margin-top: 30px;
+}
