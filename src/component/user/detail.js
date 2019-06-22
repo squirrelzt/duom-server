@@ -22,8 +22,8 @@ class Detail extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/users/' + params + '/c','get',{},(result)=>{
-            console.log('---------------------');
-            console.log(result);
+            // console.log('---------------------');
+            // console.log(result);
             this.setState({
                 data: result.user,
                 team1Data: result.userLowers==null?[]:result.userLowers,

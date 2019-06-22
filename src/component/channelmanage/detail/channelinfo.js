@@ -16,6 +16,8 @@ class ChannelInfo extends Component {
     fetch(params) {
         auth.fetch('/v1/channelTo','get', {} ,(result)=>{
             if (400 != result && "1" != result) {
+              console.log('-----------------------');
+              console.log(result);
               this.setState({
                 data: result[0]
               });
@@ -43,8 +45,8 @@ class ChannelInfo extends Component {
                     <li className="channelinfo-detail-li">余额:&nbsp;<span>{this.state.data.balance}</span></li>
                     <li className="channelinfo-detail-li">状态:&nbsp;<span>{this.state.data.status}</span></li>
                     <li className="channelinfo-detail-li">来源渠道:&nbsp;<span>{this.state.data.remark}</span></li>
-                    <li className="channelinfo-detail-li">来源渠道:&nbsp;<span>{this.state.data.createTime}</span></li>
-                    <li className="channelinfo-detail-li">备注:&nbsp;<span>{this.state.data.updateTime}</span></li>
+                    <li className="channelinfo-detail-li">创建时间:&nbsp;<span>{this.state.data.createTime}</span></li>
+                    <li className="channelinfo-detail-li">更新时间:&nbsp;<span>{this.state.data.updateTime}</span></li>
                     </ul>
                }
                

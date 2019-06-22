@@ -18,17 +18,10 @@ let columns = [{
     title: '余额',
     dataIndex: 'balance'
   },{
-    title: '状态',
-    dataIndex: 'status',
-    render(text) {
-        switch (text) {
-            case 0:
-              return <span>启用</span>;
-              break;
-            case 1:
-              return <span>禁用</span>;
-              break;
-          }
+    title: '已发金额',
+    dataIndex: 'grantAmount',
+    render(text,record) {
+        return <span>{record.income-record.balance}</span>
     }
   },{
     title: '备注',
