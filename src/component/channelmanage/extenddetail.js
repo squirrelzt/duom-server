@@ -6,6 +6,7 @@ const { TabPane } = Tabs;
 import ChannelInfo from './detail/channelinfo';
 import SubUser from './detail/subuser';
 import CommissionDetail from './detail/commissiondetail';
+import CommissionGrant from './detail/commissiongrant';
 
 class ExtendDetail extends Component {
     constructor(props) {
@@ -62,7 +63,7 @@ class ExtendDetail extends Component {
                     <TabPane tab="渠道信息" key="1"><ChannelInfo {...this.props} /></TabPane>
                     <TabPane tab="下属用户" key="2"><SubUser {...this.props} init={{channleFromId: this.props.match.params.id}} /></TabPane>
                     <TabPane tab="佣金明细" key="3"><CommissionDetail {...this.props} init={{channleToId:this.props.match.params.id}}/></TabPane>
-                    <TabPane tab="佣金发放" key="4">佣金发放</TabPane>
+                    <TabPane tab="佣金发放" key="4"><CommissionGrant {...this.props}/></TabPane>
                     {/* <TabPane tab="任务信息" key="4"><JobInfo {...this.props}/></TabPane> */}
                 </Tabs>
             </div>
