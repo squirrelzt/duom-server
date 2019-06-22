@@ -5,6 +5,7 @@ import { Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
 const { TabPane } = Tabs;
 import Audited from './workorder/audited';
 import UnAudited from './workorder/unaudited';
+import Reject from './workorder/reject';
 
 class WorkOrder extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class WorkOrder extends Component {
                 <Tabs defaultActiveKey="1" onChange={this.callback}>
                     <TabPane tab="未审核" key="1"><UnAudited  {...this.props}/></TabPane>
                     <TabPane tab="已审核" key="2"><Audited {...this.props} /></TabPane>
+                    <TabPane tab="驳回" key="3"><Reject {...this.props} /></TabPane>
                 </Tabs>
             </div>
         )
