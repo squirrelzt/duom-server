@@ -152,14 +152,14 @@ class Home extends Component {
                                     </span>
                                 }>
                         </SubMenu>
-                        <SubMenu key="finance-setting"
+                        {/* <SubMenu key="finance-setting"
                                 title={
                                     <span>
                                         <Icon type="pay-circle"></Icon>
                                         <span>财务设置</span>
                                     </span>
                                 }>
-                        </SubMenu>
+                        </SubMenu> */}
                         <SubMenu key="commission-withdraw-list"
                                 title={
                                     <span>
@@ -171,7 +171,7 @@ class Home extends Component {
                                 <Menu.Item key="auditedcashoutlists"><Link to="/cashout/auditedcashoutlists">提现已审核列表</Link></Menu.Item>
                                 <Menu.Item key="rejectcashoutlists"><Link to="/cashout/rejectcashoutlists">提现已拒绝列表</Link></Menu.Item>
                         </SubMenu>
-                        <SubMenu key="job-order-manage"
+                        {/* <SubMenu key="job-order-manage"
                                 title={
                                     <span>
                                         <Icon type="appstore"></Icon>
@@ -179,7 +179,7 @@ class Home extends Component {
                                     </span>
                                 }>
                                 <Menu.Item key="channel"><Link to="/workorder/manage">工单管理</Link></Menu.Item>
-                        </SubMenu>
+                        </SubMenu> */}
                         <SubMenu key="job-tab-manage"
                                 title={
                                     <span>
@@ -189,22 +189,22 @@ class Home extends Component {
                                 }>
                             <Menu.Item key="taglists"><Link to="/tag/taglists">标签列表</Link></Menu.Item>
                         </SubMenu>
-                        <SubMenu key="finance-statis"
+                        {/* <SubMenu key="finance-statis"
                                 title={
                                     <span>
                                         <Icon type="account-book"></Icon>
                                         <span>财务统计</span>
                                     </span>
                                 }>
-                        </SubMenu>
-                        <SubMenu key="setting-manage"
+                        </SubMenu> */}
+                        {/* <SubMenu key="setting-manage"
                                 title={
                                     <span>
                                         <Icon type="setting"></Icon>
                                         <span>系统管理</span>
                                     </span>
                                 }>
-                        </SubMenu>
+                        </SubMenu> */}
                     </Menu>
                 </aside>
                 <section>

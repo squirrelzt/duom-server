@@ -34,7 +34,7 @@ ReactDOM.render(
   <Router>
     <div>
       <Switch>
-        <Route path='/login' component = { Login }/>
+        <Route path='/lqgc/dm/project' component = { Login }/>
         <Route path='/' component = { Home } />
       </Switch>
         <div className="content-container">
