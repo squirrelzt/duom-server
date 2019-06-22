@@ -47,6 +47,9 @@ module.exports = {
       // return {};
     }
   },
+  getTimestamp(dateString) {
+    return new Date(dateString).getTime()/1000;
+  },
   getPath(){
     // return '';
       // return 'http://localhost:8080';

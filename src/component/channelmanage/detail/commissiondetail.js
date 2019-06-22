@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import auth from './../../../common/auth';
 import './css/commissiondetail.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
+import { Form, Input, Button, Select, Table, Divider, DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
 
 let columns = [{
     title: 'ID',
@@ -81,32 +82,88 @@ class CommissionDetail extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            channleToId:'',
+            rangePicker:[],
+            startTime:'',
+            endTime:''
         };
     }
 
     fetch(params) {
-        auth.fetch('/v1/channelTo/' + params + '/users','get',{},(result)=>{
-            // console.log('----------------------');
-            // console.log(result);
-            this.setState({
-                data: result
-            })
-        });
+      let getParams = '';
+      if (params != null && params.userId != null) {
+        getParams = '?cUserId=' + params.userId;
+      }
+      if (this.state.startTime != '') {
+        getParams += ('&startTime=' + auth.getTimestamp(this.state.startTime));
+      }
+      if (this.state.endTime != '') {
+        getParams += ('&endTime=' + auth.getTimestamp(this.state.endTime));
+      }
+      // console.log(getParams);
+      auth.fetch('/v1/channelTo/'+this.props.match.params.id+'/commisionsDetail' + getParams,'get',{},(result)=>{
+          // console.log('----------------------');
+          // console.log(result);
+          this.setState({
+              data: result
+          })
+      });
     };
 
     componentWillMount(){
         if (localStorage.token == null) {
             this.props.history.push('/login');
         }
-        this.fetch(this.props.match.params.id);
+        this.fetch();
     };
-
+    onRangeDateChange(date, dateString) {
+      // console.log(dateString);
+      this.state.rangePicker = dateString;
+      // console.log(this.state.rangePicker);
+      this.state.startTime = dateString[0];
+      this.state.endTime = dateString[1];
+    }
+    onQuery(e) {
+      e.preventDefault();
+      this.props.form.validateFields((err, values) => {
+        if (!err) {
+          // console.log('------------------------------');
+          // console.log(values);
+          this.fetch(values);
+        }
+      });
+    }
+    handleReset() {
+        this.props.form.resetFields();
+    }
     render() {
+      const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         return (
             <div id="commissiondetail-container">
-               
                <div className="">
+               <Form layout="inline">
+                        <Form.Item label="用户">
+                            {getFieldDecorator('userId')(
+                                <Input placeholder="请输入用户ID" />,
+                            )}
+                        </Form.Item>
+                        <Form.Item label="起止时间">
+                            {getFieldDecorator('rangeDate')(
+                                <RangePicker format='YYYY-MM-DD' onChange={this.onRangeDateChange.bind(this)}/>,
+                            )}
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                                查询
+                            </Button>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button onClick={this.handleReset.bind(this)}>
+                                重置
+                            </Button>
+                        </Form.Item>
+                    </Form>
                     <Table columns={columns}
                         rowKey={data => data.id}
                         dataSource={this.state.data}
@@ -117,5 +174,5 @@ class CommissionDetail extends Component {
         )
     }
 }
-
+CommissionDetail = Form.create()(CommissionDetail);
 export default CommissionDetail;

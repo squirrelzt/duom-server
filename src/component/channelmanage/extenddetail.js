@@ -5,10 +5,7 @@ import { Tabs } from 'antd';
 const { TabPane } = Tabs;
 import ChannelInfo from './detail/channelinfo';
 import SubUser from './detail/subuser';
-// import UserInfo from './detail/userinfo';
-// import Balance from './detail/balance';
-// import Team from './detail/team';
-// import JobInfo from './detail/jobinfo';
+import CommissionDetail from './detail/commissiondetail';
 
 class ExtendDetail extends Component {
     constructor(props) {
@@ -52,13 +49,6 @@ class ExtendDetail extends Component {
         if (localStorage.token == null) {
             this.props.history.push('/login');
         }
-        // console.log('===================');
-        // console.log(this.props);
-        // console.log(this.props.match.params.id);
-        // this.fetch(this.props.match.params.id);
-        // this.fetchWithdraw(this.props.match.params.id);
-        // this.fetchIncome(this.props.match.params.id);
-        // this.fetchJob(this.props.match.params.id);
     };
 
     callback() {
@@ -71,7 +61,7 @@ class ExtendDetail extends Component {
                 <Tabs defaultActiveKey="1" onChange={this.callback}>
                     <TabPane tab="渠道信息" key="1"><ChannelInfo {...this.props} /></TabPane>
                     <TabPane tab="下属用户" key="2"><SubUser {...this.props} init={{channleFromId: this.props.match.params.id}} /></TabPane>
-                    <TabPane tab="佣金明细" key="3">佣金明细</TabPane>
+                    <TabPane tab="佣金明细" key="3"><CommissionDetail {...this.props} init={{channleToId:this.props.match.params.id}}/></TabPane>
                     <TabPane tab="佣金发放" key="4">佣金发放</TabPane>
                     {/* <TabPane tab="任务信息" key="4"><JobInfo {...this.props}/></TabPane> */}
                 </Tabs>
