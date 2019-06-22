@@ -8,8 +8,10 @@ module.exports = {
     entry: {
         index: './src/entry/index.js'
 	},
-    mode: 'development',
-    devtool: 'inline-source-map',
+	mode: 'development',
+	// mode: 'production',
+	devtool: 'inline-source-map',
+	// devtool: false,
     devServer: {
 			historyApiFallback:true,
       contentBase: './dist'

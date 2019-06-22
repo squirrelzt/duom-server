@@ -10,7 +10,9 @@ class FormModal extends Component {
             data: [],
             visible: false,
             taskFormIds: [],
-            taskFormTypeId: ''
+            taskFormTypeId: '',
+            selectedFormId: '',
+            titleVisibility: 'visible'
         };
     }
     
@@ -80,7 +82,23 @@ class FormModal extends Component {
         //     visible: false
         // });
     }
-   
+    onSelect(value) {
+        // console.log('------------------------');
+        // console.log(value);
+        this.setState({
+            selectedFormId: value
+        });
+        if (value == 1) {
+            this.setState({
+                titleVisibility: 'visible'
+            });
+        } else if (value == 2) {
+            this.setState({
+                titleVisibility: 'hidden'
+            });
+        }
+
+    }
     render() {
    
         this.state.visible = this.props.init.visible;
@@ -96,14 +114,14 @@ class FormModal extends Component {
                      <Form onSubmit={this.handleSubmit}>
                         <Form.Item label="表单类型">
                             {getFieldDecorator('taskFormTypeId')(
-                               <Select>
+                               <Select onChange={this.onSelect.bind(this)}>
                                     <Select.Option value="1">文本</Select.Option>
                                     <Select.Option value="2">图片</Select.Option>
                                 </Select>,
                             )}
                         </Form.Item>
                         
-                        <Form.Item label="标题">
+                        <Form.Item label="标题" className="formmodal-title" style={{visibility: this.state.titleVisibility}}>
                             {getFieldDecorator('title')(
                                 <Input placeholder=""  />,
                             )}
