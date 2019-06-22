@@ -13,6 +13,8 @@ import CommissionDetail from './../component/channelcommissionlist/commissiondet
 import ChannelManage from './../component/channelmanage/channelmanage.js';
 import ExtendDetail from './../component/channelmanage/extenddetail.js';
 import Cashout from './../component/cashout/cashout.js';
+import AuditedCashout from './../component/cashout/auditedcashout.js';
+import RejectCashout from './../component/cashout/rejectcashout.js';
 import './../common/lib.js';
 import './css/index.css';
 
@@ -45,6 +47,8 @@ ReactDOM.render(
           <Route path='/extend/extendlists' component = { ChannelManage }/>
           <Route path='/extend/extendlist/extenddetail/:id' component = { ExtendDetail }/>
           <Route path='/cashout/cashoutlists' component = { Cashout }/>
+          <Route path='/cashout/auditedcashoutlists' component = { AuditedCashout }/>
+          <Route path='/cashout/rejectcashoutlists' component = { RejectCashout }/>
         </div>
     </div>
   </Router>

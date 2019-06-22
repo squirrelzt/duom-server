@@ -96,7 +96,19 @@ module.exports = {
       }, {
         "key": "cashoutlists",
         "path": "/cashout/cashoutlists",
-        "name": "佣金发放列表",
+        "name": "佣金提现列表",
+        "catalog": "1",
+        "params": []
+      }, {
+        "key": "auditedcashoutlists",
+        "path": "/cashout/auditedcashoutlists",
+        "name": "提现已审核列表",
+        "catalog": "1",
+        "params": []
+      }, {
+        "key": "rejectcashoutlists",
+        "path": "/cashout/rejectcashoutlists",
+        "name": "提现已拒绝列表",
         "catalog": "1",
         "params": []
       }
