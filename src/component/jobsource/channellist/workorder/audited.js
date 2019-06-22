@@ -38,14 +38,6 @@ let columns = [{
   },{
     title: '创建时间',
     dataIndex: 'createTime'
-  },{
-    title: '操作',
-    dataIndex: 'operation',
-    render(text, record) {
-        return <span>
-                    <Link to={"/job/list/basicinfo/" + record.id}>查看</Link>
-                </span>;
-    }
   }];
 
 class Audited extends Component {
