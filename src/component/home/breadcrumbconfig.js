@@ -111,6 +111,12 @@ module.exports = {
         "name": "提现已拒绝列表",
         "catalog": "1",
         "params": []
+      }, {
+        "key": "tag",
+        "path": "/tag/taglists",
+        "name": "任务标签管理",
+        "catalog": "0",
+        "params": []
       }
     ]
     return breadcrumbUrl;

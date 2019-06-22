@@ -98,6 +98,8 @@ class Home extends Component {
             this.state.defaultOpenKeys.push("channel-manage");
           } else if (this.state.currentPage == "cashoutlists" || this.state.currentPage == "auditedcashoutlists" || this.state.currentPage == "rejectcashoutlists") {
             this.state.defaultOpenKeys.push("commission-withdraw-list");
+          } else if (this.state.currentPage == "taglists" || this.state.currentPage == "taglist") {
+            this.state.defaultOpenKeys.push("ob-tab-manage");
           }
         return (
             <div id="home-container">
@@ -185,6 +187,7 @@ class Home extends Component {
                                         <span>任务标签管理</span>
                                     </span>
                                 }>
+                            <Menu.Item key="taglists"><Link to="/tag/taglists">标签列表</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="finance-statis"
                                 title={

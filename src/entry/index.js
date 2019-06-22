@@ -15,6 +15,7 @@ import ExtendDetail from './../component/channelmanage/extenddetail.js';
 import Cashout from './../component/cashout/cashout.js';
 import AuditedCashout from './../component/cashout/auditedcashout.js';
 import RejectCashout from './../component/cashout/rejectcashout.js';
+import Tag from './../component/tag/tag.js';
 import './../common/lib.js';
 import './css/index.css';
 
@@ -49,6 +50,7 @@ ReactDOM.render(
           <Route path='/cashout/cashoutlists' component = { Cashout }/>
           <Route path='/cashout/auditedcashoutlists' component = { AuditedCashout }/>
           <Route path='/cashout/rejectcashoutlists' component = { RejectCashout }/>
+          <Route path='/tag/taglists' component = { Tag }/>
         </div>
     </div>
   </Router>
