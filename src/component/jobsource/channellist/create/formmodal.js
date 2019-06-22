@@ -55,9 +55,6 @@ class FormModal extends Component {
         let t = this;
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            // values.status = parseInt(values.status);
-            // values.startTime = this.timeConvert(moment(values.startDate).format('YYYY-MM-DD'), this.state.startTime);
-            // values.endTime = this.timeConvert(moment(values.endDate).format('YYYY-MM-DD'), this.state.endTime);
             this.fetch(values);
             // console.log('---------------------------');
             // console.log(values);

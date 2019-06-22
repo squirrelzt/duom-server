@@ -1,26 +1,51 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import auth from './../../../../common/auth';
 import './css/workorder.css';
 import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
 
+
 let columns = [{
+  title: '任务单ID',
+  dataIndex: 'id'
+  },{
+    title: '任务ID',
+    dataIndex: 'taskId'
+  },{
+    title: '任务名',
+    dataIndex: 'taskName'
+  },{
+    title: '任务分类',
+    dataIndex: 'taskType',
+    render(text) {
+      return <span>APP普通任务</span>
+    }
+  },{
     title: '任务来源渠道ID',
-    dataIndex: 'id'
-  },{
-    title: '任务来源渠道名',
-    dataIndex: 'name'
-  },{
-    title: '佣金',
-    dataIndex: 'commission'
-  },{
-    title: '渠道来源ID',
     dataIndex: 'channelFromId'
   },{
-    title: '数量',
-    dataIndex: 'count'
+    title: '任务来源渠道名',
+    dataIndex: 'channelFromName'
+  },{
+    title: '申请人ID',
+    dataIndex: 'userId'
+  },{
+    title: '开始时间',
+    dataIndex: 'startTime'
+  },{
+    title: '结束时间',
+    dataIndex: 'endTime'
   },{
     title: '创建时间',
     dataIndex: 'createTime'
+  },{
+    title: '操作',
+    dataIndex: 'operation',
+    render(text, record) {
+        return <span>
+                    <Link to={"/job/list/basicinfo/" + record.id}>查看</Link>
+                </span>;
+    }
   }];
 
 class Audited extends Component {
@@ -39,6 +64,8 @@ class Audited extends Component {
         url += ('&taskId=' + params);
       }
       auth.fetch(url,'get', {} ,(result)=>{
+        // console.log('+++++++++++++++');
+        // console.log(result);
           if (400 != result && "1" != result) {
             this.setState({
               data: result
@@ -98,6 +125,7 @@ class Audited extends Component {
                     </Form>
                </div>
                 <Table columns={columns}
+                    scroll={{x :1200}}
                     rowKey={data => data.id}
                     dataSource={this.state.data}
                 />

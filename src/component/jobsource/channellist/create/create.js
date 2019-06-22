@@ -76,6 +76,11 @@ class Create extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             values.status = parseInt(values.status);
+            // console.log('++++++++++++++++++++++');
+            // console.log(values.startDate);
+            // console.log(moment(values.startDate));
+            // values.startTime = this.timeConvert(moment(values.startDate).format('YYYY-MM-DD'), this.state.startTime);
+            // values.endTime = this.timeConvert(moment(values.endDate).format('YYYY-MM-DD'), this.state.endTime);
             values.startTime = this.timeConvert(moment(values.startDate).format('YYYY-MM-DD'), this.state.startTime);
             values.endTime = this.timeConvert(moment(values.endDate).format('YYYY-MM-DD'), this.state.endTime);
             // this.fetchUpload(values);
