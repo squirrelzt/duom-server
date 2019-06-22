@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import auth from './../../common/auth';
 import './css/channelmanage.css';
 import { Table, Divider, Form, Input, Button, Select, DatePicker } from 'antd';

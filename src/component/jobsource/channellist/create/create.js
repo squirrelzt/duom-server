@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import auth from './../../../../common/auth';
 // import './css/create.css';
 import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
@@ -14,6 +13,8 @@ class Create extends Component {
             uploadUrl: '',
             taskFormIds: [],
             taskFormTypeId: '',
+            startDate: '',
+            endDate: '',
             startTime: '',
             endTime: '',
             formVisible: false
@@ -78,11 +79,9 @@ class Create extends Component {
             values.status = parseInt(values.status);
             // console.log('++++++++++++++++++++++');
             // console.log(values.startDate);
-            // console.log(moment(values.startDate));
-            // values.startTime = this.timeConvert(moment(values.startDate).format('YYYY-MM-DD'), this.state.startTime);
-            // values.endTime = this.timeConvert(moment(values.endDate).format('YYYY-MM-DD'), this.state.endTime);
-            values.startTime = this.timeConvert(moment(values.startDate).format('YYYY-MM-DD'), this.state.startTime);
-            values.endTime = this.timeConvert(moment(values.endDate).format('YYYY-MM-DD'), this.state.endTime);
+            values.startTime = this.timeConvert(this.state.startDate, this.state.startTime);
+            values.endTime = this.timeConvert(this.state.endDate, this.state.endTime);
+            // console.log(values);
             // this.fetchUpload(values);
             this.fetch(values);
           }
@@ -116,6 +115,18 @@ class Create extends Component {
                 taskFormTypeId: 1
             });
         }
+    }
+    onStartDateChange(date, dateString) {
+        // console.log(date, dateString);
+        this.setState({
+            startDate: dateString
+        });
+    }
+    onEndDateChange(date, dateString) {
+        // console.log(date, dateString);
+        this.setState({
+            endDate: dateString
+        });
     }
     onStartTimeChange(time, timeString) {
         // console.log(time, timeString);
@@ -192,11 +203,11 @@ class Create extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="开始时间">
-                        {getFieldDecorator('startDate', config)(<DatePicker />)}
+                        {getFieldDecorator('startDate', config)(<DatePicker onChange={this.onStartDateChange.bind(this)}/>)}
                         <TimePicker onChange={this.onStartTimeChange.bind(this)}/>
                         </Form.Item>
                         <Form.Item label="结束时间">
-                        {getFieldDecorator('endDate', config)(<DatePicker />)}
+                        {getFieldDecorator('endDate', config)(<DatePicker onChange={this.onEndDateChange.bind(this)}/>)}
                         <TimePicker onChange={this.onEndTimeChange.bind(this)}/>
                         </Form.Item>
                         
