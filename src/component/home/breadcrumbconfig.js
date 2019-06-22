@@ -87,6 +87,18 @@ module.exports = {
         "name": "推广渠道详情",
         "catalog": "2",
         "params": []
+      }, {
+        "key": "cashout",
+        "path": "/cashout",
+        "name": "佣金发放",
+        "catalog": "0",
+        "params": []
+      }, {
+        "key": "cashoutlists",
+        "path": "/cashout/cashoutlists",
+        "name": "佣金发放列表",
+        "catalog": "1",
+        "params": []
       }
     ]
     return breadcrumbUrl;

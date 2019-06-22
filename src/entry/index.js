@@ -12,6 +12,7 @@ import ChannelCommissionList from './../component/channelcommissionlist/channelc
 import CommissionDetail from './../component/channelcommissionlist/commissiondetail/commissiondetail.js';
 import ChannelManage from './../component/channelmanage/channelmanage.js';
 import ExtendDetail from './../component/channelmanage/extenddetail.js';
+import Cashout from './../component/cashout/cashout.js';
 import './../common/lib.js';
 import './css/index.css';
 
@@ -43,6 +44,7 @@ ReactDOM.render(
           <Route path='/channelcommission/commissionlist/comissiondetail/:id' component = { CommissionDetail }/>
           <Route path='/extend/extendlists' component = { ChannelManage }/>
           <Route path='/extend/extendlist/extenddetail/:id' component = { ExtendDetail }/>
+          <Route path='/cashout/cashoutlists' component = { Cashout }/>
         </div>
     </div>
   </Router>

@@ -96,6 +96,8 @@ class Home extends Component {
             }
           } else if (this.state.currentPage == "extendlists" || this.state.currentPage == "extendlist") {
             this.state.defaultOpenKeys.push("channel-manage");
+          } else if (this.state.currentPage == "cashoutlists" || this.state.currentPage == "cashoutlist") {
+            this.state.defaultOpenKeys.push("commission-withdraw-list");
           }
         return (
             <div id="home-container">
@@ -163,6 +165,7 @@ class Home extends Component {
                                         <span>佣金提现列表</span>
                                     </span>
                                 }>
+                                <Menu.Item key="cashoutlists"><Link to="/cashout/cashoutlists">提现列表</Link></Menu.Item>    
                         </SubMenu>
                         <SubMenu key="job-order-manage"
                                 title={
