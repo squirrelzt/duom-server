@@ -18,7 +18,6 @@ class Check extends Component {
 
     fetch(params) {
         let putParams='?id=' + parseInt(this.state.id) +'&channelFromId='+parseInt(this.state.channelFromId)+'&status='+parseInt(params.status);
-        console.log(putParams);
         auth.fetch('/v1/taskOrders/users/'+localStorage.userId + putParams,'put', {} ,(result)=>{
             console.log("================");
             console.log(result);

@@ -59,8 +59,8 @@ class JobWorkOrder extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             if (values != null) {
-              console.log('-----------------------------');
-              console.log(values);
+              // console.log('-----------------------------');
+              // console.log(values);
               this.fetch(values.taskId);
             }
           }

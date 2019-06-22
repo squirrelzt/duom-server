@@ -16,12 +16,12 @@ class ChannelInfo extends Component {
     fetch(params) {
         auth.fetch('/v1/channelTo','get', {} ,(result)=>{
             if (400 != result && "1" != result) {
-              console.log('-----------------------');
-              console.log(result);
+            //   console.log('-----------------------');
+            //   console.log(result);
               this.setState({
                 data: result[0]
               });
-              console.log(this.state.data);
+            //   console.log(this.state.data);
             }
             
         });

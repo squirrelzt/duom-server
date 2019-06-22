@@ -1,0 +1,5 @@
+.detail-content li {
+    list-style-type: none;
+    height: 45px;
+    line-height: 45px;
+}
