@@ -2,11 +2,15 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './../component/login/login.js';
+import Loginx from './../component/loginx/loginx.js';
 import Home from './../component/home/home.js';
+import Homex from './../component/homex/homex.js';
 import User from './../component/user/user.js';
 import Detail from './../component/user/detail.js';
 import JobSource from './../component/jobsource/jobsource.js';
+import JobSourcex from '../component/jobsourcex/jobsourcex.js';
 import ChannelList from './../component/jobsource/channellist/channellist.js';
+import ChannelListx from './../component/jobsourcex/channellistx/channellistx.js';
 import JobWorkOrder from './../component/jobworkorder/jobworkorder.js';
 import ChannelCommissionList from './../component/channelcommissionlist/channelcommissionlist.js';
 import CommissionDetail from './../component/channelcommissionlist/commissiondetail/commissiondetail.js';
@@ -35,13 +39,17 @@ ReactDOM.render(
     <div>
       <Switch>
         <Route path='/lqgc/dm/project' component = { Login }/>
+        <Route path='/xdds/dm/project' component = { Loginx }/>
+        <Route path='/home' component = { Homex } />
         <Route path='/' component = { Home } />
       </Switch>
         <div className="content-container">
           <Route path='/user/lists' component = { User }/>
           <Route path='/user/list/detail/:id' component = { Detail }/>
           <Route path='/job/channel' component = { JobSource }/>
+          <Route path='/home/homelistx' component = { JobSourcex }/>
           <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
+          <Route path='/home/homelist/basicinfox/:id' component = { ChannelListx }/>
           <Route path='/workorder/manage' component = { JobWorkOrder }/>
           <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>
           <Route path='/channelcommission/commissionlist/comissiondetail/:id' component = { CommissionDetail }/>
