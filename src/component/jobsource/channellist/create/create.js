@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import auth from './../../../../common/auth';
-// import './css/create.css';
 import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
 import FormModal from './formmodal.js';
+import RichTextEditor from './richtexteditor.js';
+import $ from "jquery";
 
 class Create extends Component {
     constructor(props) {
@@ -81,7 +82,12 @@ class Create extends Component {
             // console.log(values.startDate);
             values.startTime = this.timeConvert(this.state.startDate, this.state.startTime);
             values.endTime = this.timeConvert(this.state.endDate, this.state.endTime);
-            // console.log(values);
+            console.log(values);
+            console.log($('#editor').val());
+            $('#editor').val().then(value=>{
+                console.log(value);
+            });
+            // console.log(this.refs.editor.getData());
             // this.fetchUpload(values);
             this.fetch(values);
           }
@@ -221,6 +227,11 @@ class Create extends Component {
                         <Form.Item label="任务领取后有效时间">
                             {getFieldDecorator('taskDuration')(
                                 <Input placeholder=""  />,
+                            )}
+                        </Form.Item>
+                        <Form.Item label="填写表单">
+                            {getFieldDecorator('taskExplain')(
+                                <RichTextEditor {...props} />,
                             )}
                         </Form.Item>
                         <Form.Item>
