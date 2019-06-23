@@ -51,10 +51,10 @@ module.exports = {
     return new Date(dateString).getTime()/1000;
   },
   getLoginUrl() {
-    return '/xdds/dm/project';
+    return '/lqgc/dm/project';
   },
   getLoginUrlx() {
-    return '/lqgc/dm/project';
+    return '/bs1010/dm/project';
   },
   getPath(){
     // return '';

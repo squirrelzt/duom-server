@@ -39,7 +39,7 @@ ReactDOM.render(
     <div>
       <Switch>
         <Route path='/lqgc/dm/project' component = { Login }/>
-        <Route path='/xdds/dm/project' component = { Loginx }/>
+        <Route path='/bs1010/dm/project' component = { Loginx }/>
         <Route path='/home' component = { Homex } />
         <Route path='/' component = { Home } />
       </Switch>
