@@ -107,7 +107,7 @@ class JobSource extends Component {
 
     componentWillMount(){
         if (localStorage.token == null) {
-            this.props.history.push('/login');
+            this.props.history.push(auth.getLoginUrl());
         }
         this.fetch();
     }

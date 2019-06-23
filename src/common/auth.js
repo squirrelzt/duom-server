@@ -21,7 +21,7 @@ module.exports = {
         } else if(err.status == 400) {
           callback(err.status);
         } else if (err.status == 401) {
-          window.location.href="/login";
+          window.location.href= this.getLoginUrl();
         } else if (err.status == 405) {
           callback(err.status);
         } else {
@@ -49,6 +49,12 @@ module.exports = {
   },
   getTimestamp(dateString) {
     return new Date(dateString).getTime()/1000;
+  },
+  getLoginUrl() {
+    return '/xdds/dm/project';
+  },
+  getLoginUrlx() {
+    return '/lqgc/dm/project';
   },
   getPath(){
     // return '';

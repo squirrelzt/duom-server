@@ -72,7 +72,7 @@ class User extends Component {
       // localStorage.userId = "123";
       // // test
       if (localStorage.token == null) {
-        this.props.history.push('/login');
+        this.props.history.push(auth.getLoginUrl());
       }
       this.fetch();
     };

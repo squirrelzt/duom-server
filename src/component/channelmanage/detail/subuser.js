@@ -65,7 +65,7 @@ class SubUser extends Component {
 
     componentWillMount(){
         if (localStorage.token == null) {
-            this.props.history.push('/login');
+            this.props.history.push(auth.getLoginUrl());
         }
         if(columns[columns.length-1].title != "操作"){
           let opt ={

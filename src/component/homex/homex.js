@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import auth from './../../common/auth'
 import './css/homex.css';
 import { Menu, Icon, Button, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
@@ -23,7 +24,7 @@ class Homex extends Component {
        console.log(localStorage.token);
     //   // test
       if (localStorage.token == null) {
-        this.props.history.push('/xdds/dm/project');
+        this.props.history.push(auth.getLoginUrl());
       }
     };
 
@@ -46,7 +47,7 @@ class Homex extends Component {
     logout() {
         localStorage.token = "";
         localStorage.userId = "";
-        window.location.href="/xdds/dm/project";
+        window.location.href=auth.getLoginUrlx();
     }
     render() {
         let url = this.props.location.pathname;

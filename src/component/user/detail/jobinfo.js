@@ -59,8 +59,8 @@ class JobInfo extends Component {
         }
         console.log(getParams);
         auth.fetch('/v1/taskOrders/c/users/' + localStorage.userId + getParams,'get',{},(result)=>{
-            console.log('-----------------------');
-            console.log(result);
+            // console.log('-----------------------');
+            // console.log(result);
             this.setState({
                 data: result
             })
@@ -69,7 +69,7 @@ class JobInfo extends Component {
 
     componentWillMount(){
         if (localStorage.token == null) {
-            this.props.history.push('/login');
+            this.props.history.push(auth.getLoginUrl());
           }
         this.fetch();
         this.props.form.validateFields();
@@ -86,7 +86,7 @@ class JobInfo extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             // console.log('Received values of form: ', values);
-            console.log(values);
+            // console.log(values);
             this.fetch(values);
           }
         });

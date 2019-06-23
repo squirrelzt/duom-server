@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import auth from './../../common/auth';
 import './css/home.css';
 import { Menu, Icon, Button, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
@@ -23,7 +24,7 @@ class Home extends Component {
        console.log(localStorage.token);
     //   // test
       if (localStorage.token == null) {
-        this.props.history.push('/login');
+        this.props.history.push(auth.getLoginUrl());
       }
     };
 
@@ -46,7 +47,7 @@ class Home extends Component {
     logout() {
         localStorage.token = "";
         localStorage.userId = "";
-        window.location.href="/login";
+        window.location.href=auth.getLoginUrl();
     }
     render() {
         let url = this.props.location.pathname;

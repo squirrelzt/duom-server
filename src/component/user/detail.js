@@ -57,7 +57,7 @@ class Detail extends Component {
     };
     componentWillMount(){
         if (localStorage.token == null) {
-            this.props.history.push('/login');
+            this.props.history.push(auth.getLoginUrl());
         }
         this.fetch(this.props.match.params.id);
         this.fetchWithdraw(this.props.match.params.id);

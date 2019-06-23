@@ -28,7 +28,7 @@ class Team extends Component {
 
     componentWillMount(){
         if (localStorage.token == null) {
-            this.props.history.push('/login');
+            this.props.history.push(auth.getLoginUrl());
         }
         this.setState({
             team1Count:this.props.init.team1Data.length,

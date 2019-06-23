@@ -78,7 +78,7 @@ class JobSourcex extends Component {
 
     componentWillMount(){
         if (localStorage.token == null) {
-            this.props.history.push('/xdds/dm/project');
+            this.props.history.push(auth.getLoginUrl());
         }
         this.fetch();
     }
