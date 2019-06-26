@@ -1,8 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import App from './../component/login/app.js';
-import Editor from './../component/login/Editor';
 import Login from './../component/login/login.js';
 import Loginx from './../component/loginx/loginx.js';
 import Home from './../component/home/home.js';
@@ -41,8 +39,6 @@ ReactDOM.render(
     <div>
       <Switch>
         <Route path='/lqgc/dm/project' component = { Login }/>
-        <Route path='/app' component = { App }/>
-        <Route path='/editor' component = { Editor }/>
         <Route path='/bs1010/dm/project' component = { Loginx }/>
         <Route path='/home' component = { Homex } />
         <Route path='/' component = { Home } />

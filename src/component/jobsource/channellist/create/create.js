@@ -3,6 +3,7 @@ import auth from './../../../../common/auth';
 import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
 import FormModal from './formmodal.js';
 import RichTextEditor from './richtexteditor.js';
+import RichEditor from './richeditor';
 import $ from "jquery";
 
 class Create extends Component {
@@ -18,7 +19,8 @@ class Create extends Component {
             endDate: '',
             startTime: '',
             endTime: '',
-            formVisible: false
+            formVisible: false,
+            richEditorData: ''
         };
     }
     
@@ -82,13 +84,10 @@ class Create extends Component {
             // console.log(values.startDate);
             values.startTime = this.timeConvert(this.state.startDate, this.state.startTime);
             values.endTime = this.timeConvert(this.state.endDate, this.state.endTime);
-            console.log(values);
-            console.log($('#editor').val());
-            $('#editor').val().then(value=>{
-                console.log(value);
-            });
+            // console.log(values);
             // console.log(this.refs.editor.getData());
             // this.fetchUpload(values);
+            values.ckeditor = this.refs.editor.getData();
             this.fetch(values);
           }
         });
@@ -230,9 +229,7 @@ class Create extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="填写表单">
-                            {getFieldDecorator('taskExplain')(
-                                <RichTextEditor {...props} />,
-                            )}
+                            <RichEditor ref='editor' {...props} />
                         </Form.Item>
                         <Form.Item>
                             <Button className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
