@@ -3,15 +3,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
         index: './src/entry/index.js'
 	},
-	mode: 'development',
-	// mode: 'production',
-	devtool: 'inline-source-map',
-	// devtool: false,
+	// mode: 'development',
+	mode: 'production',
+	// devtool: 'inline-source-map',
+	devtool: false,
     devServer: {
 			historyApiFallback:true,
       contentBase: './dist'
@@ -24,7 +25,8 @@ module.exports = {
 			}),
         // new ManifestPlugin(),
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new ExtractTextPlugin("styles.css"),
 	],
     output: {
 			filename: 'main.js',
@@ -34,12 +36,6 @@ module.exports = {
   module: {
 	  rules: [
 	    {
-			test: /\.css$/,
-			use: [
-				'style-loader',
-				'css-loader'
-				]
-		},{
 			test: /\.(png|svg|jpg|gif|ico)$/,
 			use: [
 				'file-loader'
@@ -65,6 +61,12 @@ module.exports = {
 			use: [
 				'babel-loader'
 			]
+		  },{
+			test: /\.css$/,
+			use: ExtractTextPlugin.extract({
+			  fallback: "style-loader",
+			  use: "css-loader"
+			})
 		  }
 		]
   }

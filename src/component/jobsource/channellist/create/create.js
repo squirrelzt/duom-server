@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import auth from './../../../../common/auth';
 import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
 import FormModal from './formmodal.js';
-import RichTextEditor from './richtexteditor.js';
 import RichEditor from './richeditor';
-import $ from "jquery";
 
 class Create extends Component {
     constructor(props) {
