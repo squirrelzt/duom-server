@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -12,11 +13,11 @@ module.exports = {
 	// mode: 'development',
 	mode: 'production',
 	// devtool: 'inline-source-map',
-	devtool: false,
-    devServer: {
-			historyApiFallback:true,
-      contentBase: './dist'
-		},
+	// devtool: false,
+    // devServer: {
+	// 		historyApiFallback:true,
+    //   contentBase: './dist'
+	// 	},
     plugins: [
         // new CleanWebpackPlugin(),
     	new HtmlWebpackPlugin({
@@ -32,9 +33,13 @@ module.exports = {
 				}
 			}),
         // new ManifestPlugin(),
-        new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
+        // new webpack.NamedModulesPlugin(),
+		// new webpack.HotModuleReplacementPlugin(),
 		new ExtractTextPlugin("styles.css"),
+		new OptimizeCssAssetsPlugin({
+			assetNameRegExp:/\.css$/g,
+  			cssProcessor:require('cssnano')
+		})
 	],
     output: {
 			filename: 'main.js',
