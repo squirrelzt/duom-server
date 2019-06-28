@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../../../common/auth';
+import {auth} from './../../../../common/auth';
 import './css/workorder.css';
 import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
 import Check from './check.js';

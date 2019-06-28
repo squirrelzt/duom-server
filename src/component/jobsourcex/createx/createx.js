@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import auth from '../../../common/auth';
+import {auth} from '../../../common/auth';
 import './css/createx.css';
 import { Modal, Form, Input, Button, Select, message } from 'antd';
 

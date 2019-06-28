@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../common/auth';
+import {auth} from './../../common/auth';
 import './css/channelmanage.css';
 import { Table, Divider, Form, Input, Button, Select, DatePicker } from 'antd';
 const { MonthPicker, RangePicker } = DatePicker;

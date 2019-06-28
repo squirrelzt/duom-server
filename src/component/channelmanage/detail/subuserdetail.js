@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../../common/auth';
+import {auth} from './../../../common/auth';
 import './css/subuser.css';
 import { Modal, Divider, Button } from 'antd';
 

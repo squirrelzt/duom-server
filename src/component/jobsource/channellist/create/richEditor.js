@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from "axios";
 import ImageCompressor from "image-compressor";
-import auth from './../../../../common/auth';
+import {auth} from './../../../../common/auth';
 class RichEditor extends Component {
     constructor(props) {
         super(props);      // 当父组件向子组件传递数据时，需要在这里传入props。

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../../common/auth';
+import {auth} from './../../../common/auth';
 import './css/commissiondetail.css';
 import { Form, Input, Button, Select, Table, Divider, DatePicker } from 'antd';
 const { RangePicker } = DatePicker;

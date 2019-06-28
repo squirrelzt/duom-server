@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../../common/auth';
+import {auth} from '../../common/auth';
 import './css/jobsourcex.css';
 import { Table, Divider, Form, Input, Button, Select } from 'antd';
 import Createx from './createx/createx';

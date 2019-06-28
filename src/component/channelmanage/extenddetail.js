@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import auth from './../../common/auth';
+import {auth} from './../../common/auth';
 import './css/extenddetail.css';
 import { Tabs } from 'antd';
 const { TabPane } = Tabs;

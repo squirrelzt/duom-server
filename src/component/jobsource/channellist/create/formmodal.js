@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import auth from './../../../../common/auth';
+import {auth} from './../../../../common/auth';
 // import './css/create.css';
 import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
 

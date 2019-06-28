@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import auth from './../../../common/auth';
+import {auth} from './../../../common/auth';
 import './css/jobinfo.css';
 import { Menu, Icon, Breadcrumb, Table, Divider, Form, Input, Button, DatePicker, Select } from 'antd';
 const { RangePicker } = DatePicker;

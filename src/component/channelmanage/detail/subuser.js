@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../../common/auth';
+import {auth} from './../../../common/auth';
 import './css/subuser.css';
 import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
 import SubUserDetail from './subuserdetail';

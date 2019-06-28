@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from "jquery";
-import auth from './../../common/auth';
+import {auth} from './../../common/auth';
 import './../login/css/login.css';
 
 class Loginx extends Component {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../common/auth'
+import {auth} from './../../common/auth'
 import './css/homex.css';
 import { Menu, Icon, Button, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
-import breadcrumbconfig from './breadcrumbconfigx';
+import {breadcrumbconfig} from './breadcrumbconfigx';
 import $ from "jquery";
 
 class Homex extends Component {

@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
@@ -46,6 +47,9 @@ module.exports = {
 			path: path.resolve(__dirname, 'dist'),
 			publicPath: '/'
 		},
+		// optimization: {
+		// 	minimizer: [new UglifyJsPlugin()],
+		//   },
   module: {
 	  rules: [
 	    {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import auth from './../../../../common/auth';
+import {auth} from './../../../../common/auth';
 import { Modal, Button, Divider, message } from 'antd';
 import './css/check.css'; 
 

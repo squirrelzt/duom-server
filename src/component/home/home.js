@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../common/auth';
+import {auth} from './../../common/auth';
 import './css/home.css';
 import { Menu, Icon, Button, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
-import breadcrumbconfig from './breadcrumbconfig';
+import {breadcrumbconfig} from './breadcrumbconfig';
 import $ from "jquery";
 
 class Home extends Component {

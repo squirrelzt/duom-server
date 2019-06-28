@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from './../../common/auth';
+import {auth} from './../../common/auth';
 import './css/tag.css';
 import { Table, Form, Input, Button, Select, Divider, message } from 'antd';
 
