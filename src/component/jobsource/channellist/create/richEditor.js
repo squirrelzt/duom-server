@@ -22,15 +22,18 @@ class RichEditor extends Component {
                     let uploadImgMethod = (f) => {
                         const data = new FormData();
                         const config = {
-                            headers: { "content-type": "multipart/form-data" }
+                            headers: { 
+                                "content-type": "multipart/form-data",
+                                "Accept": "*/*",
+                                "DUOM_HEADER":localStorage.token
+                             }
                         };
                         f.then(function(result){
                             data.append("file", result, result.name);
-                            // axios.post(auth.getPath() + "/editor/uploadImage", data, config)
-                            axios.post("http://127.0.0.1:8080/editor/uploadImage", data, config)
+                            axios.post(auth.getPath() + "/v1/file/upload", data, config)
                                 .then(response => {
                                     resolve({
-                                        default: response.data.url
+                                        default: response.data
                                     });
                                 });
                         });

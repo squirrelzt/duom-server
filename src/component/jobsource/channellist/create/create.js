@@ -86,6 +86,7 @@ class Create extends Component {
             // console.log(this.refs.editor.getData());
             // this.fetchUpload(values);
             values.ckeditor = this.refs.editor.getData();
+            // console.log(values);
             this.fetch(values);
           }
         });
