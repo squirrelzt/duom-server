@@ -16,7 +16,7 @@ const history = require('connect-history-api-fallback');
 // 解析 application/json
 app.use(bodyParser.json()); 
 // 解析 application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
