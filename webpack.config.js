@@ -21,7 +21,15 @@ module.exports = {
         // new CleanWebpackPlugin(),
     	new HtmlWebpackPlugin({
 				favicon:'./src/entry/images/favicon.ico',
-							title: '后台管理系统'
+				title: '后台管理系统',
+				minify:{
+					html5:true,
+					collapseWhitespace: true,
+					preserveLineBreaks: false,
+					minifyCSS: true,
+					minifyJS: true,
+					removeComments: false
+				}
 			}),
         // new ManifestPlugin(),
         new webpack.NamedModulesPlugin(),
