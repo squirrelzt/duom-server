@@ -32,7 +32,6 @@ class CreateJob extends Component {
       
     }
     fetch(params) {
-        console.log(this.state.taskFormIds);
         let name = params.name;
         let taskLabelIds = params.taskLabelIds;
         let count = params.count;
@@ -52,7 +51,6 @@ class CreateJob extends Component {
         +'&taskExplain='+taskExplain+'&androidName='+androidName+'&iosName='+iosName+'&appOpenTime='+appOpenTime+'&description='+description
         +'&urlHead='+this.state.urlHead+'&urlPkgAndroid='+this.state.urlPkgAndroid;
         let t = this;
-        console.log(postParams);
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
             // console.log("------------------");
             // console.log(result);
@@ -73,17 +71,11 @@ class CreateJob extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             values.status = parseInt(values.status);
-            // console.log(values.startDate);
             values.startTime = this.timeConvert(this.state.startDate, this.state.startTime);
             values.endTime = this.timeConvert(this.state.endDate, this.state.endTime);
-            // console.log(values);
-            // console.log(this.refs.editor.getData());
-            // this.fetchUpload(values);
             values.taskExplain = this.refs.editor.getData();
             // console.log('++++++++++++++++++++++');
             // console.log(values);
-            // console.log(this.state.urlHead);
-            // console.log(this.state.urlPkgAndroid);
             this.fetch(values);
           }
         });
