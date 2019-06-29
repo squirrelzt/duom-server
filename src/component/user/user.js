@@ -15,9 +15,6 @@ let columns = [{
     title: '上级用户ID',
     dataIndex: 'userIdUpper'
   },{
-    title: '任务来源渠道',
-    dataIndex: 'channelFromId'
-  },{
     title: '任务推广渠道',
     dataIndex: 'channelToId'    
   },{
