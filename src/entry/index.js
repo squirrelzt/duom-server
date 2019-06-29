@@ -11,6 +11,7 @@ import JobSource from './../component/jobsource/jobsource.js';
 import JobSourcex from '../component/jobsourcex/jobsourcex.js';
 import ChannelList from './../component/jobsource/channellist/channellist.js';
 import SelectJobType from './../component/jobsource/channellist/create/SelectJobType.js';
+import CreateJob from './../component/jobsource/channellist/create/CreateJob.js';
 import ChannelListx from './../component/jobsourcex/channellistx/channellistx.js';
 import JobWorkOrder from './../component/jobworkorder/jobworkorder.js';
 import ChannelCommissionList from './../component/channelcommissionlist/channelcommissionlist.js';
@@ -56,6 +57,7 @@ ReactDOM.render(
           <Route path='/home/homelistx' component = { JobSourcex }/>
           <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
           <Route path='/job/list/jobtype' component = { SelectJobType }/>
+          <Route path='/job/list/createjob' component = { CreateJob }/>
           <Route path='/home/homelist/basicinfox/:id' component = { ChannelListx }/>
           <Route path='/workorder/manage' component = { JobWorkOrder }/>
           <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>

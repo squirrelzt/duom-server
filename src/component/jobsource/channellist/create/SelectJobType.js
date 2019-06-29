@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {auth} from './../../../../common/auth';
 import { message, Card } from 'antd';
 import './css/SelectJobType.css';
@@ -35,7 +36,7 @@ class SelectJobType extends Component {
         return (
            <div id="select-job-type-container">
                <div className="jobType app">
-                   CPA任务
+                   <Link to="/job/list/createjob">CPA任务</Link>
                 </div>
                <div className="jobType jd">
                     京东零元购
