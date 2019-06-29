@@ -56,6 +56,16 @@ class Create extends Component {
     render() {
         this.state.visible = this.props.init.visible;
         const { getFieldDecorator, getFieldError, isFieldValidating, isFieldTouched, getFieldValue } = this.props.form;
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 10 },
+                sm: { span: 8 },
+            },
+            wrapperCol: {
+                xs: { span: 10 },
+                sm: { span: 16 },
+            },
+        };
         return (
             <Modal id="user-source-create-container"
                 title="新增渠道"
@@ -64,7 +74,7 @@ class Create extends Component {
                 visible = { this.state.visible }
                 footer = {[]}>
                  <div className="">
-                     <Form onSubmit={this.handleSubmit}>
+                     <Form {...formItemLayout} onSubmit={this.handleSubmit}>
                         <Form.Item label="渠道名称">
                             {getFieldDecorator('name')(
                                 <Input placeholder="请输入渠道名称" />,

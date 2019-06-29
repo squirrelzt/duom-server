@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {auth} from './../../../common/auth';
-import { Modal, Form, Input, Button, Select, message } from 'antd';
+import { Modal, Form, Input, Button, message } from 'antd';
+import './css/Recharge.css';
 
-class CreateUser extends Component {
+class Recharge extends Component {
     constructor(props) {
         super();
         this.state = {
@@ -42,7 +43,9 @@ class CreateUser extends Component {
         let t = this;
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            this.fetch(values);
+              console.log('----------------');
+              console.log(values);
+            // this.fetch(values);
           }
         });
     }
@@ -62,7 +65,7 @@ class CreateUser extends Component {
         const formItemLayout = {
             labelCol: {
                 xs: { span: 10 },
-                sm: { span: 5 },
+                sm: { span: 4 },
             },
             wrapperCol: {
                 xs: { span: 10 },
@@ -70,42 +73,30 @@ class CreateUser extends Component {
             },
         };
         return (
-            <Modal id="user-source-create-container"
-                title="新增用户"
+            <Modal id="recharge-container"
+                title="充值"
                 onOk = { this.handOk.bind(this) }
                 onCancel = { this.handleReset.bind(this) }
                 visible = { this.state.visible }
                 footer = {[]}>
                  <div className="">
                      <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                        <Form.Item label="手机号">
+                        <Form.Item label="充值金额">
                             {getFieldDecorator('phone')(
-                                <Input placeholder="请输入手机号" />,
+                                <Input placeholder="请输入充值金额" />,
                             )}
                         </Form.Item>
-                        <Form.Item label="上级用户ID">
-                            {getFieldDecorator('upperUserId')(
-                                <Input placeholder="请输入上级用户ID"  />,
-                            )}
-                        </Form.Item>
-                        <Form.Item label="用户推广渠道">
-                            {getFieldDecorator('channelToId')(
-                                <Input placeholder="请输入用户推广渠道" />,
-                            )}
-                        </Form.Item>
-                        <div className="form-btn">
-                            <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
-                                保存
+                      
+                        <div className="recharge-btn">
+                            <Button type="primary" onClick={this.onSave.bind(this)}>
+                                充值
                             </Button>
-                            <Button className="cancel" onClick={this.handleReset.bind(this)}>
-                                取消
-                            </Button>
-                           </div> 
+                        </div> 
                     </Form>
-               </div>
+                  </div>
             </Modal>
         )
     }
 }
-CreateUser = Form.create()(CreateUser);
-export default CreateUser;
+Recharge = Form.create()(Recharge);
+export default Recharge;

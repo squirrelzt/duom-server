@@ -4,6 +4,7 @@ import {auth} from './../../common/auth';
 import './css/jobsource.css';
 import { Table, Divider, Form, Input, Button, Select } from 'antd';
 import Create from './create/create';
+import Recharge from './recharge/Recharge';
 
 let columns = [{
     title: '任务来源渠道ID',
@@ -11,10 +12,10 @@ let columns = [{
   },{
     title: '任务来源渠道名',
     dataIndex: 'name'
-//   },{
-//     title: '余额',
-//     dataIndex: 'balance'
-//   },{
+  },{
+    title: '余额',
+    dataIndex: 'balance'
+  },{
 //     title: '状态',
 //     dataIndex: 'status',
 //     render(text) {
@@ -52,14 +53,14 @@ let columns = [{
   },{
     title: '创建时间',
     dataIndex: 'createTime'
-  },{
-    title: '操作',
-    dataIndex: 'operation',
-    render(text, record) {
-        return <span>
-                    <Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link>
-                </span>;
-    }
+//   },{
+//     title: '操作',
+//     dataIndex: 'operation',
+//     render(text, record) {
+//         return <span>
+//                     <Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link>
+//                 </span>;
+//     }
   }];
 
 class JobSource extends Component {
@@ -67,7 +68,8 @@ class JobSource extends Component {
         super();
         this.state = {
             data: [],
-            createVisible: false
+            createVisible: false,
+            rechargeVisible: false
         };
     }
     fetch(params) {
@@ -109,8 +111,25 @@ class JobSource extends Component {
         if (localStorage.token == null) {
             this.props.history.push(auth.getLoginUrl());
         }
+        if(columns[columns.length-1].title != "操作"){
+            let opt ={
+              title:'操作',
+              render:this.renderFn.bind(this)
+            }
+            columns.push(opt);
+          }
         this.fetch();
     }
+    renderFn(text,record,index){
+        return (
+          <span className="btn-margin">
+            <span><Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link></span>
+            <Divider type="vertical"/>
+            <a onClick={this.onRecharge.bind(this,record)}>充值</a>
+          </span>
+        )
+    }
+    
     onQuery(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -122,6 +141,13 @@ class JobSource extends Component {
       }
     handleReset() {
         this.props.form.resetFields();
+    }
+    onRecharge(record) {
+        console.log('------------------------');
+        console.log(record);
+        this.setState({
+            rechargeVisible: true
+        });
     }
     onCreate() {
         this.setState({
@@ -136,9 +162,13 @@ class JobSource extends Component {
             "idList": []
         });
     }
+    onRechargeCallback(params) {
+        this.setState({
+            rechargeVisible: params.visible
+          });
+    }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
         return (
             <div id="jobsource-container">
                  <div className="">
@@ -172,6 +202,7 @@ class JobSource extends Component {
                    <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
                </div>
                <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
+               <Recharge {...this.props} init = {{ visible: this.state.rechargeVisible }} callbackParent = { this.onRechargeCallback.bind(this) }/>
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 
