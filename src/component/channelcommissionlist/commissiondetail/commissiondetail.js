@@ -27,9 +27,9 @@ class CommissionDetail extends Component {
         super();
         this.state = {
             data: [],
-            balance: '',
-            accountChanged: '',
-            total: ''
+            balance: 0,
+            accountChanged: 0,
+            total: 0
         };
     }
     fetch(params) {
