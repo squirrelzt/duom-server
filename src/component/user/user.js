@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/user.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
+import { Menu, Icon, Breadcrumb, Table, Divider, Tabs, Button } from 'antd';
 const { TabPane } = Tabs;
+import CreateUser from './createuser/CreateUser.js';
 
 let columns = [{
     title: '用户ID',
@@ -50,7 +51,8 @@ class User extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            createVisible: false
         };
     }
     fetch(params = {}) {
@@ -62,29 +64,36 @@ class User extends Component {
           }
       });
     };
-
     componentWillMount() {
-      // // test
-      // localStorage.token = "qweraetstetxdgsyewrywryewry";
-      // localStorage.userId = "123";
-      // // test
       if (localStorage.token == null) {
         this.props.history.push(auth.getLoginUrl());
       }
       this.fetch();
     };
-    callback() {
-
+    onCreate() {
+      this.setState({
+        createVisible: true
+      });
+    }
+    onCreateCallback(params) {
+      this.setState({
+        createVisible: params.visible
+      });
+      this.fetch();
     }
     render() {
         return (
             <div id="user-container">
+              <div className="user-add">
+                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增用户</Button>
+               </div>
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 
                         dataSource={this.state.data}
                         />
                 </div>
+                <CreateUser {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
             </div>
         )
     }
