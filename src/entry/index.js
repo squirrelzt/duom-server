@@ -10,6 +10,7 @@ import Detail from './../component/user/detail.js';
 import JobSource from './../component/jobsource/jobsource.js';
 import JobSourcex from '../component/jobsourcex/jobsourcex.js';
 import ChannelList from './../component/jobsource/channellist/channellist.js';
+import SelectJobType from './../component/jobsource/channellist/create/SelectJobType.js';
 import ChannelListx from './../component/jobsourcex/channellistx/channellistx.js';
 import JobWorkOrder from './../component/jobworkorder/jobworkorder.js';
 import ChannelCommissionList from './../component/channelcommissionlist/channelcommissionlist.js';
@@ -32,7 +33,12 @@ function component() {
 let element = component(); 
 document.body.appendChild(element);
 
-
+function requireAuth(nextState, replace) {
+  console.log('-------------------');
+}
+function requireAuthx(nextState, replace) {
+  console.log('====================');
+}
 ReactDOM.render(
   (
   <Router>
@@ -40,8 +46,8 @@ ReactDOM.render(
       <Switch>
         <Route path='/lqgc/dm/project' component = { Login }/>
         <Route path='/bs1010/dm/project' component = { Loginx }/>
-        <Route path='/home' component = { Homex } />
-        <Route path='/' component = { Home } />
+        <Route path='/home' component = { Homex } onEnter={requireAuthx}/>
+        <Route path='/' component = { Home } onEnter={requireAuth}/>
       </Switch>
         <div className="content-container">
           <Route path='/user/lists' component = { User }/>
@@ -49,6 +55,7 @@ ReactDOM.render(
           <Route path='/job/channel' component = { JobSource }/>
           <Route path='/home/homelistx' component = { JobSourcex }/>
           <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
+          <Route path='/job/list/jobtype' component = { SelectJobType }/>
           <Route path='/home/homelist/basicinfox/:id' component = { ChannelListx }/>
           <Route path='/workorder/manage' component = { JobWorkOrder }/>
           <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>

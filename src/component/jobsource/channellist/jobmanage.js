@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {auth} from './../../../common/auth';
 import './css/channelList.css';
 import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
@@ -17,7 +18,7 @@ let columns = [{
     render(text) {
         switch (text) {
             case 1:
-              return <span>APP普通任务</span>;
+              return <span>CPA任务</span>;
               break;
             case 2:
               return <span>京东零元购</span>;
@@ -124,7 +125,8 @@ class JobManage extends Component {
                     </Form>
                </div>
                <div className="job-source-add">
-                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务</Button>
+               {/* <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务</Button> */}
+                   <Link to="/job/list/jobtype"><Button type="primary">新增任务</Button></Link>
                </div>
                <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
                 <Table columns={columns}
