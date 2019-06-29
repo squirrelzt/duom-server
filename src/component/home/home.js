@@ -18,11 +18,7 @@ class Home extends Component {
     }
 
     componentWillMount(){
-    //      // test
-    //   localStorage.token = "qweraetstetxdgsyewrywryewry";
-    //   localStorage.userId = "123";
-       console.log(localStorage.token);
-    //   // test
+      console.log(localStorage.token);
       if (localStorage.token == null) {
         this.props.history.push(auth.getLoginUrl());
       }
@@ -145,14 +141,14 @@ class Home extends Component {
                                 }>
                             <Menu.Item key="commissionlists"><Link to="/channelcommission/commissionlists">佣金列表</Link></Menu.Item>
                         </SubMenu>
-                        <SubMenu key="extension-commison-record"
+                        {/* <SubMenu key="extension-commison-record"
                                 title={
                                     <span>
                                         <Icon type="profile"></Icon>
                                         <span>用户推广渠道佣金发放记录</span>
                                     </span>
                                 }>
-                        </SubMenu>
+                        </SubMenu> */}
                         {/* <SubMenu key="finance-setting"
                                 title={
                                     <span>
@@ -214,7 +210,7 @@ class Home extends Component {
                         <Icon className="menuUnFoldIcon" type="menu-unfold" style={{display: 'none'}} onClick={this.onMenuUnFold}/>
                         <div className="logout">
                             <span>当前用户: {localStorage.userId}</span>
-                            <Button size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
+                            <Button type="primary" size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
                         </div>
                     </div>
                 </section>

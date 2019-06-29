@@ -18,11 +18,7 @@ class Homex extends Component {
     }
 
     componentWillMount(){
-    //      // test
-    //   localStorage.token = "qweraetstetxdgsyewrywryewry";
-    //   localStorage.userId = "123";
-       console.log(localStorage.token);
-    //   // test
+      console.log(localStorage.token);
       if (localStorage.token == null) {
         this.props.history.push(auth.getLoginUrl());
       }
@@ -118,7 +114,7 @@ class Homex extends Component {
                         <Icon className="menuUnFoldIcon" type="menu-unfold" style={{display: 'none'}} onClick={this.onMenuUnFold}/>
                         <div className="logout">
                             <span>当前用户: {localStorage.userId}</span>
-                            <Button size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
+                            <Button type="primary" size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
                         </div>
                     </div>
                 </section>

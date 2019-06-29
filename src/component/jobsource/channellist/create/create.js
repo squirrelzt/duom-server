@@ -21,7 +21,11 @@ class Create extends Component {
             richEditorData: ''
         };
     }
-    
+    componentWillMount(){}
+    componentDidUpdate(){}
+    componentWillUnmount(){}
+    componentWillUpdate(){}
+    componentDidMount(){}
     fetchUpload(params) {
         auth.fetch('/v1/taskForm?bUserId='+ localStorage.userId +'&taskFormTypeId=2&urlImg=' + this.state.uploadUrl,'post', {} ,(result)=>{
             // console.log("------------------");
@@ -44,9 +48,11 @@ class Create extends Component {
         let startTime = params.startTime;
         let endTime = params.endTime;
         let taskDuration = params.taskDuration;
+        let taskExplain = params.taskExplain;
         let postParams = 'name=' + name + '&taskLabelIds=' + taskLabelIds.join(',') + '&count=' + count + '&commision=' + commision
         +'&bUserId='+localStorage.userId+'&channelFromId='+this.props.match.params.id+'&taskFormTypeId='+this.state.taskFormTypeId
-        +'&taskFormIds='+this.state.taskFormIds.join(',')+'&startTime='+startTime+'&endTime='+endTime+'&taskDuration='+taskDuration;
+        +'&taskFormIds='+this.state.taskFormIds.join(',')+'&startTime='+startTime+'&endTime='+endTime+'&taskDuration='+taskDuration
+        +'&taskExplain='+taskExplain;
         if (name != null) {
             // postParams += 'name=' + name;
         } else {
@@ -68,9 +74,7 @@ class Create extends Component {
         });
     };
 
-    componentWillMount(){
-        
-    };
+   
    
     onSave(e) {
         e.preventDefault();
@@ -78,15 +82,15 @@ class Create extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             values.status = parseInt(values.status);
-            // console.log('++++++++++++++++++++++');
             // console.log(values.startDate);
             values.startTime = this.timeConvert(this.state.startDate, this.state.startTime);
             values.endTime = this.timeConvert(this.state.endDate, this.state.endTime);
             // console.log(values);
             // console.log(this.refs.editor.getData());
             // this.fetchUpload(values);
-            values.ckeditor = this.refs.editor.getData();
-            // console.log(values);
+            values.taskExplain = this.refs.editor.getData();
+            console.log('++++++++++++++++++++++');
+            console.log(values);
             this.fetch(values);
           }
         });
@@ -208,11 +212,11 @@ class Create extends Component {
                         </Form.Item>
                         <Form.Item label="开始时间">
                         {getFieldDecorator('startDate', config)(<DatePicker onChange={this.onStartDateChange.bind(this)}/>)}
-                        <TimePicker onChange={this.onStartTimeChange.bind(this)}/>
+                        <TimePicker onChange={this.onStartTimeChange.bind(this)} />
                         </Form.Item>
                         <Form.Item label="结束时间">
                         {getFieldDecorator('endDate', config)(<DatePicker onChange={this.onEndDateChange.bind(this)}/>)}
-                        <TimePicker onChange={this.onEndTimeChange.bind(this)}/>
+                        <TimePicker onChange={this.onEndTimeChange.bind(this)} />
                         </Form.Item>
                         
                         <Form.Item label="上传安装包">
