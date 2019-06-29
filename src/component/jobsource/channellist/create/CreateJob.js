@@ -3,13 +3,13 @@ import {auth} from './../../../../common/auth';
 import { Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
 import './css/CreateJob.css';
 import RichEditor from './richeditor';
+import FormModal from './formmodal.js';
 
 class CreateJob extends Component {
     constructor(props) {
         super();
         this.state = {
             data: [],
-            uploadUrl: '',
             taskFormIds: [],
             taskFormTypeId: '',
             startDate: '',
@@ -18,30 +18,21 @@ class CreateJob extends Component {
             endTime: '',
             formVisible: false,
             richEditorData: '',
-            txtId: 0,
-            imgId: 0
+            urlHead: '',
+            urlPkgAndroid:'',
+            title:'',
+            urlImg:''
         };
     }
     componentWillMount(){}
     componentDidUpdate(){}
     componentWillUnmount(){}
     componentWillUpdate(){}
-    componentDidMount(){}
-    fetchUpload(params) {
-        auth.fetch('/v1/taskForm?bUserId='+ localStorage.userId +'&taskFormTypeId=2&urlImg=' + this.state.uploadUrl,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
-               this.setState({
-                 taskFormIds: result
-               });
-            //    console.log(this.state.taskFormIds);
-               this.fetch(params);
-               
-            }
-        });
+    componentDidMount(){
+      
     }
     fetch(params) {
+        console.log(this.state.taskFormIds);
         let name = params.name;
         let taskLabelIds = params.taskLabelIds;
         let count = params.count;
@@ -50,19 +41,18 @@ class CreateJob extends Component {
         let endTime = params.endTime;
         let taskDuration = params.taskDuration;
         let taskExplain = params.taskExplain;
+        let androidName = params.androidName;
+        let iosName = params.iosName;
+        let appOpenTime = params.appOpenTime;
+        let description = params.description;
+
         let postParams = 'name=' + name + '&taskLabelIds=' + taskLabelIds.join(',') + '&count=' + count + '&commision=' + commision
         +'&bUserId='+localStorage.userId+'&channelFromId='+this.props.match.params.id+'&taskFormTypeId='+this.state.taskFormTypeId
         +'&taskFormIds='+this.state.taskFormIds.join(',')+'&startTime='+startTime+'&endTime='+endTime+'&taskDuration='+taskDuration
-        +'&taskExplain='+taskExplain;
-        if (name != null) {
-            // postParams += 'name=' + name;
-        } else {
-            // postParams += 'name=' + name;
-        }
-        if (name != null) {
-
-        }
+        +'&taskExplain='+taskExplain+'&androidName='+androidName+'&iosName='+iosName+'&appOpenTime='+appOpenTime+'&description='+description
+        +'&urlHead='+this.state.urlHead+'&urlPkgAndroid='+this.state.urlPkgAndroid;
         let t = this;
+        console.log(postParams);
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
             // console.log("------------------");
             // console.log(result);
@@ -90,9 +80,11 @@ class CreateJob extends Component {
             // console.log(this.refs.editor.getData());
             // this.fetchUpload(values);
             values.taskExplain = this.refs.editor.getData();
-            console.log('++++++++++++++++++++++');
-            console.log(values);
-            // this.fetch(values);
+            // console.log('++++++++++++++++++++++');
+            // console.log(values);
+            // console.log(this.state.urlHead);
+            // console.log(this.state.urlPkgAndroid);
+            this.fetch(values);
           }
         });
     }
@@ -108,19 +100,19 @@ class CreateJob extends Component {
         // e.preventDefault();
         this.props.form.resetFields();
     }
-    onUploadChange(info) {
+    onUploadChangeUrlHead(info) {
+        // console.log('------------------------');
+        // console.log(info.file.response);
         this.setState({
-            uploadUrl: info.file.response
+            urlHead: info.file.response
         });
-        if (info.file.type.search('image')) {
-            this.setState({
-                taskFormTypeId: 2
-            });
-        } else if (info.file.type.search('text')) {
-            this.setState({
-                taskFormTypeId: 1
-            });
-        }
+    }
+    onUploadChangeAndroid(info) {
+        // console.log('------------------------');
+        // console.log(info.file.response);
+        this.setState({
+            urlPkgAndroid: info.file.response
+        });
     }
     onStartDateChange(date, dateString) {
         // console.log(date, dateString);
@@ -151,78 +143,36 @@ class CreateJob extends Component {
             formVisible: true
         })
     }
-    fetch(params) {
-        auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
-                message.success('新增任务成功');
-                this.handleReset();
-            } else if (1 != result) {
-                message.error('新增任务失败');
-            }
-        });
-    };
 
-    removeTxt(k) {
-        const { form } = this.props;
-        // can use data-binding to get
-        const txtKeys = form.getFieldValue('txtKeys');
-        // We need at least one passenger
-        if (txtKeys.length === 1) {
-            return;
-        }
-
-        // can use data-binding to set
-        form.setFieldsValue({
-            txtKeys: txtKeys.filter(key => key !== k),
+      onCreateCallback(params) {
+        // console.log('^^^^^^^^^^^^^^^^^^');
+        // console.log(params);
+        this.setState({
+            title: params.title,
+            urlImg: params.urlImg,
+            formVisible: params.visible,
+            taskFormIds: params.taskFormIds,
+            taskFormTypeId: params.taskFormTypeId
         });
     }
-    addTxt() {
-        const { form } = this.props;
-        // can use data-binding to get
-        const txtKeys = form.getFieldValue('txtKeys');
-        const nextKeys = txtKeys.concat(this.state.txtId++);
-        // can use data-binding to set
-        // important! notify form to detect changes
-        form.setFieldsValue({
-            txtKeys: nextKeys,
-        });
-      };
-      removeImg(k) {
-        const { form } = this.props;
-        // can use data-binding to get
-        const imgKeys = form.getFieldValue('imgKeys');
-        // We need at least one passenger
-        if (imgKeys.length === 1) {
-            return;
-        }
-
-        // can use data-binding to set
-        form.setFieldsValue({
-            imgKeys: imgKeys.filter(key => key !== k),
-        });
-    }
-    addImg() {
-        const { form } = this.props;
-        // can use data-binding to get
-        const imgKeys = form.getFieldValue('imgKeys');
-        const nextKeys = imgKeys.concat(this.state.imgId++);
-        // can use data-binding to set
-        // important! notify form to detect changes
-        form.setFieldsValue({
-            imgKeys: nextKeys,
-        });
-      };
     render() {
-        const props = {
+        const urlHeadProps = {
             name: 'file',
             action: auth.getPath() + '/v1/file/upload',
             headers: {
               authorization: 'authorization-text',
               "DUOM_HEADER": localStorage.token
             },
-            onChange: this.onUploadChange.bind(this)
+            onChange: this.onUploadChangeUrlHead.bind(this)
+        };
+        const androidProps = {
+            name: 'file',
+            action: auth.getPath() + '/v1/file/upload',
+            headers: {
+              authorization: 'authorization-text',
+              "DUOM_HEADER": localStorage.token
+            },
+            onChange: this.onUploadChangeAndroid.bind(this)
         };
         const { getFieldDecorator, getFieldError, isFieldValidating, isFieldTouched, getFieldValue } = this.props.form;
         const config = {
@@ -238,85 +188,6 @@ class CreateJob extends Component {
             sm: { span: 16 },
         },
         };
-        const formItemLayoutWithOutLabel = {
-            wrapperCol: {
-              xs: { span: 24, offset: 0 },
-              sm: { span: 20, offset: 4 },
-            },
-          };
-        getFieldDecorator('txtKeys', { initialValue: [] });
-        const txtKeys = getFieldValue('txtKeys');
-        const txtFormItems = txtKeys.map((k, index) => (
-            <Form.Item
-              label='标题'
-              required={false}
-              key={k}
-            >
-              {getFieldDecorator(`formTitles[${k}]`, {
-                validateTrigger: ['onChange', 'onBlur'],
-                rules: [
-                  {
-                    required: true,
-                    whitespace: true,
-                    message: "请输入文本表单标题",
-                  },
-                ],
-              })(<Input placeholder="标题" style={{ width: '60%', marginRight: 8 }} />)}
-              {txtKeys.length > 1 ? (
-                <Icon
-                  className="dynamic-delete-button"
-                  type="minus-circle-o"
-                  onClick={() => this.removeTxt(k)}
-                />
-              ) : null}
-            </Form.Item>
-          ));
-        getFieldDecorator('imgKeys', { initialValue: [] });
-        const imgKeys = getFieldValue('imgKeys');
-        const imgFormItems = imgKeys.map((k, index) => (
-            <div key={k}>
-                <Form.Item
-                    label='标题'
-                    required={false}
-                    key={k+'title'}
-                    >
-                    {getFieldDecorator(`imgTitles[${k}]`, {
-                        validateTrigger: ['onChange', 'onBlur'],
-                        rules: [
-                        {
-                            required: true,
-                            whitespace: true,
-                            message: "请输入图片表单标题",
-                        },
-                        ],
-                    })(<Input placeholder="标题" style={{ width: '60%', marginRight: 8 }} />
-                    )}
-                </Form.Item>
-                <Form.Item
-                    label='示例图'
-                    required={false}
-                    key={k+'img'}
-                    >
-                    {getFieldDecorator(`exampleImgs[${k}]`, {
-                        validateTrigger: ['onChange', 'onBlur'],
-                        
-                    })(<Upload className="form-img" {...props}>
-                        <Button>
-                            <Icon type="uploadIcon" /> 点击上传
-                        </Button>
-                    </Upload>
-                    )}
-                    {imgKeys.length > 1 ? (
-                        <Icon
-                        className="dynamic-delete-button"
-                        type="minus-circle-o"
-                        onClick={() => this.removeImg(k)}
-                        />
-                    ) : null}
-                </Form.Item>
-            </div>
-            
-          ));
         return (
            <div id="create-job-container">
              <Form {...formItemLayout} onSubmit={this.handleSubmit}>
@@ -341,7 +212,7 @@ class CreateJob extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="任务图标">
-                            <Upload {...props}>
+                            <Upload {...urlHeadProps}>
                                 <Button>
                                     <Icon type="uploadIcon" /> 点击上传
                                 </Button>
@@ -361,7 +232,7 @@ class CreateJob extends Component {
                             )}(分钟)
                         </Form.Item>
                         <Form.Item label="APP打开时间">
-                            {getFieldDecorator('openTime')(
+                            {getFieldDecorator('appOpenTime')(
                                 <Input placeholder="" />,
                             )}(秒:选填)
                         </Form.Item>
@@ -386,7 +257,7 @@ class CreateJob extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="IOS APP bundle id">
-                            {getFieldDecorator('iosBundleId')(
+                            {getFieldDecorator('iosName')(
                                 <Input placeholder="" />,
                             )}
                         </Form.Item>
@@ -396,36 +267,31 @@ class CreateJob extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="Android APP包名">
-                            {getFieldDecorator('androidBundleName')(
+                            {getFieldDecorator('androidName')(
                                 <Input placeholder="" />,
                             )}
                         </Form.Item>
                         <Form.Item label="上传Android安装包">
-                            <Upload {...props}>
+                            <Upload {...androidProps}>
                                 <Button>
                                 <Icon type="upload" /> 点击上传
                                 </Button>
                             </Upload>
                         </Form.Item>
                         <Form.Item label="任务说明">
-                            <RichEditor ref='editor' {...props} />
+                            <RichEditor ref='editor' />
                         </Form.Item>
-                        <Form.Item  label="文本表单">
-                            <Button type="dashed" onClick={this.addTxt.bind(this)} style={{ width: '60%' }}>
-                                <Icon type="plus" /> 添加文本表单
-                            </Button>
-                        </Form.Item>
-                        {txtFormItems}
-                        <Form.Item  label="图片表单">
-                            <Button type="dashed" onClick={this.addImg.bind(this)} style={{ width: '60%' }}>
-                                <Icon type="plus" /> 添加图片表单
-                            </Button>
-                        </Form.Item>
-                        {imgFormItems}
-                        {/* <Form.Item>
-                            <Button className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
-                         </Form.Item> */}
-                        
+                        <Form.Item>
+                            <Button type="primary" className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
+                         </Form.Item>
+                        <div style={{visibility: this.state.exampleImgVisibility}}>
+                            {this.state.title != ''?
+                            <div>标题: &nbsp;&nbsp;{this.state.title}</div>
+                            :""}
+                            {this.state.urlImg != ''?
+                             <div>示例图:&nbsp;&nbsp;<img src={this.state.urlImg}/></div>
+                            :""}
+                        </div>
                         <div className="form-btn">
                             <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
                                 保存
@@ -433,6 +299,8 @@ class CreateJob extends Component {
                             <Button className="cancel" onClick={this.handleReset.bind(this)}>
                                 取消
                             </Button>
+                            <FormModal init={{visible:this.state.formVisible}}
+                                callbackParent = { this.onCreateCallback.bind(this) }/>
                            </div> 
                     </Form>
            </div>

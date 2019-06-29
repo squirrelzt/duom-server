@@ -18,7 +18,6 @@ class SelectJobType extends Component {
     componentDidMount(){}
     
     fetch(params) {
-       
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
             // console.log("------------------");
             // console.log(result);
@@ -36,7 +35,7 @@ class SelectJobType extends Component {
         return (
            <div id="select-job-type-container">
                <div className="jobType app">
-                   <Link to="/job/list/createjob">CPA任务</Link>
+                   <Link to={"/job/listsj/createjob/"+this.props.match.params.id}><span>CPA任务</span></Link>
                 </div>
                <div className="jobType jd">
                     京东零元购

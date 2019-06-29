@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {auth} from './../../../../common/auth';
 // import './css/create.css';
-import { Modal, Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
+import { Modal, Form, Icon, Input, Button, Select, message, Upload } from 'antd';
 
 class FormModal extends Component {
     constructor(props) {
@@ -12,7 +12,9 @@ class FormModal extends Component {
             taskFormIds: [],
             taskFormTypeId: '',
             selectedFormId: '',
-            titleVisibility: 'visible'
+            title: '',
+            urlImg: '',
+            exampleImgVisibility: 'visible'
         };
     }
     
@@ -27,17 +29,16 @@ class FormModal extends Component {
                 + '&title='+params.title;
         } else if (params.taskFormTypeId == "2") {
             url='/v1/taskForm?bUserId='+ localStorage.userId +'&taskFormTypeId='+parseInt(params.taskFormTypeId)
-                +'&urlImg=' + this.props.init.uploadUrl;
+                + '&title='+params.title+'&urlImg=' + this.state.urlImg;
         }
-       
         auth.fetch(url,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
             if (200 != result) {
                this.setState({
                     taskFormIds: result
                });
                this.props.callbackParent({
+                    title: this.state.title,
+                    urlImg: this.state.urlImg,
                     formVisible: this.state.visible,
                     taskFormIds: this.state.taskFormIds,
                     taskFormTypeId: this.state.taskFormTypeId
@@ -55,11 +56,11 @@ class FormModal extends Component {
         let t = this;
         this.props.form.validateFields((err, values) => {
           if (!err) {
+            this.setState({
+                title: values.title,
+                taskFormTypeId: values.taskFormTypeId
+            })
             this.fetch(values);
-            // console.log('---------------------------');
-            // console.log(values);
-            // console.log(this.props.init.uploadUrl);
-            
           }
         });
     }
@@ -75,9 +76,9 @@ class FormModal extends Component {
             taskFormIds: this.state.taskFormIds,
             taskFormTypeId: this.state.taskFormTypeId
         });
-        // this.props.callbackParent({
-        //     visible: false
-        // });
+        this.props.callbackParent({
+            visible: false
+        });
     }
     onSelect(value) {
         // console.log('------------------------');
@@ -87,19 +88,34 @@ class FormModal extends Component {
         });
         if (value == 1) {
             this.setState({
-                titleVisibility: 'visible'
+                exampleImgVisibility: 'hidden'
             });
         } else if (value == 2) {
             this.setState({
-                titleVisibility: 'hidden'
+                exampleImgVisibility: 'visible'
             });
         }
 
     }
+    onUploadChange(info) {
+        // console.log('------------------------');
+        // console.log(info.file.response);
+        this.setState({
+            urlImg: info.file.response
+        });
+    }
     render() {
-   
         this.state.visible = this.props.init.visible;
         const { getFieldDecorator, getFieldError, isFieldValidating, isFieldTouched, getFieldValue } = this.props.form;
+        const props = {
+            name: 'file',
+            action: auth.getPath() + '/v1/file/upload',
+            headers: {
+              authorization: 'authorization-text',
+              "DUOM_HEADER": localStorage.token
+            },
+            onChange: this.onUploadChange.bind(this)
+        };
         return (
             <Modal id="form-create-container"
                 title="新增核销表单"
@@ -118,10 +134,17 @@ class FormModal extends Component {
                             )}
                         </Form.Item>
                         
-                        <Form.Item label="标题" className="formmodal-title" style={{visibility: this.state.titleVisibility}}>
+                        <Form.Item label="标题" className="formmodal-title">
                             {getFieldDecorator('title')(
                                 <Input placeholder=""  />,
                             )}
+                        </Form.Item>
+                        <Form.Item label="示例图" className="example-img" style={{visibility: this.state.exampleImgVisibility}}>
+                            <Upload {...props}>
+                                <Button>
+                                    <Icon type="uploadIcon" /> 点击上传
+                                </Button>
+                            </Upload>
                         </Form.Item>
                         <div className="form-btn">
                             <Button type="primary" className="save" onClick={this.onSave.bind(this)}>

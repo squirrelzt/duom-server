@@ -56,8 +56,8 @@ ReactDOM.render(
           <Route path='/job/channel' component = { JobSource }/>
           <Route path='/home/homelistx' component = { JobSourcex }/>
           <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
-          <Route path='/job/list/jobtype' component = { SelectJobType }/>
-          <Route path='/job/list/createjob' component = { CreateJob }/>
+          <Route path='/job/lists/jobtype/:id' component = { SelectJobType }/>
+          <Route path='/job/listsj/createjob/:id' component = { CreateJob }/>
           <Route path='/home/homelist/basicinfox/:id' component = { ChannelListx }/>
           <Route path='/workorder/manage' component = { JobWorkOrder }/>
           <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>

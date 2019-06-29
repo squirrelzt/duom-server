@@ -126,7 +126,7 @@ class JobManage extends Component {
                </div>
                <div className="job-source-add">
                {/* <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务</Button> */}
-                   <Link to="/job/list/jobtype"><Button type="primary">新增任务</Button></Link>
+                   <Link to={"/job/lists/jobtype/"+this.props.match.params.id}><Button type="primary">新增任务</Button></Link>
                </div>
                <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
                 <Table columns={columns}
