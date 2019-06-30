@@ -25,20 +25,20 @@ class Home extends Component {
     };
 
     onMenuFold() {
-        $('#home-container aside').css('display', 'none');
+        $('#home-container aside').css('visibility', 'hidden');
         $('#home-container section').css('margin-left', '0');
         $('#home-container > .breadcrumb').css('margin-left', '0');
         $('.content-container').css('margin-left', '0');
-        $('.menuFoldIcon').css('display', 'none');
-        $('.menuUnFoldIcon').css('display', 'block');
+        $('.menuFoldIcon').css('visibility', 'hidden');
+        $('.menuUnFoldIcon').css('visibility', 'visible');
     }
     onMenuUnFold() {
-        $('#home-container aside').css('display', 'block');
+        $('#home-container aside').css('visibility', 'visible');
         $('#home-container section').css('margin-left', '240px');
         $('#home-container > .breadcrumb').css('margin-left', '240px');
         $('.content-container').css('margin-left', '240px');
-        $('.menuFoldIcon').css('display', 'block');
-        $('.menuUnFoldIcon').css('display', 'none');
+        $('.menuFoldIcon').css('visibility', 'visible');
+        $('.menuUnFoldIcon').css('visibility', 'hidden');
     }
     logout() {
         localStorage.token = "";
@@ -168,8 +168,8 @@ class Home extends Component {
                 </aside>
                 <section>
                     <div className="menu-display">
-                        <Icon className="menuFoldIcon" type="menu-fold" onClick={this.onMenuFold}/>
-                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{display: 'none'}} onClick={this.onMenuUnFold}/>
+                        <Icon className="menuFoldIcon" type="menu-fold" style={{cursor:'pointer'}} onClick={this.onMenuFold}/>
+                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{visibility: 'hidden', cursor:'pointer'}} onClick={this.onMenuUnFold}/>
                         <div className="logout">
                             <span>当前用户: {localStorage.userId}</span>
                             <Button type="primary" size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
