@@ -80,18 +80,22 @@ class Home extends Component {
           this.state.currentPage = urlArray[1];
           if ((this.state.currentPage == "list" && urlArray[0] == "user") || this.state.currentPage == "lists") {
             this.state.defaultOpenKeys.push("user-manage-menu");
+            this.state.currentPage = "lists";
           } else if (this.state.currentPage == "channel") {
             this.state.defaultOpenKeys.push("job-resource-manage");
           } else if (urlArray[0] == "job" && this.state.currentPage == "list") {
-            this.state.currentPage = urlArray[2];
+            this.state.currentPage = "channel";
             this.state.defaultOpenKeys.push("job-resource-manage");
-          } else if (this.state.currentPage == "commissionlists" || this.state.currentPage == "commissionlist") {
-            this.state.defaultOpenKeys.push("channel-commission-list");
-            if (this.state.currentPage == "commissionlist") {
-                this.state.currentPage = urlArray[2];
-            }
-          } else if (this.state.currentPage == "extendlists" || this.state.currentPage == "extendlist") {
+          } else if (this.state.currentPage == "extendlists") {
             this.state.defaultOpenKeys.push("channel-manage");
+          } else if (urlArray[0] == "extend" && this.state.currentPage == "extendlist") {
+            this.state.currentPage = "extendlists";
+            this.state.defaultOpenKeys.push("channel-manage");
+          } else if (this.state.currentPage == "commissionlists") {
+            this.state.defaultOpenKeys.push("channel-commission-list");
+          } else if (urlArray[0] == "channelcommission" && this.state.currentPage == "commissionlist") {
+            this.state.currentPage = "commissionlists";
+            this.state.defaultOpenKeys.push("channel-commission-list");
           } else if (this.state.currentPage == "cashoutlists" || this.state.currentPage == "auditedcashoutlists" || this.state.currentPage == "rejectcashoutlists") {
             this.state.defaultOpenKeys.push("commission-withdraw-list");
           } else if (this.state.currentPage == "taglists" || this.state.currentPage == "taglist") {
@@ -120,7 +124,7 @@ class Home extends Component {
                                         <span>任务来源渠道管理</span>
                                     </span>
                                 }>
-                            <Menu.Item key="channel"><Link to="/job/channel">渠道管理</Link></Menu.Item>
+                            <Menu.Item key="channel"><Link to="/job/channel">渠道列表</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-manage"
                                 title={
@@ -129,7 +133,7 @@ class Home extends Component {
                                         <span>用户推广渠道管理</span>
                                     </span>
                                 }>
-                            <Menu.Item key="channel"><Link to="/extend/extendlists">推广渠道列表</Link></Menu.Item>
+                            <Menu.Item key="extendlists"><Link to="/extend/extendlists">推广渠道列表</Link></Menu.Item>
                         </SubMenu>
                         <SubMenu key="channel-commission-list"
                                 title={
@@ -140,22 +144,6 @@ class Home extends Component {
                                 }>
                             <Menu.Item key="commissionlists"><Link to="/channelcommission/commissionlists">佣金列表</Link></Menu.Item>
                         </SubMenu>
-                        {/* <SubMenu key="extension-commison-record"
-                                title={
-                                    <span>
-                                        <Icon type="profile"></Icon>
-                                        <span>用户推广渠道佣金发放记录</span>
-                                    </span>
-                                }>
-                        </SubMenu> */}
-                        {/* <SubMenu key="finance-setting"
-                                title={
-                                    <span>
-                                        <Icon type="pay-circle"></Icon>
-                                        <span>财务设置</span>
-                                    </span>
-                                }>
-                        </SubMenu> */}
                         <SubMenu key="commission-withdraw-list"
                                 title={
                                     <span>
@@ -167,15 +155,6 @@ class Home extends Component {
                                 <Menu.Item key="auditedcashoutlists"><Link to="/cashout/auditedcashoutlists">提现已审核列表</Link></Menu.Item>
                                 <Menu.Item key="rejectcashoutlists"><Link to="/cashout/rejectcashoutlists">提现已拒绝列表</Link></Menu.Item>
                         </SubMenu>
-                        {/* <SubMenu key="job-order-manage"
-                                title={
-                                    <span>
-                                        <Icon type="appstore"></Icon>
-                                        <span>任务工单管理</span>
-                                    </span>
-                                }>
-                                <Menu.Item key="channel"><Link to="/workorder/manage">工单管理</Link></Menu.Item>
-                        </SubMenu> */}
                         <SubMenu key="job-tab-manage"
                                 title={
                                     <span>
@@ -185,22 +164,6 @@ class Home extends Component {
                                 }>
                             <Menu.Item key="taglists"><Link to="/tag/taglists">标签列表</Link></Menu.Item>
                         </SubMenu>
-                        {/* <SubMenu key="finance-statis"
-                                title={
-                                    <span>
-                                        <Icon type="account-book"></Icon>
-                                        <span>财务统计</span>
-                                    </span>
-                                }>
-                        </SubMenu> */}
-                        {/* <SubMenu key="setting-manage"
-                                title={
-                                    <span>
-                                        <Icon type="setting"></Icon>
-                                        <span>系统管理</span>
-                                    </span>
-                                }>
-                        </SubMenu> */}
                     </Menu>
                 </aside>
                 <section>
