@@ -48,7 +48,9 @@ class Cashout extends Component {
                 }
             }
         }
+        console.log(getParams);
         auth.fetch('/v1/cashout/b' + getParams,'get',{},(result)=>{
+            console.log(result)
             if ("error" == result) {
 
             } else {
@@ -73,13 +75,17 @@ class Cashout extends Component {
         this.fetch();
     }
     renderFn(text,record,index){
-        return (
-          <span className="btn-margin">
-            <a onClick={this.onAgree.bind(this, record)}>通过审核</a>
-            <Divider type="vertical"/>
-            <a onClick={this.onReject.bind(this, record)}>不通过审核</a>
-          </span>
-        )
+        if (record.status = 0) {
+            return  <span className="btn-margin">
+                        <a onClick={this.onAgree.bind(this, record)} >通过审核</a>
+                        <Divider type="vertical"/>
+                        <a onClick={this.onReject.bind(this, record)}>不通过审核</a>
+                    </span>
+        } else if (record.status = 1){
+            return  <span> 已通过</span>
+        } else if (record.status == 2) {
+            return  <span> 已拒绝</span>
+        }
       }
     onAgree(record) {
         // console.log('-------------------------');
@@ -99,6 +105,10 @@ class Cashout extends Component {
                 } else if (result ==1 && params.status == 2) {
                     message.info('审核不通过');
                 }
+                this.fetch({
+                    id: this.state.id,
+                    userId: this.state.userId
+                });
             }
         });
     };
