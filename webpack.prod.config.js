@@ -1,26 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-var ManifestPlugin = require('webpack-manifest-plugin');
-const webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     entry: {
         index: './src/entry/index.js'
 	},
-	mode: 'development',
-	// mode: 'production',
-	devtool: 'inline-source-map',
-	// devtool: false,
-    devServer: {
-			historyApiFallback:true,
-      contentBase: './dist'
-		},
+	mode: 'production',
+	devtool: false,
     plugins: [
-        // new CleanWebpackPlugin(),
     	new HtmlWebpackPlugin({
 				favicon:'./src/entry/images/favicon.ico',
 				title: '后台管理系统',
@@ -33,9 +22,6 @@ module.exports = {
 					removeComments: false
 				}
 			}),
-        new ManifestPlugin(),
-        new webpack.NamedModulesPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
 		new ExtractTextPlugin("styles.css"),
 		new OptimizeCssAssetsPlugin({
 			assetNameRegExp:/\.css$/g,
@@ -47,9 +33,6 @@ module.exports = {
 			path: path.resolve(__dirname, 'dist'),
 			publicPath: '/'
 		},
-		// optimization: {
-		// 	minimizer: [new UglifyJsPlugin()],
-		//   },
   module: {
 	  rules: [
 	    {

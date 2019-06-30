@@ -12,7 +12,7 @@
     "dev": "node ./server/server.js",
     "start": "webpack-dev-server --mode development --open",
     "server": "node ./server/dev-server.js",
-    "build": "webpack"
+    "build": "webpack --config webpack.prod.config.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.4.5",
