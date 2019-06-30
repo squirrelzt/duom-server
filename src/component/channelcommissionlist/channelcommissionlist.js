@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/channelcommissionlist.css';
 import { Table, Divider, Form, Input, Button, Select } from 'antd';
+import GrantCommission from './grantcommission/GrantCommission';
 
 let columns = [{
     title: '用户推广渠道ID',
@@ -25,16 +26,6 @@ let columns = [{
   },{
     title: '创建时间',
     dataIndex: 'createTime'
-  },{
-    title: '操作',
-    dataIndex: 'operation',
-    render(text, record) {
-        return <span>
-                    <Link to={"/channelcommission/commissionlist/comissiondetail/" + record.id}>查看详情</Link>
-                    <Divider type="vertical" />
-                    <a href="">发放佣金</a>
-                </span>;
-    }
   }];
 
 class ChannelCommissionList extends Component {
@@ -42,7 +33,9 @@ class ChannelCommissionList extends Component {
         super();
         this.state = {
             data: [],
-            createVisible: false
+            createVisible: false,
+            grantCommissionVisible: false,
+            channelToId:''
         };
     }
    
@@ -58,9 +51,36 @@ class ChannelCommissionList extends Component {
       };
   
       componentWillMount(){
+        if(columns[columns.length-1].title != "操作"){
+          let opt ={
+            title:'操作',
+            render:this.renderFn.bind(this)
+          }
+          columns.push(opt);
+        }
         this.fetch();
       };
-   
+      renderFn(text,record,index){
+        return (
+          <span>
+            <span><Link to={"/channelcommission/commissionlist/comissiondetail/" + record.id}>查看详情</Link></span>
+            <Divider type="vertical"/>
+            <a onClick={this.onGrantCommission.bind(this,record)}>发放佣金</a>
+          </span>
+        )
+      }
+      onGrantCommission(record) {
+        this.setState({
+          grantCommissionVisible: true,
+          channelToId: record.id
+        });
+      }
+      onGrantCommissionCallback(params) {
+        this.setState({
+          grantCommissionVisible: params.visible
+        });
+        this.fetch();
+      }
       onQuery(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -85,15 +105,6 @@ class ChannelCommissionList extends Component {
                                 <Input placeholder="请输入用户推广渠道ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="分类">
-                            {getFieldDecorator('status', {initialValue: "1"})(
-                                <Select>
-                                    <Select.Option value="1">APP普通任务</Select.Option>
-                                    <Select.Option value="2">京东零元购</Select.Option>
-                                    <Select.Option value="3">淘宝零元购</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
                             <Button type="primary" onClick={this.onQuery.bind(this)}>
                                 查询
@@ -105,6 +116,8 @@ class ChannelCommissionList extends Component {
                             </Button>
                         </Form.Item>
                     </Form>
+                    <GrantCommission {...this.props} init = {{ visible: this.state.grantCommissionVisible,channelToId:this.state.channelToId }}
+                     callbackParent = { this.onGrantCommissionCallback.bind(this) }/>
                </div>
                 <Table columns={columns}
                     rowKey={data => data.id}
