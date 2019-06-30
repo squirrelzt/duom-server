@@ -22,7 +22,8 @@ class CreateJob extends Component {
             urlPkgAndroid:'',
             title:'',
             urlImg:'',
-            formHtml:''
+            formHtml:'',
+            labels:[]
         };
     }
     componentWillMount(){}
@@ -30,7 +31,19 @@ class CreateJob extends Component {
     componentWillUnmount(){}
     componentWillUpdate(){}
     componentDidMount(){
-      
+      this.fetchLabels();
+    }
+    fetchLabels() {
+        auth.fetch('/v1/taskLabel','get', {} ,(result)=>{
+            if (200 != result) {
+            //    console.log('----------------');
+            //    console.log(result);
+               this.setState({
+                   labels: result
+               })
+            }
+          
+        });
     }
     fetch(params) {
         let name = params.name;
@@ -64,8 +77,6 @@ class CreateJob extends Component {
         });
     };
 
-   
-   
     onSave(e) {
         e.preventDefault();
         let t = this;
@@ -206,10 +217,13 @@ class CreateJob extends Component {
                         <Form.Item label="任务标签(多选)">
                             {getFieldDecorator('taskLabelIds')(
                                 <Checkbox.Group style={{ width: '100%' }}>
-                                    <Checkbox value="1">标签一</Checkbox>
-                                    <Checkbox value="2">标签二</Checkbox>
-                                    <Checkbox value="3">标签三</Checkbox>
-                                    <Checkbox value="4">标签四</Checkbox>
+                                    {this.state.labels.length > 0 ?
+                                    this.state.labels.map(label=>{
+                                        return(
+                                            <Checkbox value={label.id}>{label.name}</Checkbox>
+                                        )
+                                    })
+                                    :""}
                                 </Checkbox.Group>,
                                 )}
                         </Form.Item>
