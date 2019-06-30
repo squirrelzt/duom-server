@@ -131,6 +131,7 @@ class JobManage extends Component {
                <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
                 <Table columns={columns}
                     rowKey={data => data.id} 
+                    scroll={{x:1200}}
                     dataSource={this.state.data}
                 />
             </div>
