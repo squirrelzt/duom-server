@@ -42,8 +42,15 @@ class Tag extends Component {
                 }
             }
         });
-    };
-
+    }
+    fetchDel(params) {
+        let t = this;
+        auth.fetch('/v1/taskLabel/' + params,'delete',{},(result)=>{
+            if ("error" != result) {
+               t.fetch();
+            }
+        });
+    }
     componentWillMount(){
         if (localStorage.token == null) {
             this.props.history.push(auth.getLoginUrl());
@@ -69,7 +76,7 @@ class Tag extends Component {
     onUpdate(record) {
     }
     onDelete(record) {
-
+        this.fetchDel(record.id);
     }
     fetchCheck(params) {
         auth.fetch('/v1/cashout/b/users/'+params.userId+'?id='+params.id+'&administarId='+localStorage.userId+'&status='+params.status,'put',{},(result)=>{
