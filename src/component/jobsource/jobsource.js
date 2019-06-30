@@ -51,7 +51,7 @@ class JobSource extends Component {
             if (id != null && id != '') {
                 postParams += '&id=' + parseInt(id);
             }
-            if (name != null) {
+            if (name != null && name != '') {
                 postParams += ('&name=' + name);
             }
             
@@ -145,7 +145,12 @@ class JobSource extends Component {
                      <Form layout="inline">
                         <Form.Item label="任务来源渠道">
                             {getFieldDecorator('id')(
-                                <Input placeholder="请输入渠道ID/渠道名" />,
+                                <Input placeholder="请输入渠道ID" />,
+                            )}
+                        </Form.Item>
+                        <Form.Item label="任务来源渠道名">
+                            {getFieldDecorator('name')(
+                                <Input placeholder="渠道名" />,
                             )}
                         </Form.Item>
                         <Form.Item label="状态">
