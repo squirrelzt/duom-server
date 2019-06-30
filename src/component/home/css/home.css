@@ -51,6 +51,9 @@ section {
     cursor: pointer;
     text-align: left;
 }
+.menu-display svg {
+    cursor: pointer;
+}
 .breadcrumb {
     margin-left: 240px;
 }

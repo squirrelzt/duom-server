@@ -168,8 +168,8 @@ class Home extends Component {
                 </aside>
                 <section>
                     <div className="menu-display">
-                        <Icon className="menuFoldIcon" type="menu-fold" style={{cursor:'pointer'}} onClick={this.onMenuFold}/>
-                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{visibility: 'hidden', cursor:'pointer'}} onClick={this.onMenuUnFold}/>
+                        <Icon className="menuFoldIcon" type="menu-fold" onClick={this.onMenuFold}/>
+                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{visibility: 'hidden'}} onClick={this.onMenuUnFold}/>
                         <div className="logout">
                             <span>当前用户: {localStorage.userId}</span>
                             <Button type="primary" size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
