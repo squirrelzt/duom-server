@@ -16,11 +16,11 @@ class SubUserDetail extends Component {
 
     fetch(params) {
         auth.fetch('/v1/channelTo/' + params + '/users','get',{},(result)=>{
-            // console.log('----------------------');
-            // console.log(result);
-            this.setState({
-                data: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    data: result
+                });
+            }
         });
     };
 
@@ -28,7 +28,6 @@ class SubUserDetail extends Component {
         if (localStorage.token == null) {
             this.props.history.push(auth.getLoginUrl());
         }
-        // this.fetch(this.props.match.params.id);
     };
     handleReset(e) {
       this.props.callbackParent({
@@ -41,11 +40,9 @@ class SubUserDetail extends Component {
       if (this.props.init.data != null) {
         this.state.userData = this.props.init.data.user;
       }
-      // this.state.id = this.props.init.id;
         return (
             <Modal id="subuserdetail-container"
             title="用户详情"
-            // onOk = { this.handOk.bind(this) }
             onCancel = { this.handleReset.bind(this) }
             visible = { this.state.visible }
             footer = {[]}>
@@ -66,8 +63,6 @@ class SubUserDetail extends Component {
                       <li>更新时间:&nbsp;{this.state.userData.updateTime}</li>
                   </ul>
                 :""}
-                  
-            
                   <div className="check-btn">
                       <Button type="primary" className="back" onClick={this.handleReset.bind(this)}>
                           返回

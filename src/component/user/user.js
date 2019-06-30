@@ -57,11 +57,11 @@ class User extends Component {
     }
     fetch(params = {}) {
       auth.fetch('/v1/users/c','get',params,(result)=>{
-          if ("1" != result) {
-            this.setState({
-              data: result
-            });
-          }
+        if ("error" != result) {
+          this.setState({
+            data: result
+          });
+        }
       });
     };
     componentWillMount() {

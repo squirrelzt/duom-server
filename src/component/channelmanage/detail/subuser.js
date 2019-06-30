@@ -55,11 +55,12 @@ class SubUser extends Component {
 
     fetch(params) {
         auth.fetch('/v1/channelTo/' + params + '/users','get',{},(result)=>{
-            // console.log('----------------------');
-            // console.log(result);
-            this.setState({
+            if ("error" != result) {
+              this.setState({
                 data: result
-            })
+              });
+            }
+            
         });
     };
 
@@ -85,25 +86,18 @@ class SubUser extends Component {
     }
     fetchDetail(params) {
         auth.fetch('/v1/users/'+params+'/c','get', {} ,(result)=>{
-            // console.log("================");
-            // console.log(result);
-            if (200 != result) {
-                this.setState({
-                  modalVisible: true,
-                  modalData: result
-                })
+            if ("error" != result) {
+              this.setState({
+                modalVisible: true,
+                modalData: result
+              });
             }
         });
     }
     onLookUp(record) {
-      // this.setState({
-      //   modalVisible: true
-      // });
       this.fetchDetail(record.id);
     }
     onCallback(params) {
-      // console.log('^^^^^^^^^^^^^^^^^^');
-      // console.log(params);
       this.setState({
         modalVisible: params.visible
       });

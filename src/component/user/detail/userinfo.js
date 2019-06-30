@@ -14,9 +14,11 @@ class UserInfo extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/users/' + params + '/c','get',{},(result)=>{
-            this.setState({
-                data: result.user
-            })
+            if ("error" != result) {
+                this.setState({
+                    data: result.user
+                });
+            }
         });
     };
 

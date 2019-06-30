@@ -57,15 +57,14 @@ class JobManagex extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/tasks/c','get', {} ,(result)=>{
-            // console.log('---------------');
-            // console.log(result);
+           if ("error" != result) {
             this.setState({
-                data: result
+              data: result
             })
+           }
         });
     };
     componentWillMount(){
-        // this.fetch(this.props.match.params.id);
         this.fetch();
     };
     onQuery(e) {

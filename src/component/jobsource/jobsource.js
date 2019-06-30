@@ -16,18 +16,6 @@ let columns = [{
     title: '余额',
     dataIndex: 'balance'
   },{
-//     title: '状态',
-//     dataIndex: 'status',
-//     render(text) {
-//         switch (text) {
-//             case 0:
-//               return <span>启用</span>;
-//               break;
-//             case 1:
-//               return <span>禁用</span>;
-//               break;
-//           }
-//     }
   },{
     title: '平台服务费',
     dataIndex: 'platformScale',
@@ -37,30 +25,9 @@ let columns = [{
   },{
     title: '备注',
     dataIndex: 'remark'
-//   },{
-//     title: '是否删除',
-//     dataIndex: 'isDeleted',
-//     render(text) {
-//         switch (text) {
-//             case 0:
-//               return <span>否</span>;
-//               break;
-//             case 1:
-//               return <span>是</span>;
-//               break;
-//           }
-//     }
   },{
     title: '创建时间',
     dataIndex: 'createTime'
-//   },{
-//     title: '操作',
-//     dataIndex: 'operation',
-//     render(text, record) {
-//         return <span>
-//                     <Link to={"/job/list/basicinfo/" + record.id}>查看详情</Link>
-//                 </span>;
-//     }
   }];
 
 class JobSource extends Component {
@@ -100,7 +67,7 @@ class JobSource extends Component {
             
         }
         auth.fetch('/v1/channelfroms' + postParams,'get',{},(result)=>{
-            if ("1" != result) {
+            if ("error" != result) {
                 this.setState({
                     data: result
                 });
@@ -144,12 +111,12 @@ class JobSource extends Component {
         this.props.form.resetFields();
     }
     onRecharge(record) {
-        // console.log('------------------------');
-        // console.log(record);
-        this.setState({
-            rechargeVisible: true,
-            id: record.id
-        });
+        if ("error" != result) {
+            this.setState({
+                rechargeVisible: true,
+                id: record.id
+            });
+        }
     }
     onCreate() {
         this.setState({

@@ -15,10 +15,10 @@ module.exports = {
 	// mode: 'production',
 	devtool: 'inline-source-map',
 	// devtool: false,
-    // devServer: {
-	// 		historyApiFallback:true,
-    //   contentBase: './dist'
-	// 	},
+    devServer: {
+			historyApiFallback:true,
+      contentBase: './dist'
+		},
     plugins: [
         // new CleanWebpackPlugin(),
     	new HtmlWebpackPlugin({

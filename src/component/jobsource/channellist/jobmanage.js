@@ -58,11 +58,11 @@ class JobManage extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/tasks/c','get', {} ,(result)=>{
-            // console.log('---------------');
-            // console.log(result);
-            this.setState({
+            if ("error" != result) {
+              this.setState({
                 data: result
-            })
+              });
+            }
         });
     };
     componentWillMount(){

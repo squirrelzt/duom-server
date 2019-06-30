@@ -19,24 +19,18 @@ class Check extends Component {
     fetch(params) {
         let putParams='?id=' + parseInt(this.state.id) +'&channelFromId='+parseInt(this.state.channelFromId)+'&status='+parseInt(params.status);
         auth.fetch('/v1/taskOrders/users/'+localStorage.userId + putParams,'put', {} ,(result)=>{
-            console.log("================");
-            console.log(result);
-            if (200 != result) {
+           if ("error" != result) {
                 if (params.status == '1') {
                     message.info('审核通过成功');
                 } else if (params.status == '2') {
                     message.info('驳回成功');
                 }
                 this.handleReset();
-            }
+           }
         });
     }
 
-    componentWillMount(){
-        // console.log('---------------------------');
-        // console.log(this.props.match.params.id);
-        // this.fetch();
-    };
+    componentWillMount(){}
    
     onAgree(e) {
         e.preventDefault();

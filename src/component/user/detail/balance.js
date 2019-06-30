@@ -76,20 +76,6 @@ class Balance extends Component {
     render() {
         return (
             <div id="balance-container">
-               {/* <div className="total">
-                    <div className="total-section">
-                        <div>当前余额</div>
-                        <div>100</div>
-                    </div>
-                    <div className="total-section">
-                        <div>已提现金额</div>
-                        <div>8120</div>
-                    </div>
-                    <div className="total-section">
-                        <div>本月新增</div>
-                        <div>23000</div>
-                    </div>
-               </div> */}
                <div className="">
                <Tabs defaultActiveKey="withdrawRecord" onChange={this.callback}>
                     <TabPane tab="提现记录" key="withdrawRecord">

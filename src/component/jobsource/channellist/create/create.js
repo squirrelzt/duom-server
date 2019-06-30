@@ -28,16 +28,12 @@ class Create extends Component {
     componentDidMount(){}
     fetchUpload(params) {
         auth.fetch('/v1/taskForm?bUserId='+ localStorage.userId +'&taskFormTypeId=2&urlImg=' + this.state.uploadUrl,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
-               this.setState({
-                 taskFormIds: result
-               });
-            //    console.log(this.state.taskFormIds);
-               this.fetch(params);
-               
-            }
+          if ("error" != result) {
+            this.setState({
+                taskFormIds: result
+            });
+            this.fetch(params);
+          }
         });
     }
     fetch(params) {
@@ -63,12 +59,10 @@ class Create extends Component {
         }
         let t = this;
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
+            if ("error" != result) {
                 message.success('新增任务成功');
                 this.handleReset();
-            } else if (1 != result) {
+            } else {
                 message.error('新增任务失败');
             }
         });
@@ -82,15 +76,9 @@ class Create extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             values.status = parseInt(values.status);
-            // console.log(values.startDate);
             values.startTime = this.timeConvert(this.state.startDate, this.state.startTime);
             values.endTime = this.timeConvert(this.state.endDate, this.state.endTime);
-            // console.log(values);
-            // console.log(this.refs.editor.getData());
-            // this.fetchUpload(values);
             values.taskExplain = this.refs.editor.getData();
-            console.log('++++++++++++++++++++++');
-            console.log(values);
             this.fetch(values);
           }
         });
@@ -125,25 +113,21 @@ class Create extends Component {
         }
     }
     onStartDateChange(date, dateString) {
-        // console.log(date, dateString);
         this.setState({
             startDate: dateString
         });
     }
     onEndDateChange(date, dateString) {
-        // console.log(date, dateString);
         this.setState({
             endDate: dateString
         });
     }
     onStartTimeChange(time, timeString) {
-        // console.log(time, timeString);
         this.setState({
             startTime: timeString
         });
     }
     onEndTimeChange(time, timeString) {
-        // console.log(time, timeString);
         this.setState({
             endTime: timeString
         });
@@ -154,8 +138,6 @@ class Create extends Component {
         })
     }
     onCreateCallback(params) {
-        // console.log('^^^^^^^^^^^^^^^^^^');
-        // console.log(params);
         this.setState({
             formVisible: params.visible,
             taskFormIds: params.taskFormIds,

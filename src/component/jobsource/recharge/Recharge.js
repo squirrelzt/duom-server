@@ -13,21 +13,17 @@ class Recharge extends Component {
         };
     }
     fetch(params) {
-        // console.log(params);
         let t = this;
         let id = this.state.id;
         let postParams = id+'?bUserId='+localStorage.userId+'&changed='+params;
-        // console.log(postParams);
         auth.fetch('/v1/channelfroms/' + postParams,'put', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
+            if ("error" != result) {
                 message.success('充值成功');
                 t.props.form.resetFields();
                 t.props.callbackParent({
                     visible: false
                 });
-            } else if (1 != result) {
+            } else {
                 message.error('充值失败');
             }
         });
@@ -42,8 +38,6 @@ class Recharge extends Component {
         let t = this;
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            //   console.log('----------------');
-            //   console.log(values);
             this.fetch(values.changed);
           }
         });

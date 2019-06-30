@@ -51,6 +51,10 @@ class Loginx extends Component {
                 $('.send-success').css('visibility', 'hidden');
                 $('.send-fail').css('visibility', 'visible');
                 $('.send-fail').val('输入错误');
+            } else if ("error" == result) {
+                $('.send-success').css('visibility', 'hidden');
+                $('.send-fail').css('visibility', 'visible');
+                $('.send-fail').val('输入错误');
             }
         });
     }

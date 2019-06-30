@@ -74,13 +74,11 @@ class ChannelManage extends Component {
             }
         }
         auth.fetch('/v1/channelTo' + getParams,'get',{},(result)=>{
-            // console.log('-----------------------');
-            // console.log(result);
-            if ("1" != result) {
+           if ("error" != null) {
                 this.setState({
                     data: result
                 });
-            }
+           }
         });
     };
 
@@ -95,8 +93,6 @@ class ChannelManage extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             values.status = parseInt(values.status);
-            // console.log('------------------------------');
-            // console.log(values);
             this.fetch(values);
           }
         });
@@ -110,7 +106,6 @@ class ChannelManage extends Component {
         });
     }
     onRangeDateChange(date, dateString) {
-        // console.log(date, dateString);
         this.setState({
             startDate: new Date(this.state.startDate).getTime()/1000,
             endDate: new Date(this.state.endDate).getTime()/1000

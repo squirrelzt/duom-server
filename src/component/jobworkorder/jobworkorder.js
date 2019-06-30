@@ -41,12 +41,11 @@ class JobWorkOrder extends Component {
             url += ('&taskId=' + params);
         }
         auth.fetch(url,'get', {} ,(result)=>{
-            if (400 != result && "1" != result) {
-              this.setState({
-                data: result
-              });
-            }
-            
+          if ("error" != result) {
+            this.setState({
+              data: result
+            });
+          }
         });
       };
   
@@ -59,8 +58,6 @@ class JobWorkOrder extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             if (values != null) {
-              // console.log('-----------------------------');
-              // console.log(values);
               this.fetch(values.taskId);
             }
           }
@@ -80,15 +77,6 @@ class JobWorkOrder extends Component {
                                 <Input placeholder="请输入任务ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="分类">
-                            {getFieldDecorator('status', {initialValue: "1"})(
-                                <Select>
-                                    <Select.Option value="1">APP普通任务</Select.Option>
-                                    <Select.Option value="2">京东零元购</Select.Option>
-                                    <Select.Option value="3">淘宝零元购</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
                             <Button type="primary" onClick={this.onQuery.bind(this)}>
                                 查询

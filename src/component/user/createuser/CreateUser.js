@@ -11,31 +11,25 @@ class CreateUser extends Component {
         };
     }
     fetch(params) {
-        // console.log("------------------");
-        // console.log(params);
         let t = this;
         let phone = params.phone;
         let upperUserId = params.upperUserId;
         let channelToId = params.channelToId;
         let postParams = 'phone='+phone +'&upperUserId=' + upperUserId + '&channelToId=' + channelToId;
         auth.fetch('/v1/users/c?' + postParams,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
+           if ("error" != result) {
                 message.success('新增用户成功');
                 t.props.form.resetFields();
                 t.props.callbackParent({
                     visible: false
                 });
-            } else if (1 != result) {
+           } else {
                 message.error('新增用户失败');
-            }
+           }
         });
     };
 
-    componentWillMount(){
-        
-    };
+    componentWillMount(){}
    
     onSave(e) {
         e.preventDefault();

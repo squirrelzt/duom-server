@@ -67,8 +67,7 @@ class JobSourcex extends Component {
             }
         }
         auth.fetch('/v1/channelfroms' + postParams,'get',{},(result)=>{
-            if ("1" != result) {
-                console.log(result);
+            if ("error" != result) {
                 this.setState({
                     data: result
                 });

@@ -27,8 +27,7 @@ class Login extends Component {
         if (!flag) {
             return;
         }
-        auth.fetch('/v1/verfyCode?phone='+telephone,'post', {}, (result)=>{
-            $('.verify-code-send-btn').attr('disabled', true);
+        $('.verify-code-send-btn').attr('disabled', true);
             let time = 60;
             let timer = setInterval( function() {
                 if (time == 0) {
@@ -40,35 +39,38 @@ class Login extends Component {
                     time--;
                 }
             }, 1000);
-            if ("767" == result) {
+        auth.fetch('/v1/verfyCode?phone='+telephone,'post', {}, (result)=>{
+            if (767 == result) {
                 $('.send-success').css('visibility', 'hidden');
                 $('.send-fail').css('visibility', 'visible');
                 $('.send-fail').val('用户不存在');
-            }else if("200" == result) {
-                $('.send-success').css('visibility', 'visible');
-                $('.send-fail').css('visibility', 'hidden');
-            } else if ("400" == result) {
+            } else if (400 == result) {
                 $('.send-success').css('visibility', 'hidden');
                 $('.send-fail').css('visibility', 'visible');
                 $('.send-fail').val('输入错误');
+            } else if (404 == result) {
+                $('.send-success').css('visibility', 'hidden');
+                $('.send-fail').css('visibility', 'visible');
+                $('.send-fail').val('Not Found');
+            } else if ("error" == result) {
+                $('.send-success').css('visibility', 'hidden');
+                $('.send-fail').css('visibility', 'visible');
+                $('.send-fail').val('failed');
             }
         });
     }
     fetch(params = {}) {
         auth.fetch('/v1/token','post',params,(result)=>{
-            localStorage.token = result.token;
-            localStorage.userId = result.userId;
-            this.props.history.push('/user/lists');
-            // if ("200" == result) {
-            //     localStorage.token = result.token;
-            //     localStorage.userId = result.userId;
-            //     this.props.history.push('/home/user')
-            // } else {
-            //     $('.login-error').css('visibility', 'visible');
-            //     $('.login-error').val('登录失败' + result);
-            // }
+            if ("error" == result) {
+                $('.login-error').css('visibility', 'visible');
+                $('.login-error').val('获取验证码失败');
+            } else {
+                localStorage.token = result.token;
+                localStorage.userId = result.userId;
+                this.props.history.push('/user/lists');
+            }
         });
-    };
+    }
     clearVerifyCode() {
         $('.verify-code-input').val('');
         $('.verifyCodeError').css('visibility', 'hidden');

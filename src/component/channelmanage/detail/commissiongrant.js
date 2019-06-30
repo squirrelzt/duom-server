@@ -34,14 +34,14 @@ class CommissionGrant extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/cashout/channelTo/' + this.props.match.params.id,'get', {} ,(result)=>{
-            console.log("------------------");
-            console.log(result);
-            this.setState({
-                data: result,
-                balance: result[0].balance,
-                accountChanged: result[0].accountChanged,
-                total: (parseInt(result[0].balance)+parseInt(result[0].accountChanged))
-            })
+            if ("error" != result) {
+                this.setState({
+                    data: result,
+                    balance: result[0].balance,
+                    accountChanged: result[0].accountChanged,
+                    total: (parseInt(result[0].balance)+parseInt(result[0].accountChanged))
+                });
+            }
         });
     };
 

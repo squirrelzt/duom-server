@@ -64,30 +64,25 @@ class UnAuditedx extends Component {
         url += ('&taskId=' + params);
       }
       auth.fetch(url,'get', {} ,(result)=>{
-        // console.log('----------------------');
-        // console.log(result);
-          if (400 != result && "1" != result) {
-            this.setState({
-              data: result
-            });
-          }
-          
+        if ("error" != result) {
+          this.setState({
+            data: result
+          });
+        }
       });
     };
     fetchCheck(params) {
       let url = '/v1/tasks/formContent?userId=' + params.userId + '&taskId=' + params.taskId;
       auth.fetch(url,'get', {} ,(result)=>{
-          if (200 != result) {
-            // console.log('----------------------');
-            // console.log(result);
-             this.setState({
-               checkData: result,
-               checkMoalVisible: true,
-               selectId: params.id,
-               selectChannelFromId: params.channelFromId,
-               selectTaskName: params.taskName
-             });
-          }
+        if ("error" != result) {
+          this.setState({
+            checkData: result,
+            checkMoalVisible: true,
+            selectId: params.id,
+            selectChannelFromId: params.channelFromId,
+            selectTaskName: params.taskName
+          });
+        }
       });
   }
     componentWillMount(){
@@ -121,8 +116,6 @@ class UnAuditedx extends Component {
       this.props.form.resetFields();
   }
   onCallback(params) {
-    // console.log('^^^^^^^^^^^^^^^^^^');
-    // console.log(params);
     this.setState({
         checkMoalVisible: params.visible
     });
@@ -138,15 +131,6 @@ class UnAuditedx extends Component {
                                 <Input placeholder="请输入任务ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="分类">
-                            {getFieldDecorator('status', {initialValue: "1"})(
-                                <Select>
-                                    <Select.Option value="1">APP普通任务</Select.Option>
-                                    <Select.Option value="2">京东零元购</Select.Option>
-                                    <Select.Option value="3">淘宝零元购</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
                             <Button type="primary" onClick={this.onQuery.bind(this)}>
                                 查询

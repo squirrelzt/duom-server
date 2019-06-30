@@ -49,9 +49,9 @@ class Cashout extends Component {
             }
         }
         auth.fetch('/v1/cashout/b' + getParams,'get',{},(result)=>{
-            // console.log('-------------------------');
-            // console.log(result);
-            if ("1" != result) {
+            if ("error" == result) {
+
+            } else {
                 this.setState({
                     data: result
                 });
@@ -93,9 +93,7 @@ class Cashout extends Component {
     }
     fetchCheck(params) {
         auth.fetch('/v1/cashout/b/users/'+params.userId+'?id='+params.id+'&administarId='+localStorage.userId+'&status='+params.status,'put',{},(result)=>{
-            // console.log('-------------------------');
-            // console.log(result);
-            if (result != 400 && result != 401 && result != 500) {
+            if ("error" != result) {
                 if (result ==0 && params.status == 1) {
                     message.info('审核通过');
                 } else if (result ==1 && params.status == 2) {

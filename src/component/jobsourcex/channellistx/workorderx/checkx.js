@@ -17,26 +17,21 @@ class Checkx extends Component {
     
 
     fetch(params) {
+        let t = this;
         let putParams='?id=' + parseInt(this.state.id) +'&channelFromId='+parseInt(this.state.channelFromId)+'&status='+parseInt(params.status);
         auth.fetch('/v1/taskOrders/users/'+localStorage.userId + putParams,'put', {} ,(result)=>{
-            console.log("================");
-            console.log(result);
-            if (200 != result) {
+            if ("error" != result) {
                 if (params.status == '1') {
                     message.info('审核通过成功');
                 } else if (params.status == '2') {
                     message.info('驳回成功');
                 }
-                this.handleReset();
+                t.handleReset();
             }
         });
     }
 
-    componentWillMount(){
-        // console.log('---------------------------');
-        // console.log(this.props.match.params.id);
-        // this.fetch();
-    };
+    componentWillMount(){}
    
     onAgree(e) {
         e.preventDefault();
@@ -65,7 +60,6 @@ class Checkx extends Component {
         return (
             <Modal id="check-cancel-content-container"
                 title="新增核销表单"
-                // onOk = { this.handOk.bind(this) }
                 onCancel = { this.handleReset.bind(this) }
                 visible = { this.state.visible }
                 footer = {[]}>

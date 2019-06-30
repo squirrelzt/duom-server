@@ -33,8 +33,8 @@ class FormModal extends Component {
                 + '&title='+params.title+'&urlImg=' + this.state.urlImg;
         }
         auth.fetch(url,'post', {} ,(result)=>{
-            if (200 != result) {
-               this.setState({
+            if ("error" != result) {
+                this.setState({
                     taskFormIds: result
                });
                this.props.callbackParent({
@@ -93,8 +93,6 @@ class FormModal extends Component {
         });
     }
     onSelect(value) {
-        // console.log('------------------------');
-        // console.log(value);
         this.setState({
             selectedFormId: value
         });
@@ -111,14 +109,10 @@ class FormModal extends Component {
 
     }
     onUploadChange(info) {
-        // console.log('------------------------');
-        // console.log(info.file.response);
         this.setState({
             fileList: [...info.fileList],
             urlImg: info.file.response
         });
-        // console.log('=====================');
-        // console.log(this.state.fileList);
     }
     render() {
         this.state.visible = this.props.init.visible;

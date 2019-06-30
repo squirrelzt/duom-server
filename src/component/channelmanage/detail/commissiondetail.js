@@ -103,11 +103,12 @@ class CommissionDetail extends Component {
       }
       // console.log(getParams);
       auth.fetch('/v1/channelTo/'+this.props.match.params.id+'/commisionsDetail' + getParams,'get',{},(result)=>{
-          // console.log('----------------------');
-          // console.log(result);
-          this.setState({
+          if ("error" != result) {
+            this.setState({
               data: result
-          })
+            });
+          }
+          
       });
     };
 

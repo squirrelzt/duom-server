@@ -45,9 +45,7 @@ class RejectCashout extends Component {
             }
         }
         auth.fetch('/v1/cashout/b?status=2' + getParams,'get',{},(result)=>{
-            // console.log('-------------------------');
-            // console.log(result);
-            if ("1" != result) {
+            if ("error" != result) {
                 this.setState({
                     data: result
                 });

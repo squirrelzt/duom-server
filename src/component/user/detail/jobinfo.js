@@ -51,19 +51,14 @@ class JobInfo extends Component {
                     getParams += ('&taskId=' + params.taskId);
                 }
             }
-            // if (getParams == '') {
-            //     getParams = '?status=' + params.status;
-            // } else {
-            //     getParams += ('&status=' + params.status);
-            // }
         }
         console.log(getParams);
         auth.fetch('/v1/taskOrders/c/users/' + localStorage.userId + getParams,'get',{},(result)=>{
-            // console.log('-----------------------');
-            // console.log(result);
-            this.setState({
-                data: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    data: result
+                });
+            }
         });
     };
 
@@ -85,8 +80,6 @@ class JobInfo extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            // console.log('Received values of form: ', values);
-            // console.log(values);
             this.fetch(values);
           }
         });
@@ -96,20 +89,6 @@ class JobInfo extends Component {
 
         return (
             <div id="jobinfo-container">
-               {/* <div className="total">
-                    <div className="total-section">
-                        <div>完成任务数</div>
-                        <div>100</div>
-                    </div>
-                    <div className="total-section">
-                        <div>领取任务数</div>
-                        <div>120</div>
-                    </div>
-                    <div className="total-section">
-                        <div>进行中任务数</div>
-                        <div>20</div>
-                    </div>
-               </div> */}
                <div className="">
                      <Form layout="inline" onSubmit={this.handleSubmit.bind(this)}>
                         <Form.Item label="任务单ID">
@@ -122,19 +101,6 @@ class JobInfo extends Component {
                                 <Input placeholder="请输入任务ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="状态">
-                            {getFieldDecorator('status', {initialValue: "0"})(
-                                <Select>
-                                    <Select.Option value="0">启用</Select.Option>
-                                    <Select.Option value="1">禁用</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
-                        {/* <Form.Item label="领取时间">
-                            {getFieldDecorator('createTime')(
-                                <RangePicker />,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
                         <Button type="primary" htmlType="submit">
                             查询

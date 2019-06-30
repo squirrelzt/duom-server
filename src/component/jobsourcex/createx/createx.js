@@ -19,11 +19,9 @@ class Createx extends Component {
         let postParams = 'bUserId='+localStorage.userId +'&name=' + name + '&remark=' + remark + '&status=' + status + '&platformScale=' + platformScale;
         console.log(postParams);
         auth.fetch('/v1/channelfroms?' + postParams,'post', {} ,(result)=>{
-            console.log("------------------");
-            console.log(result);
-            if (200 != result) {
+            if ("error" != result) {
                 message.success('新增渠道成功');
-            } else if (1 != result) {
+            } else {
                 message.error('新增渠道失败');
             }
         });

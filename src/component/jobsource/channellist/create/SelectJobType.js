@@ -19,18 +19,14 @@ class SelectJobType extends Component {
     
     fetch(params) {
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
+            if ("error" != result) {
                 message.success('新增任务成功');
                 this.handleReset();
-            } else if (1 != result) {
+            } else {
                 message.error('新增任务失败');
             }
         });
     };
-
-  
     render() {
         return (
            <div id="select-job-type-container">

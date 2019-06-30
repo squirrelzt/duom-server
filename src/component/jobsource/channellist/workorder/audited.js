@@ -56,14 +56,11 @@ class Audited extends Component {
         url += ('&taskId=' + params);
       }
       auth.fetch(url,'get', {} ,(result)=>{
-        // console.log('+++++++++++++++');
-        // console.log(result);
-          if (400 != result && "1" != result) {
-            this.setState({
-              data: result
-            });
-          }
-          
+        if ("error" != result) {
+          this.setState({
+            data: result
+          });
+        }
       });
     };
 

@@ -22,37 +22,43 @@ class Detail extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/users/' + params + '/c','get',{},(result)=>{
-            // console.log('---------------------');
-            // console.log(result);
-            this.setState({
-                data: result.user,
-                team1Data: result.userLowers==null?[]:result.userLowers,
-                team2Data: result.userLower2s==null?[]:result.userLower2s
-            })
+            if ("error" != result) {
+                this.setState({
+                    data: result.user,
+                    team1Data: result.userLowers==null?[]:result.userLowers,
+                    team2Data: result.userLower2s==null?[]:result.userLower2s
+                });
+            }
         });
     };
 
     fetchWithdraw(params) {
         auth.fetch('/v1/cashout/users/' + params,'get',{},(result)=>{
-            this.setState({
-                withdrawData: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    withdrawData: result
+                });
+            }
         });
     };
 
     fetchIncome(params) {
         auth.fetch('/v1/income/users/' + params,'get',{},(result)=>{
-            this.setState({
-                incomeData: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    incomeData: result
+                });
+            }
         });
     };
 
     fetchJob(params) {
         auth.fetch('/v1/tasks/c/users/' + params,'get',{},(result)=>{
-            this.setState({
-                jobData: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    jobData: result
+                });
+            }
         });
     };
     componentWillMount(){
@@ -69,7 +75,6 @@ class Detail extends Component {
 
     }
     render() {
-        // console.log(this.props.match);
         return (
             <div id="user-container">
                 <Tabs defaultActiveKey="1" onChange={this.callback}>

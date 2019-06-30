@@ -57,7 +57,6 @@ class Home extends Component {
         if (urlArray[urlArray.length - 1] == "") {              //如果URL最后一个元素是/,即数组最后一个元素为空，则删掉
             urlArray.pop();
         }
-        // console.log('urlArray=' + urlArray);
         breadcrumbconfig.getBreadcrumbUrl().map(item => {
             let paramsUrl = "";
             for (let i = 0; i < item.params.length; i++) {

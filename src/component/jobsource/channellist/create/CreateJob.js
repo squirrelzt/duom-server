@@ -35,19 +35,16 @@ class CreateJob extends Component {
     }
     fetchLabels() {
         auth.fetch('/v1/taskLabel','get', {} ,(result)=>{
-            if (200 != result) {
-            //    console.log('----------------');
-            //    console.log(result);
-               this.setState({
-                   labels: result
-               })
+            if ("error" != result) {
+                this.setState({
+                    labels: result
+                });
             }
-          
         });
     }
     fetch(params) {
         let name = params.name;
-        let taskLabelIds = params.taskLabelIds;
+        let taskLabelIds = params.taskLabelIds==undefined?'':params.taskLabelIds.join(',');
         let count = params.count;
         let commision = params.commision;
         let startTime = params.startTime;
@@ -58,21 +55,20 @@ class CreateJob extends Component {
         let iosName = params.iosName;
         let appOpenTime = params.appOpenTime;
         let description = params.description;
+        let taskFormIds = this.state.taskFormIds.length>0?this.state.taskFormIds.join(','):'';
 
-        let postParams = 'name=' + name + '&taskLabelIds=' + taskLabelIds.join(',') + '&count=' + count + '&commision=' + commision
+        let postParams = 'name=' + name + '&taskLabelIds=' + taskLabelIds + '&count=' + count + '&commision=' + commision
         +'&bUserId='+localStorage.userId+'&channelFromId='+this.props.match.params.id+'&taskFormTypeId='+this.state.taskFormTypeId
-        +'&taskFormIds='+this.state.taskFormIds.join(',')+'&startTime='+startTime+'&endTime='+endTime+'&taskDuration='+taskDuration
+        +'&taskFormIds='+taskFormIds+'&startTime='+startTime+'&endTime='+endTime+'&taskDuration='+taskDuration
         +'&taskExplain='+taskExplain+'&androidName='+androidName+'&iosName='+iosName+'&appOpenTime='+appOpenTime+'&description='+description
         +'&urlHead='+this.state.urlHead+'&urlPkgAndroid='+this.state.urlPkgAndroid;
         let t = this;
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
-                message.success('新增任务成功');
-                this.handleReset();
-            } else if (1 != result) {
+            if ("error" == result) {
                 message.error('新增任务失败');
+            } else {
+                message.success('新增任务成功');
+                t.handleReset();
             }
         });
     };
@@ -220,10 +216,13 @@ class CreateJob extends Component {
                                     {this.state.labels.length > 0 ?
                                     this.state.labels.map(label=>{
                                         return(
-                                            <Checkbox value={label.id}>{label.name}</Checkbox>
+                                            <Checkbox key={label.id} value={label.id}>{label.name}</Checkbox>
                                         )
                                     })
                                     :""}
+                                    {/* <Checkbox  value="1">1</Checkbox>
+                                    <Checkbox  value="2">2</Checkbox>
+                                    <Checkbox  value="3">3</Checkbox> */}
                                 </Checkbox.Group>,
                                 )}
                         </Form.Item>

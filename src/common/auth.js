@@ -16,18 +16,30 @@ export const auth = {
         callback(result);
       },
       error: (err) => {
-        if (err.status == 767) {
-          callback(err.status);
-        } else if(err.status == 400) {
-          callback(err.status);
-        } else if (err.status == 401) {
-          window.location.href= this.getLoginUrl();
-        } else if (err.status == 405) {
-          callback(err.status);
-        } else {
-          console.log(err);
-          callback({result:'1',msg:err});
+        // console.log("+++++++++++++++++++++");
+        // console.log(err);
+        if (401 == err.status) {
+           window.location.href= this.getLoginUrl();
         }
+        // console.log(err);
+        // callback(err.status);
+        callback("error");
+        // if (err.status == 767) {
+        //   callback(err.status);
+        // } else if(err.status == 400) {
+        //   callback(err.status);
+        // } else if (err.status == 401) {
+        //   window.location.href= this.getLoginUrl();
+        // } else if (err.status == 403) {
+        //   callback(err.status);
+        // } else if (err.status == 405) {
+        //   callback(err.status);
+        // } else if (err.status == 452) {
+        //   callback(err.status);
+        // } else {
+        //   console.log(err);
+        //   callback(err);
+        // }
        
       }
     });

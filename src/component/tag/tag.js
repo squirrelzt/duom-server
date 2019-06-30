@@ -28,9 +28,7 @@ class Tag extends Component {
             getParams = '/' + params.id;
         }
         auth.fetch('/v1/taskLabel' + getParams,'get',{},(result)=>{
-            // console.log('-------------------------');
-            // console.log(result);
-            if ("1" != result) {
+            if ("error" != result) {
                 if (params != null && params.id != null) {
                     this.setState({
                         data:[result]
@@ -41,7 +39,6 @@ class Tag extends Component {
                     });
                 }
             }
-            
         });
     };
 
@@ -68,30 +65,25 @@ class Tag extends Component {
         )
     }
     onUpdate(record) {
-        // record.status=2;
-        // this.fetchCheck(record);
     }
     onDelete(record) {
 
     }
     fetchCheck(params) {
         auth.fetch('/v1/cashout/b/users/'+params.userId+'?id='+params.id+'&administarId='+localStorage.userId+'&status='+params.status,'put',{},(result)=>{
-            // console.log('-------------------------');
-            // console.log(result);
-            if (result != 400 && result != 401 && result != 500) {
-                if (result ==0 && params.status == 1) {
-                    message.info('审核通过');
-                } else if (result ==1 && params.status == 2) {
-                    message.info('审核不通过');
-                }
+           if ("error" != result) {
+            if (result ==0 && params.status == 1) {
+                message.info('审核通过');
+            } else if (result ==1 && params.status == 2) {
+                message.info('审核不通过');
             }
+           }
         });
     };
     onQuery(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            // this.fetch(values);
             this.setState({
                 data:[]
             });
@@ -115,14 +107,6 @@ class Tag extends Component {
                                 <Input placeholder="请输入标签ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="状态">
-                            {getFieldDecorator('status', {initialValue: "0"})(
-                                <Select>
-                                    <Select.Option value="0">启用</Select.Option>
-                                    <Select.Option value="1">禁用</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
                             <Button type="primary" onClick={this.onQuery.bind(this)}>
                                 查询

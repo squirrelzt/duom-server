@@ -22,27 +22,33 @@ class ExtendDetail extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/users/' + params + '/c','get',{},(result)=>{
-            this.setState({
-                data: result.user,
-                team1Data: result.userLowers,
-                team2Data: result.userLower2s
-            })
+            if ("error" != result) {
+                this.setState({
+                    data: result.user,
+                    team1Data: result.userLowers,
+                    team2Data: result.userLower2s
+                });
+            }
         });
     };
 
     fetchWithdraw(params) {
         auth.fetch('/v1/cashout/users/' + params,'get',{},(result)=>{
-            this.setState({
-                withdrawData: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    withdrawData: result
+                });
+            }
         });
     };
 
     fetchIncome(params) {
         auth.fetch('/v1/income/users/' + params,'get',{},(result)=>{
-            this.setState({
-                incomeData: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    incomeData: result
+                });
+            }
         });
     };
 
@@ -56,7 +62,6 @@ class ExtendDetail extends Component {
 
     }
     render() {
-        // console.log(this.props.match);
         return (
             <div id="user-container">
                 <Tabs defaultActiveKey="1" onChange={this.callback}>
@@ -64,7 +69,6 @@ class ExtendDetail extends Component {
                     <TabPane tab="下属用户" key="2"><SubUser {...this.props} init={{channleFromId: this.props.match.params.id}} /></TabPane>
                     <TabPane tab="佣金明细" key="3"><CommissionDetail {...this.props} init={{channleToId:this.props.match.params.id}}/></TabPane>
                     <TabPane tab="佣金发放" key="4"><CommissionGrant {...this.props}/></TabPane>
-                    {/* <TabPane tab="任务信息" key="4"><JobInfo {...this.props}/></TabPane> */}
                 </Tabs>
             </div>
         )

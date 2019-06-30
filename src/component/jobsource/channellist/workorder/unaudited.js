@@ -64,29 +64,26 @@ class UnAudited extends Component {
         url += ('&taskId=' + params);
       }
       auth.fetch(url,'get', {} ,(result)=>{
-        // console.log('----------------------');
-        // console.log(result);
-          if (400 != result && "1" != result) {
-            this.setState({
-              data: result
-            });
-          }
-          
+        if ("error" != result) {
+          this.setState({
+            data: result
+          });
+        }
       });
     };
     fetchCheck(params) {
       let url = '/v1/tasks/formContent?userId=' + params.userId + '&taskId=' + params.taskId;
       auth.fetch(url,'get', {} ,(result)=>{
           if (200 != result) {
-            // console.log('----------------------');
-            // console.log(result);
-             this.setState({
-               checkData: result,
-               checkMoalVisible: true,
-               selectId: params.id,
-               selectChannelFromId: params.channelFromId,
-               selectTaskName: params.taskName
-             });
+            if ("error" != result) {
+              this.setState({
+                checkData: result,
+                checkMoalVisible: true,
+                selectId: params.id,
+                selectChannelFromId: params.channelFromId,
+                selectTaskName: params.taskName
+              });
+            }
           }
       });
   }
@@ -121,8 +118,6 @@ class UnAudited extends Component {
       this.props.form.resetFields();
   }
   onCallback(params) {
-    // console.log('^^^^^^^^^^^^^^^^^^');
-    // console.log(params);
     this.setState({
         checkMoalVisible: params.visible
     });

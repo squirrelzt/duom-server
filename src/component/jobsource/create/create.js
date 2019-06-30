@@ -18,13 +18,11 @@ class Create extends Component {
         let platformScale = params.platformScale;
         let postParams = 'bUserId='+localStorage.userId +'&name=' + name + '&remark=' + remark + '&status=' + status + '&platformScale=' + platformScale;
         auth.fetch('/v1/channelfroms?' + postParams,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
-                message.success('新增渠道成功');
-            } else if (1 != result) {
-                message.error('新增渠道失败');
-            }
+           if ("error" != result) {
+              message.success('新增渠道成功');
+           } else {
+             message.error('新增渠道失败');
+           }
         });
     };
 

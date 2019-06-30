@@ -17,11 +17,11 @@ class ChannelListx extends Component {
     }
     fetch(params) {
         auth.fetch('/v1/channelfroms/' + params + '?bUserId=' + localStorage.userId,'get', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            this.setState({
-                data: result
-            })
+            if ("error" != result) {
+                this.setState({
+                    data: result
+                });
+            }
         });
     };
 

@@ -30,10 +30,8 @@ class FormModalx extends Component {
         }
        
         auth.fetch(url,'post', {} ,(result)=>{
-            // console.log("------------------");
-            // console.log(result);
-            if (200 != result) {
-               this.setState({
+            if ("error" != result) {
+                this.setState({
                     taskFormIds: result
                });
                this.props.callbackParent({
@@ -45,9 +43,7 @@ class FormModalx extends Component {
         });
     }
 
-    componentWillMount(){
-        
-    };
+    componentWillMount(){}
    
     onSave(e) {
         e.preventDefault();
@@ -55,10 +51,6 @@ class FormModalx extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             this.fetch(values);
-            // console.log('---------------------------');
-            // console.log(values);
-            // console.log(this.props.init.uploadUrl);
-            
           }
         });
     }
@@ -74,13 +66,8 @@ class FormModalx extends Component {
             taskFormIds: this.state.taskFormIds,
             taskFormTypeId: this.state.taskFormTypeId
         });
-        // this.props.callbackParent({
-        //     visible: false
-        // });
     }
     onSelect(value) {
-        // console.log('------------------------');
-        // console.log(value);
         this.setState({
             selectedFormId: value
         });

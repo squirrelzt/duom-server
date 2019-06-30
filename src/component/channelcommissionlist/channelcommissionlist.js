@@ -49,14 +49,11 @@ class ChannelCommissionList extends Component {
 
     fetch(params) {
         auth.fetch('/v1/channelTo','get', {} ,(result)=>{
-          console.log('-------------------------------------');
-          console.log(result);
-            if (400 != result && "1" != result) {
-              this.setState({
-                data: result
-              });
-            }
-            
+          if ("error" != result) {
+            this.setState({
+              data: result
+            });
+          }
         });
       };
   
@@ -69,8 +66,6 @@ class ChannelCommissionList extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             if (values != null) {
-              console.log('-----------------------------');
-              console.log(values);
               this.fetch(values.taskId);
             }
           }

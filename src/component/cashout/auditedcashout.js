@@ -45,9 +45,9 @@ class AuditedCashout extends Component {
             }
         }
         auth.fetch('/v1/cashout/b?status=1' + getParams,'get',{},(result)=>{
-            // console.log('-------------------------');
-            // console.log(result);
-            if ("1" != result) {
+            if ("error" == result) {
+                
+            } else {
                 this.setState({
                     data: result
                 });
