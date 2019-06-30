@@ -41,7 +41,20 @@ class ChannelCommissionList extends Component {
    
 
     fetch(params) {
-        auth.fetch('/v1/channelTo','get', {} ,(result)=>{
+      let getParams = '';
+        if (params != null) {
+            if (params.id != null && params.id != '') {
+                getParams = '?id=' + params.id;
+            }
+            if (params.name != null && params.name != '') {
+                if (getParams == '') {
+                    getParams += ('?name=' + params.name);
+                } else {
+                    getParams += ('&name=' + params.name);
+                }
+            }
+        }
+        auth.fetch('/v1/channelTo' + getParams,'get', {} ,(result)=>{
           if ("error" != result) {
             this.setState({
               data: result
@@ -86,7 +99,7 @@ class ChannelCommissionList extends Component {
         this.props.form.validateFields((err, values) => {
           if (!err) {
             if (values != null) {
-              this.fetch(values.taskId);
+              this.fetch(values);
             }
           }
         });
@@ -101,8 +114,13 @@ class ChannelCommissionList extends Component {
               <div className="">
                      <Form layout="inline">
                         <Form.Item label="用户推广渠道ID">
-                            {getFieldDecorator('taskId')(
+                            {getFieldDecorator('id')(
                                 <Input placeholder="请输入用户推广渠道ID" />,
+                            )}
+                        </Form.Item>
+                        <Form.Item label="用户推广渠道名">
+                            {getFieldDecorator('name')(
+                                <Input placeholder="请输入用户推广渠道名" />,
                             )}
                         </Form.Item>
                         <Form.Item>
