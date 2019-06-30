@@ -8,28 +8,27 @@ class Recharge extends Component {
         super();
         this.state = {
             data: [],
-            visible: false
+            visible: false,
+            id:''
         };
     }
     fetch(params) {
-        // console.log("------------------");
         // console.log(params);
         let t = this;
-        let phone = params.phone;
-        let upperUserId = params.upperUserId;
-        let channelToId = params.channelToId;
-        let postParams = 'phone='+phone +'&upperUserId=' + upperUserId + '&channelToId=' + channelToId;
-        auth.fetch('/v1/users/c?' + postParams,'post', {} ,(result)=>{
+        let id = this.state.id;
+        let postParams = id+'?bUserId='+localStorage.userId+'&changed='+params;
+        // console.log(postParams);
+        auth.fetch('/v1/channelfroms/' + postParams,'put', {} ,(result)=>{
             // console.log("------------------");
             // console.log(result);
             if (200 != result) {
-                message.success('新增用户成功');
+                message.success('充值成功');
                 t.props.form.resetFields();
                 t.props.callbackParent({
                     visible: false
                 });
             } else if (1 != result) {
-                message.error('新增用户失败');
+                message.error('充值失败');
             }
         });
     };
@@ -43,9 +42,9 @@ class Recharge extends Component {
         let t = this;
         this.props.form.validateFields((err, values) => {
           if (!err) {
-              console.log('----------------');
-              console.log(values);
-            // this.fetch(values);
+            //   console.log('----------------');
+            //   console.log(values);
+            this.fetch(values.changed);
           }
         });
     }
@@ -61,6 +60,7 @@ class Recharge extends Component {
     }
     render() {
         this.state.visible = this.props.init.visible;
+        this.state.id = this.props.init.id;
         const { getFieldDecorator, getFieldError, isFieldValidating, isFieldTouched, getFieldValue } = this.props.form;
         const formItemLayout = {
             labelCol: {
@@ -80,13 +80,12 @@ class Recharge extends Component {
                 visible = { this.state.visible }
                 footer = {[]}>
                  <div className="">
-                     <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+                     <Form {...formItemLayout}>
                         <Form.Item label="充值金额">
-                            {getFieldDecorator('phone')(
+                            {getFieldDecorator('changed')(
                                 <Input placeholder="请输入充值金额" />,
                             )}
                         </Form.Item>
-                      
                         <div className="recharge-btn">
                             <Button type="primary" onClick={this.onSave.bind(this)}>
                                 充值

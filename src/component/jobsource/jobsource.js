@@ -69,7 +69,8 @@ class JobSource extends Component {
         this.state = {
             data: [],
             createVisible: false,
-            rechargeVisible: false
+            rechargeVisible: false,
+            id:''
         };
     }
     fetch(params) {
@@ -143,10 +144,11 @@ class JobSource extends Component {
         this.props.form.resetFields();
     }
     onRecharge(record) {
-        console.log('------------------------');
-        console.log(record);
+        // console.log('------------------------');
+        // console.log(record);
         this.setState({
-            rechargeVisible: true
+            rechargeVisible: true,
+            id: record.id
         });
     }
     onCreate() {
@@ -157,7 +159,7 @@ class JobSource extends Component {
     onCreateCallback(params) {
         this.setState({
             createVisible: params.visible
-          });
+        });
         this.fetch({
             "idList": []
         });
@@ -165,7 +167,10 @@ class JobSource extends Component {
     onRechargeCallback(params) {
         this.setState({
             rechargeVisible: params.visible
-          });
+        });
+        this.fetch({
+            "idList": []
+        });
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -202,7 +207,7 @@ class JobSource extends Component {
                    <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
                </div>
                <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
-               <Recharge {...this.props} init = {{ visible: this.state.rechargeVisible }} callbackParent = { this.onRechargeCallback.bind(this) }/>
+               <Recharge {...this.props} init = {{ visible: this.state.rechargeVisible,id:this.state.id }} callbackParent = { this.onRechargeCallback.bind(this) }/>
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 
