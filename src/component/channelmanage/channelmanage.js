@@ -55,8 +55,15 @@ class ChannelManage extends Component {
     fetch(params) {
         let getParams = '';
         if (params != null) {
-            if (params.id != null) {
+            if (params.id != null && params.id != '') {
                 getParams = '?id=' + params.id;
+            }
+            if (params.name != null && params.name != '') {
+                if (getParams == '') {
+                    getParams += ('?name=' + params.name);
+                } else {
+                    getParams += ('&name=' + params.name);
+                }
             }
             if (params.status != null) {
                 if (getParams == '') {
@@ -121,6 +128,11 @@ class ChannelManage extends Component {
                         <Form.Item label="渠道">
                             {getFieldDecorator('id')(
                                 <Input placeholder="请输入渠道ID" />,
+                            )}
+                        </Form.Item>
+                        <Form.Item label="渠道名">
+                            {getFieldDecorator('name')(
+                                <Input placeholder="请输入渠道名" />,
                             )}
                         </Form.Item>
                         <Form.Item label="状态">
