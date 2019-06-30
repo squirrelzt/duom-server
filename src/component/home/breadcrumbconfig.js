@@ -76,7 +76,7 @@ export const breadcrumbconfig = {
         "catalog": "0",
         "params": []
       }, {
-        "key": "channelcommission",
+        "key": "commissionlists",
         "path": "/channelcommission/commissionlists",
         "name": "佣金列表",
         "catalog": "1",
