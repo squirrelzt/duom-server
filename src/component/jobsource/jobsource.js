@@ -111,12 +111,10 @@ class JobSource extends Component {
         this.props.form.resetFields();
     }
     onRecharge(record) {
-        if ("error" != result) {
-            this.setState({
-                rechargeVisible: true,
-                id: record.id
-            });
-        }
+        this.setState({
+            rechargeVisible: true,
+            id: record.id
+        });
     }
     onCreate() {
         this.setState({
