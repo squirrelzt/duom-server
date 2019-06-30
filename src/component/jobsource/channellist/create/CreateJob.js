@@ -21,7 +21,8 @@ class CreateJob extends Component {
             urlHead: '',
             urlPkgAndroid:'',
             title:'',
-            urlImg:''
+            urlImg:'',
+            formHtml:''
         };
     }
     componentWillMount(){}
@@ -140,12 +141,26 @@ class CreateJob extends Component {
         // console.log('^^^^^^^^^^^^^^^^^^');
         // console.log(params);
         this.setState({
-            title: params.title,
-            urlImg: params.urlImg,
+            // title: params.title,
+            // urlImg: params.urlImg,
             formVisible: params.visible,
             taskFormIds: params.taskFormIds,
             taskFormTypeId: params.taskFormTypeId
         });
+        if (params.title != '' && params.title != undefined) {
+            // this.state.formHtml += '<div>标题:'+params.title+'</div>';
+            this.setState({
+                formHtml: this.state.formHtml + '<div>标题:'+params.title+'</div>'
+            });
+        }
+        if (params.urlImg != '' && params.urlImg != undefined) {
+            // this.state.formHtml += '<div>示例图:<img src='+params.urlImg+'/></div>';
+            this.setState({
+                formHtml: this.state.formHtml + `<div>示例图:<img src=`+params.urlImg+`></img></div>`
+            });
+        }
+        // console.log('++++++++++++++++++++');
+        // console.log(this.state.formHtml);
     }
     render() {
         const urlHeadProps = {
@@ -273,17 +288,21 @@ class CreateJob extends Component {
                         <Form.Item label="任务说明">
                             <RichEditor ref='editor' />
                         </Form.Item>
-                        <Form.Item>
-                            <Button type="primary" className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
-                         </Form.Item>
-                        <div style={{visibility: this.state.exampleImgVisibility}}>
+                        <div className="add-form-section">
+                            <Form.Item>
+                                <Button type="primary" className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
+                            </Form.Item>
+                            <div dangerouslySetInnerHTML={{__html: this.state.formHtml}}></div>
+                        </div>
+                       
+                        {/* <div style={{visibility: this.state.exampleImgVisibility}}>
                             {this.state.title != ''?
                             <div>标题: &nbsp;&nbsp;{this.state.title}</div>
                             :""}
                             {this.state.urlImg != ''?
                              <div>示例图:&nbsp;&nbsp;<img src={this.state.urlImg}/></div>
                             :""}
-                        </div>
+                        </div> */}
                         <div className="form-btn">
                             <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
                                 保存

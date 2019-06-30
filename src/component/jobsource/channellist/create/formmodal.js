@@ -14,7 +14,8 @@ class FormModal extends Component {
             selectedFormId: '',
             title: '',
             urlImg: '',
-            exampleImgVisibility: 'visible'
+            exampleImgVisibility: 'visible',
+            fileList:[]
         };
     }
     
@@ -44,6 +45,10 @@ class FormModal extends Component {
                     taskFormTypeId: this.state.taskFormTypeId
                 });
             }
+            this.props.form.resetFields();
+            this.setState({
+                fileList: []
+            });
         });
     }
 
@@ -72,12 +77,19 @@ class FormModal extends Component {
         // e.preventDefault();
         this.props.form.resetFields();
         this.props.callbackParent({
+            urlImg:'',
+            title:'',
             formVisible: false,
             taskFormIds: this.state.taskFormIds,
             taskFormTypeId: this.state.taskFormTypeId
         });
         this.props.callbackParent({
             visible: false
+        });
+        this.setState({
+            fileList: [],
+            urlImg:'',
+            title:''
         });
     }
     onSelect(value) {
@@ -88,7 +100,8 @@ class FormModal extends Component {
         });
         if (value == 1) {
             this.setState({
-                exampleImgVisibility: 'hidden'
+                exampleImgVisibility: 'hidden',
+                urlImg:''
             });
         } else if (value == 2) {
             this.setState({
@@ -101,8 +114,11 @@ class FormModal extends Component {
         // console.log('------------------------');
         // console.log(info.file.response);
         this.setState({
+            fileList: [...info.fileList],
             urlImg: info.file.response
         });
+        // console.log('=====================');
+        // console.log(this.state.fileList);
     }
     render() {
         this.state.visible = this.props.init.visible;
@@ -140,7 +156,7 @@ class FormModal extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="示例图" className="example-img" style={{visibility: this.state.exampleImgVisibility}}>
-                            <Upload {...props}>
+                            <Upload {...props} fileList={this.state.fileList}>
                                 <Button>
                                     <Icon type="uploadIcon" /> 点击上传
                                 </Button>
