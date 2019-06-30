@@ -74,7 +74,7 @@ class ChannelManage extends Component {
             }
         }
         auth.fetch('/v1/channelTo' + getParams,'get',{},(result)=>{
-           if ("error" != null) {
+           if ("error" != result) {
                 this.setState({
                     data: result
                 });
