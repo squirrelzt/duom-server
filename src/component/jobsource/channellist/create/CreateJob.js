@@ -23,7 +23,8 @@ class CreateJob extends Component {
             title:'',
             urlImg:'',
             formHtml:'',
-            labels:[]
+            labels:[],
+            saveDisabled:true
         };
     }
     componentWillMount(){}
@@ -63,7 +64,6 @@ class CreateJob extends Component {
         +'&taskExplain='+taskExplain+'&androidName='+androidName+'&iosName='+iosName+'&appOpenTime='+appOpenTime+'&description='+description
         +'&urlHead='+this.state.urlHead+'&urlPkgAndroid='+this.state.urlPkgAndroid;
         let t = this;
-        console.log(postParams);
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
             if ("error" == result) {
                 message.error('新增任务失败');
@@ -109,11 +109,16 @@ class CreateJob extends Component {
         });
     }
     onUploadChangeAndroid(info) {
-        console.log('------------------------');
-        console.log(info.file.response);
+        // console.log('------------------------');
+        // console.log(info.file.response);
         this.setState({
             urlPkgAndroid: info.file.response
         });
+        if (info.file.response != undefined) {
+            this.setState({
+                saveDisabled: false
+            })
+        }
     }
     onStartDateChange(date, dateString) {
         // console.log(date, dateString);
@@ -318,7 +323,8 @@ class CreateJob extends Component {
                             :""}
                         </div> */}
                         <div className="form-btn">
-                            <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
+                            <Button type="primary" className="save" onClick={this.onSave.bind(this)} 
+                                disabled={this.state.saveDisabled}>
                                 保存
                             </Button>
                             <Button className="cancel" onClick={this.handleReset.bind(this)}>
