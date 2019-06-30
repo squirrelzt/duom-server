@@ -17,6 +17,7 @@ aside {
 aside .ant-menu {
     color: #b8b8b8;
     background: #121828;
+    font-weight: bold;
 }
 aside .ant-menu-item a {
     color: #b8b8b8;
@@ -66,9 +67,11 @@ section {
     float: right;
     line-height: 80px;
     margin-right: 50px;
+    font-weight: bold;
 }
 .logout .logout-btn {
     height: 40px;
     width: 120px;
     margin-left: 30px;
+    font-weight: bold;
 }
