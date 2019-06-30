@@ -4,6 +4,7 @@ import {auth} from './../../common/auth';
 import './css/tag.css';
 import { Table, Form, Input, Button, Select, Divider, message } from 'antd';
 import CreateTag from './createtag/CreateTag';
+import UpdateTag from './updatetag/UpdateTag';
 
 let columns = [{
     title: '标签ID',
@@ -21,7 +22,9 @@ class Tag extends Component {
         super();
         this.state = {
             data: [],
-            createTagVisible: false
+            createTagVisible: false,
+            updateTagVisible: false,
+            id:''
         };
     }
     fetch(params) {
@@ -40,6 +43,15 @@ class Tag extends Component {
                         data: result
                     });
                 }
+            }
+        });
+    }
+    fetchUpdate(params) {
+        let t = this;
+        let putParams = params.id + '?name='+params.name;
+        auth.fetch('/v1/taskLabel/' + putParams,'put',{},(result)=>{
+            if ("error" != result) {
+               t.fetch();
             }
         });
     }
@@ -73,8 +85,7 @@ class Tag extends Component {
           </span>
         )
     }
-    onUpdate(record) {
-    }
+    
     onDelete(record) {
         this.fetchDel(record.id);
     }
@@ -116,6 +127,18 @@ class Tag extends Component {
         });
         this.fetch();
     }
+    onUpdate(record) {
+        this.setState({
+            updateTagVisible: true,
+            id: record.id
+        });
+    }
+    onUpdateCallback(params) {
+        this.setState({
+            updateTagVisible: params.visible
+        });
+        this.fetch();
+    }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         return (
@@ -149,6 +172,7 @@ class Tag extends Component {
                         />
                 </div>
                 <CreateTag {...this.props} init = {{ visible: this.state.createTagVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
+                <UpdateTag {...this.props} init = {{ visible: this.state.updateTagVisible,id:this.state.id }} callbackParent = { this.onUpdateCallback.bind(this) }/>
             </div>
         )
     }
