@@ -113,9 +113,15 @@ export const breadcrumbconfig = {
         "params": []
       }, {
         "key": "tag",
-        "path": "/tag/taglists",
+        "path": "/tag",
         "name": "任务标签管理",
         "catalog": "0",
+        "params": []
+      }, {
+        "key": "taglists",
+        "path": "/tag/taglists",
+        "name": "标签列表",
+        "catalog": "1",
         "params": []
       }
     ]

@@ -98,8 +98,8 @@ class Home extends Component {
             this.state.defaultOpenKeys.push("channel-commission-list");
           } else if (this.state.currentPage == "cashoutlists" || this.state.currentPage == "auditedcashoutlists" || this.state.currentPage == "rejectcashoutlists") {
             this.state.defaultOpenKeys.push("commission-withdraw-list");
-          } else if (this.state.currentPage == "taglists" || this.state.currentPage == "taglist") {
-            this.state.defaultOpenKeys.push("ob-tab-manage");
+          } else if (this.state.currentPage == "taglists") {
+            this.state.defaultOpenKeys.push("job-tag-manage");
           }
         return (
             <div id="home-container">
@@ -155,7 +155,7 @@ class Home extends Component {
                                 <Menu.Item key="auditedcashoutlists"><Link to="/cashout/auditedcashoutlists">提现已审核列表</Link></Menu.Item>
                                 <Menu.Item key="rejectcashoutlists"><Link to="/cashout/rejectcashoutlists">提现已拒绝列表</Link></Menu.Item>
                         </SubMenu>
-                        <SubMenu key="job-tab-manage"
+                        <SubMenu key="job-tag-manage"
                                 title={
                                     <span>
                                         <Icon type="project"></Icon>
