@@ -63,6 +63,7 @@ class CreateJob extends Component {
         +'&taskExplain='+taskExplain+'&androidName='+androidName+'&iosName='+iosName+'&appOpenTime='+appOpenTime+'&description='+description
         +'&urlHead='+this.state.urlHead+'&urlPkgAndroid='+this.state.urlPkgAndroid;
         let t = this;
+        console.log(postParams);
         auth.fetch('/v1/task?' + postParams,'post', {} ,(result)=>{
             if ("error" == result) {
                 message.error('新增任务失败');
@@ -108,8 +109,8 @@ class CreateJob extends Component {
         });
     }
     onUploadChangeAndroid(info) {
-        // console.log('------------------------');
-        // console.log(info.file.response);
+        console.log('------------------------');
+        console.log(info.file.response);
         this.setState({
             urlPkgAndroid: info.file.response
         });

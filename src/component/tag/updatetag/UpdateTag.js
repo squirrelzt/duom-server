@@ -14,7 +14,7 @@ class UpdateTag extends Component {
     }
     fetch(params) {
         let t = this;
-        let putParams = this.state.id + '?name='+this.state.name;
+        let putParams = this.state.id + '?name='+params;
         auth.fetch('/v1/taskLabel/' + putParams,'put',{},(result)=>{
             if ("error" != result) {
                 message.success('修改标签成功');
