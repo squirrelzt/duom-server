@@ -33,7 +33,7 @@ class CommissionDetail extends Component {
         };
     }
     fetch(params) {
-        auth.fetch('/v1/channelTo/' + params + '/cashout','get', {} ,(result)=>{
+        auth.fetch('/v1/cashout/channelTo/' + params,'get', {} ,(result)=>{
             if ("error" != result) {
                 this.setState({
                     data: result,
