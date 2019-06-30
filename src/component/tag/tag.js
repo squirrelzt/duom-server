@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/tag.css';
 import { Table, Form, Input, Button, Select, Divider, message } from 'antd';
+import CreateTag from './createtag/CreateTag';
 
 let columns = [{
     title: '标签ID',
@@ -19,7 +20,8 @@ class Tag extends Component {
     constructor(props) {
         super();
         this.state = {
-            data: []
+            data: [],
+            createTagVisible: false
         };
     }
     fetch(params) {
@@ -96,6 +98,17 @@ class Tag extends Component {
     handleReset() {
         this.props.form.resetFields();
     }
+    onCreate() {
+        this.setState({
+            createTagVisible: true
+        });
+    }
+    onCreateCallback(params) {
+        this.setState({
+            createTagVisible: params.visible
+        });
+        this.fetch();
+    }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         return (
@@ -119,12 +132,16 @@ class Tag extends Component {
                         </Form.Item>
                     </Form>
                </div>
+               <div className="tag-add">
+                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增标签</Button>
+               </div>
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 
                         dataSource={this.state.data}
                         />
                 </div>
+                <CreateTag {...this.props} init = {{ visible: this.state.createTagVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
             </div>
         )
     }
