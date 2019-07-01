@@ -187,7 +187,7 @@ class CreateJob extends Component {
         };
         const androidProps = {
             name: 'file',
-            action: auth.getPath() + '/v1/file/upload',
+            action: auth.getPath() + '/v1/file/uploadAndroid',
             headers: {
               authorization: 'authorization-text',
               "DUOM_HEADER": localStorage.token
