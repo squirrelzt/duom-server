@@ -1,8 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	optimization: {
@@ -27,7 +26,7 @@ module.exports = {
 			  reuseExistingChunk: true
 			}
 		  }
-		},
+		}
 	  },
     entry: {
         index: './src/entry/index.js'
@@ -47,14 +46,11 @@ module.exports = {
 					removeComments: false
 				}
 			}),
+		new ExtractTextPlugin("styles.css"),
 		new OptimizeCssAssetsPlugin({
 			assetNameRegExp:/\.css$/g,
   			cssProcessor:require('cssnano')
-		}),
-		new MiniCssExtractPlugin({
-			// 类似 webpackOptions.output里面的配置 可以忽略
-			filename: 'style.css',
-		  }),
+		})
 	],
     output: {
 			filename: 'main.js',
@@ -89,16 +85,13 @@ module.exports = {
 			use: [
 				'babel-loader'
 			]
-		},{
-			test:/\.css$/,
-			use: ['style-loader']
-		},{
-		test: /\.css$/,
-		use: [
-			MiniCssExtractPlugin.loader,
-			'css-loader'
-		 ]
-		}
-	 ]
+		  },{
+			test: /\.css$/,
+			use: ExtractTextPlugin.extract({
+			  fallback: "style-loader",
+			  use: "css-loader"
+			})
+		  }
+		]
   }
 };
