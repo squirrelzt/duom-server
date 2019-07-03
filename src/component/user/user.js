@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/user.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs, Button } from 'antd';
-const { TabPane } = Tabs;
+import { Table, Button } from 'antd';
 import CreateUser from './createuser/CreateUser.js';
 
 let columns = [{
@@ -55,7 +54,7 @@ class User extends Component {
             createVisible: false
         };
     }
-    fetch(params = {}) {
+    fetch = (params = {}) => {
       auth.fetch('/v1/users/c','get',params,(result)=>{
         if ("error" != result) {
           this.setState({
@@ -70,12 +69,12 @@ class User extends Component {
       }
       this.fetch();
     };
-    onCreate() {
+    onCreate = () => {
       this.setState({
         createVisible: true
       });
     }
-    onCreateCallback(params) {
+    onCreateCallback = (params) => {
       this.setState({
         createVisible: params.visible
       });
@@ -85,7 +84,7 @@ class User extends Component {
         return (
             <div id="user-container">
               <div className="user-add">
-                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增用户</Button>
+                   <Button type="primary" onClick={this.onCreate}>新增用户</Button>
                </div>
                 <div className="user-list-table">
                     <Table columns={columns}
@@ -93,7 +92,8 @@ class User extends Component {
                         dataSource={this.state.data}
                         />
                 </div>
-                <CreateUser {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
+                <CreateUser {...this.props} init = {{ visible: this.state.createVisible }} 
+                  callbackParent = { this.onCreateCallback }/>
             </div>
         )
     }

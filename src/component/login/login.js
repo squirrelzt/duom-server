@@ -14,7 +14,7 @@ class Login extends Component {
     componentWillMount(){
     }
 
-    sendVerifyCode() {
+    sendVerifyCode = () => {
         let flag = true;
         let reg = /^1[3|4|5|7|8][0-9]\d{8,11}$/;
         let telephone = $('.telephone-input').val();
@@ -59,7 +59,7 @@ class Login extends Component {
             }
         });
     }
-    fetch(params = {}) {
+    fetch = (params = {}) => {
         auth.fetch('/v1/token','post',params,(result)=>{
             if ("error" == result) {
                 $('.login-error').css('visibility', 'visible');
@@ -71,12 +71,12 @@ class Login extends Component {
             }
         });
     }
-    clearVerifyCode() {
+    clearVerifyCode = () => {
         $('.verify-code-input').val('');
         $('.verifyCodeError').css('visibility', 'hidden');
     }
 
-    login() {
+    login = () => {
         let telephoneCheck = true;
         let telephone = $('.telephone-input').val();
         if (telephone == '') {
@@ -101,7 +101,7 @@ class Login extends Component {
                 <div className="telephone">
                     <img className="telephone-img" src={require("./images/ic_phone.png")}/>
                     <input className="telephone-input" placeholder="请输入手机号" />
-                    <button className="verify-code-send-btn" onClick={this.sendVerifyCode.bind(this)}>发送验证码</button>
+                    <button className="verify-code-send-btn" onClick={this.sendVerifyCode}>发送验证码</button>
                 </div>
                 <div className="send-success">
                     <p>验证码发送成功</p>
@@ -121,7 +121,7 @@ class Login extends Component {
                     <p>输入验证码错误</p>
                 </div>
                 <div className="login-commit">
-                    <button className="login-btn" onClick={this.login.bind(this)}>登录</button>
+                    <button className="login-btn" onClick={this.login}>登录</button>
                 </div>
                 <div className="login-error">
                     <p>登录失败</p>
