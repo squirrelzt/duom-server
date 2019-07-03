@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {auth} from './../../../common/auth';
 import './css/balance.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
-const { TabPane } = Tabs;
+import { Table } from 'antd';
 
 let withdrawColumns = [{
     title: 'ID',
@@ -70,7 +69,7 @@ class Balance extends Component {
           }
     };
 
-    callback() {
+    callback = () => {
 
     }
     render() {

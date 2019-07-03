@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {auth} from './../../../common/auth';
 import './css/jobinfo.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Form, Input, Button, DatePicker, Select } from 'antd';
-const { RangePicker } = DatePicker;
+import { Table, Form, Input, Button } from 'antd';
 
 let columns = [{
     title: '任务单ID',
@@ -52,7 +51,6 @@ class JobInfo extends Component {
                 }
             }
         }
-        console.log(getParams);
         auth.fetch('/v1/taskOrders/c/users/' + localStorage.userId + getParams,'get',{},(result)=>{
             if ("error" != result) {
                 this.setState({
@@ -70,13 +68,13 @@ class JobInfo extends Component {
         this.props.form.validateFields();
     };
 
-    callback() {
+    callback = () => {
 
     }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -86,11 +84,10 @@ class JobInfo extends Component {
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
         return (
             <div id="jobinfo-container">
                <div className="">
-                     <Form layout="inline" onSubmit={this.handleSubmit.bind(this)}>
+                     <Form layout="inline" onSubmit={this.handleSubmit}>
                         <Form.Item label="任务单ID">
                             {getFieldDecorator('id')(
                                 <Input placeholder="请输入用户单ID" />,
@@ -107,7 +104,7 @@ class JobInfo extends Component {
                         </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>

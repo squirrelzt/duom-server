@@ -71,7 +71,7 @@ class Detail extends Component {
         this.fetchJob(this.props.match.params.id);
     };
 
-    callback() {
+    callback = () => {
 
     }
     render() {

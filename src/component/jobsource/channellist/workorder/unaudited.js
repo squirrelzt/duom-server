@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from './../../../../common/auth';
 import './css/workorder.css';
-import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
+import { Table, Form, Input, Button } from 'antd';
 import Check from './check.js';
 
 let columns = [{
@@ -53,7 +52,7 @@ class UnAudited extends Component {
         };
     }
 
-    onCheck(record) {
+    onCheck = (record) => {
       this.fetchCheck(record);
     }
     fetch(params) {
@@ -104,7 +103,7 @@ class UnAudited extends Component {
         </span>
       )
     }
-    onQuery(e) {
+    onQuery = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
@@ -114,10 +113,10 @@ class UnAudited extends Component {
         }
       });
     }
-  handleReset() {
+  handleReset = () => {
       this.props.form.resetFields();
   }
-  onCallback(params) {
+  onCallback = (params) => {
     this.setState({
         checkMoalVisible: params.visible
     });
@@ -133,22 +132,13 @@ class UnAudited extends Component {
                                 <Input placeholder="请输入任务ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="分类">
-                            {getFieldDecorator('status', {initialValue: "1"})(
-                                <Select>
-                                    <Select.Option value="1">APP普通任务</Select.Option>
-                                    <Select.Option value="2">京东零元购</Select.Option>
-                                    <Select.Option value="3">淘宝零元购</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
@@ -163,7 +153,7 @@ class UnAudited extends Component {
                   id:this.state.selectId,
                   channelFromId:this.state.selectChannelFromId,
                   taskName:this.state.selectTaskName}} 
-                  callbackParent={this.onCallback.bind(this)}/>
+                  callbackParent={this.onCallback}/>
             </div>
         )
     }

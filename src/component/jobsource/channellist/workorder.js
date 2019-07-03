@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {auth} from './../../../common/auth';
 import './css/channelList.css';
-import { Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
-const { TabPane } = Tabs;
 import Audited from './workorder/audited';
 import UnAudited from './workorder/unaudited';
 import Reject from './workorder/reject';

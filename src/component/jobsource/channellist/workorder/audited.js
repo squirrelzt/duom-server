@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from './../../../../common/auth';
 import './css/workorder.css';
-import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
+import { Table, Form, Input, Button } from 'antd';
 
 
 let columns = [{
@@ -68,7 +67,7 @@ class Audited extends Component {
       this.fetch();
     };
  
-    onQuery(e) {
+    onQuery = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
@@ -78,7 +77,7 @@ class Audited extends Component {
         }
       });
     }
-  handleReset() {
+  handleReset = () => {
       this.props.form.resetFields();
   }
     render() {
@@ -92,22 +91,13 @@ class Audited extends Component {
                                 <Input placeholder="请输入任务ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="分类">
-                            {getFieldDecorator('status', {initialValue: "1"})(
-                                <Select>
-                                    <Select.Option value="1">APP普通任务</Select.Option>
-                                    <Select.Option value="2">京东零元购</Select.Option>
-                                    <Select.Option value="3">淘宝零元购</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>

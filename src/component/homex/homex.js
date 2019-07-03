@@ -24,7 +24,7 @@ class Homex extends Component {
       }
     };
 
-    onMenuFold() {
+    onMenuFold = () => {
         $('#home-container aside').css('display', 'none');
         $('#home-container section').css('margin-left', '0');
         $('#home-container > .breadcrumb').css('margin-left', '0');
@@ -32,7 +32,7 @@ class Homex extends Component {
         $('.menuFoldIcon').css('display', 'none');
         $('.menuUnFoldIcon').css('display', 'block');
     }
-    onMenuUnFold() {
+    onMenuUnFold = () => {
         $('#home-container aside').css('display', 'block');
         $('#home-container section').css('margin-left', '240px');
         $('#home-container > .breadcrumb').css('margin-left', '240px');
@@ -40,7 +40,7 @@ class Homex extends Component {
         $('.menuFoldIcon').css('display', 'block');
         $('.menuUnFoldIcon').css('display', 'none');
     }
-    logout() {
+    logout = () => {
         localStorage.token = "";
         localStorage.userId = "";
         window.location.href=auth.getLoginUrlx();
@@ -57,7 +57,6 @@ class Homex extends Component {
         if (urlArray[urlArray.length - 1] == "") {              //如果URL最后一个元素是/,即数组最后一个元素为空，则删掉
             urlArray.pop();
         }
-        // console.log('urlArray=' + urlArray);
         breadcrumbconfig.getBreadcrumbUrl().map(item => {
             let paramsUrl = "";
             for (let i = 0; i < item.params.length; i++) {

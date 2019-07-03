@@ -60,7 +60,7 @@ class AuditedCashout extends Component {
         }
         this.fetch();
     }
-    onQuery(e) {
+    onQuery = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -72,7 +72,7 @@ class AuditedCashout extends Component {
           }
         });
       }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
     render() {
@@ -92,21 +92,13 @@ class AuditedCashout extends Component {
                                 <Input placeholder="请输入用户ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="状态">
-                            {getFieldDecorator('status', {initialValue: "0"})(
-                                <Select>
-                                    <Select.Option value="0">启用</Select.Option>
-                                    <Select.Option value="1">禁用</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
@@ -116,7 +108,7 @@ class AuditedCashout extends Component {
                     <Table columns={columns}
                         rowKey={data => data.id} 
                         dataSource={this.state.data}
-                        />
+                    />
                 </div>
             </div>
         )

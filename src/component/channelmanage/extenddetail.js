@@ -58,7 +58,7 @@ class ExtendDetail extends Component {
         }
     };
 
-    callback() {
+    callback = () => {
 
     }
     render() {

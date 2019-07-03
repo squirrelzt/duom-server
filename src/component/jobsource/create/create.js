@@ -30,7 +30,7 @@ class Create extends Component {
         
     };
    
-    onSave(e) {
+    onSave = (e) => {
         e.preventDefault();
         let t = this;
         this.props.form.validateFields((err, values) => {
@@ -41,10 +41,10 @@ class Create extends Component {
           }
         });
     }
-    handOk() {
+    handOk = () => {
 
     }
-    handleReset(e) {
+    handleReset = (e) => {
         e.preventDefault();
         this.props.form.resetFields();
         this.props.callbackParent({
@@ -67,8 +67,8 @@ class Create extends Component {
         return (
             <Modal id="user-source-create-container"
                 title="新增渠道"
-                onOk = { this.handOk.bind(this) }
-                onCancel = { this.handleReset.bind(this) }
+                onOk = {this.handOk}
+                onCancel = {this.handleReset}
                 visible = { this.state.visible }
                 footer = {[]}>
                  <div className="">
@@ -98,10 +98,10 @@ class Create extends Component {
                         </Form.Item>
                         
                         <div className="form-btn">
-                            <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
+                            <Button type="primary" className="save" onClick={this.onSave}>
                                 保存
                             </Button>
-                            <Button className="cancel" onClick={this.handleReset.bind(this)}>
+                            <Button className="cancel" onClick={this.handleReset}>
                                 取消
                             </Button>
                            </div> 

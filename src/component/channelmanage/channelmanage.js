@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/channelmanage.css';
-import { Table, Divider, Form, Input, Button, Select, DatePicker } from 'antd';
-const { MonthPicker, RangePicker } = DatePicker;
+import { Table, Form, Input, Button, Select, DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
 
 let columns = [{
     title: '任务推广渠道ID',
@@ -95,7 +95,7 @@ class ChannelManage extends Component {
         }
         this.fetch();
     }
-    onQuery(e) {
+    onQuery = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -104,15 +104,15 @@ class ChannelManage extends Component {
           }
         });
       }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
-    onCreate() {
+    onCreate = () => {
         this.setState({
             createVisible: true
         });
     }
-    onRangeDateChange(date, dateString) {
+    onRangeDateChange = (date, dateString) => {
         this.setState({
             startDate: new Date(this.state.startDate).getTime()/1000,
             endDate: new Date(this.state.endDate).getTime()/1000
@@ -120,7 +120,6 @@ class ChannelManage extends Component {
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
         return (
             <div id="jobsource-container">
                  <div className="">
@@ -145,30 +144,26 @@ class ChannelManage extends Component {
                         </Form.Item>
                         <Form.Item label="添加时间">
                             {getFieldDecorator('rangeDate')(
-                                <RangePicker format='YYYY-MM-DD' onChange={this.onRangeDateChange.bind(this)}/>,
+                                <RangePicker format='YYYY-MM-DD' onChange={this.onRangeDateChange}/>,
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
                     </Form>
                </div>
-               {/* <div className="user-source-add">
-                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
-               </div> */}
-               {/* <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/> */}
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 
                         dataSource={this.state.data}
-                        />
+                    />
                 </div>
             </div>
         )

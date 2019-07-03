@@ -98,7 +98,7 @@ class JobSource extends Component {
         )
     }
     
-    onQuery(e) {
+    onQuery = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -107,21 +107,21 @@ class JobSource extends Component {
           }
         });
       }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
-    onRecharge(record) {
+    onRecharge = (record) => {
         this.setState({
             rechargeVisible: true,
             id: record.id
         });
     }
-    onCreate() {
+    onCreate = () => {
         this.setState({
             createVisible: true
         });
     }
-    onCreateCallback(params) {
+    onCreateCallback = (params) => {
         this.setState({
             createVisible: params.visible
         });
@@ -129,7 +129,7 @@ class JobSource extends Component {
             "idList": []
         });
     }
-    onRechargeCallback(params) {
+    onRechargeCallback = (params) => {
         this.setState({
             rechargeVisible: params.visible
         });
@@ -162,22 +162,22 @@ class JobSource extends Component {
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
                     </Form>
                </div>
                <div className="user-source-add">
-                   <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务来源渠道</Button>
+                   <Button type="primary" onClick={this.onCreate}>新增任务来源渠道</Button>
                </div>
-               <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
-               <Recharge {...this.props} init = {{ visible: this.state.rechargeVisible,id:this.state.id }} callbackParent = { this.onRechargeCallback.bind(this) }/>
+               <Create {...this.props} init={{visible:this.state.createVisible }} callbackParent={this.onCreateCallback}/>
+               <Recharge {...this.props} init={{visible:this.state.rechargeVisible,id:this.state.id}} callbackParent={this.onRechargeCallback}/>
                 <div className="user-list-table">
                     <Table columns={columns}
                         rowKey={data => data.id} 

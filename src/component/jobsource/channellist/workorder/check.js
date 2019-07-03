@@ -32,20 +32,20 @@ class Check extends Component {
 
     componentWillMount(){}
    
-    onAgree(e) {
+    onAgree = (e) => {
         e.preventDefault();
         this.fetch({
             status: 1
         });
     }
 
-    onReject(e) {
+    onReject = (e) => {
         // e.preventDefault();
         this.fetch({
             status: 2
         });
     }
-    handleReset(e) {
+    handleReset = (e) => {
         this.props.callbackParent({
             visible: false
         });
@@ -60,8 +60,8 @@ class Check extends Component {
             <Modal id="check-cancel-content-container"
                 title="新增核销表单"
                 // onOk = { this.handOk.bind(this) }
-                onCancel = { this.handleReset.bind(this) }
-                visible = { this.state.visible }
+                onCancel = {this.handleReset}
+                visible = {this.state.visible}
                 footer = {[]}>
                     {this.state.data.length != 0 ?
                         this.state.data.map((item,key)=>{
@@ -88,10 +88,10 @@ class Check extends Component {
                 
                 
                 <div className="check-btn">
-                    <Button type="primary" className="agree" onClick={this.onAgree.bind(this)}>
+                    <Button type="primary" className="agree" onClick={this.onAgree}>
                         审核通过
                     </Button>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button className="reject" onClick={this.onReject.bind(this)}>
+                    <Button className="reject" onClick={this.onReject}>
                         驳回
                     </Button>
                 </div> 

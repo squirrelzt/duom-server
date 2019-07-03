@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {auth} from './../../../../common/auth';
-import { Form, Icon, Input, Button, Select, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
+import { Form, Icon, Input, Button, message, Checkbox, DatePicker, Upload, TimePicker } from 'antd';
 import './css/CreateJob.css';
 import RichEditor from './richeditor';
 import FormModal from './formmodal.js';
@@ -74,7 +74,7 @@ class CreateJob extends Component {
         });
     };
 
-    onSave(e) {
+    onSave = (e) => {
         e.preventDefault();
         let t = this;
         this.props.form.validateFields((err, values) => {
@@ -83,34 +83,28 @@ class CreateJob extends Component {
             values.startTime = this.timeConvert(this.state.startDate, this.state.startTime);
             values.endTime = this.timeConvert(this.state.endDate, this.state.endTime);
             values.taskExplain = this.refs.editor.getData();
-            // console.log('++++++++++++++++++++++');
-            // console.log(values);
             this.fetch(values);
           }
         });
     }
 
-    timeConvert(date,time) {
+    timeConvert = (date,time) => {
         let timestamp = (new Date(date + ' ' + time)).getTime()/1000;
         return timestamp; 
     }
-    handOk() {
+    handOk = () => {
 
     }
-    handleReset(e) {
+    handleReset = (e) => {
         // e.preventDefault();
         this.props.form.resetFields();
     }
-    onUploadChangeUrlHead(info) {
-        // console.log('------------------------');
-        // console.log(info.file.response);
+    onUploadChangeUrlHead = (info) => {
         this.setState({
             urlHead: info.file.response
         });
     }
-    onUploadChangeAndroid(info) {
-        // console.log('------------------------');
-        // console.log(info.file.response);
+    onUploadChangeAndroid = (info) => {
         this.setState({
             urlPkgAndroid: info.file.response
         });
@@ -120,60 +114,48 @@ class CreateJob extends Component {
             })
         }
     }
-    onStartDateChange(date, dateString) {
-        // console.log(date, dateString);
+    onStartDateChange = (date, dateString) => {
         this.setState({
             startDate: dateString
         });
     }
-    onEndDateChange(date, dateString) {
-        // console.log(date, dateString);
+    onEndDateChange = (date, dateString) => {
         this.setState({
             endDate: dateString
         });
     }
-    onStartTimeChange(time, timeString) {
-        // console.log(time, timeString);
+    onStartTimeChange = (time, timeString) => {
         this.setState({
             startTime: timeString
         });
     }
-    onEndTimeChange(time, timeString) {
-        // console.log(time, timeString);
+    onEndTimeChange = (time, timeString) => {
         this.setState({
             endTime: timeString
         });
     }
-    onCreateForm(e) {
+    onCreateForm = (e) => {
         this.setState({
             formVisible: true
         })
     }
 
-      onCreateCallback(params) {
-        // console.log('^^^^^^^^^^^^^^^^^^');
-        // console.log(params);
+      onCreateCallback = (params) => {
         this.setState({
-            // title: params.title,
-            // urlImg: params.urlImg,
             formVisible: params.visible,
             taskFormIds: params.taskFormIds,
             taskFormTypeId: params.taskFormTypeId
         });
-        if (params.title != '' && params.title != undefined) {
-            // this.state.formHtml += '<div>标题:'+params.title+'</div>';
+        if (!params.title) {
             this.setState({
                 formHtml: this.state.formHtml + '<div>标题:'+params.title+'</div>'
             });
         }
-        if (params.urlImg != '' && params.urlImg != undefined) {
-            // this.state.formHtml += '<div>示例图:<img src='+params.urlImg+'/></div>';
+        if (!params.urlImg) {
             this.setState({
                 formHtml: this.state.formHtml + `<div>示例图:<img src=`+params.urlImg+`></img></div>`
             });
         }
-        // console.log('++++++++++++++++++++');
-        // console.log(this.state.formHtml);
     }
     render() {
         const urlHeadProps = {
@@ -226,9 +208,6 @@ class CreateJob extends Component {
                                         )
                                     })
                                     :""}
-                                    {/* <Checkbox  value="1">1</Checkbox>
-                                    <Checkbox  value="2">2</Checkbox>
-                                    <Checkbox  value="3">3</Checkbox> */}
                                 </Checkbox.Group>,
                                 )}
                         </Form.Item>
@@ -245,12 +224,12 @@ class CreateJob extends Component {
                             </Upload>
                         </Form.Item>
                         <Form.Item label="开始时间">
-                        {getFieldDecorator('startDate', config)(<DatePicker onChange={this.onStartDateChange.bind(this)}/>)}
-                        <TimePicker onChange={this.onStartTimeChange.bind(this)} />
+                        {getFieldDecorator('startDate', config)(<DatePicker onChange={this.onStartDateChange}/>)}
+                        <TimePicker onChange={this.onStartTimeChange} />
                         </Form.Item>
                         <Form.Item label="结束时间">
-                        {getFieldDecorator('endDate', config)(<DatePicker onChange={this.onEndDateChange.bind(this)}/>)}
-                        <TimePicker onChange={this.onEndTimeChange.bind(this)} />
+                        {getFieldDecorator('endDate', config)(<DatePicker onChange={this.onEndDateChange}/>)}
+                        <TimePicker onChange={this.onEndTimeChange} />
                         </Form.Item>
                         <Form.Item label="任务时间">
                             {getFieldDecorator('taskDuration')(
@@ -309,29 +288,20 @@ class CreateJob extends Component {
                         </Form.Item>
                         <div className="add-form-section">
                             <Form.Item>
-                                <Button type="primary" className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
+                                <Button type="primary" className="addForm" onClick={this.onCreateForm}>添加表单</Button>
                             </Form.Item>
                             <div dangerouslySetInnerHTML={{__html: this.state.formHtml}}></div>
                         </div>
-                       
-                        {/* <div style={{visibility: this.state.exampleImgVisibility}}>
-                            {this.state.title != ''?
-                            <div>标题: &nbsp;&nbsp;{this.state.title}</div>
-                            :""}
-                            {this.state.urlImg != ''?
-                             <div>示例图:&nbsp;&nbsp;<img src={this.state.urlImg}/></div>
-                            :""}
-                        </div> */}
                         <div className="form-btn">
-                            <Button type="primary" className="save" onClick={this.onSave.bind(this)} 
+                            <Button type="primary" className="save" onClick={this.onSave} 
                                 disabled={this.state.saveDisabled}>
                                 保存
                             </Button>
-                            <Button className="cancel" onClick={this.handleReset.bind(this)}>
+                            <Button className="cancel" onClick={this.handleReset}>
                                 取消
                             </Button>
                             <FormModal init={{visible:this.state.formVisible}}
-                                callbackParent = { this.onCreateCallback.bind(this) }/>
+                                callbackParent={this.onCreateCallback}/>
                            </div> 
                     </Form>
            </div>

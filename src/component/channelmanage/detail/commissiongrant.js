@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {auth} from '../../../common/auth';
 import './css/commissiongrant.css';
-import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
-const { TabPane } = Tabs;
+import { Table } from 'antd';
 
 
 let columns = [{

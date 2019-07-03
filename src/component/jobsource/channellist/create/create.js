@@ -70,7 +70,7 @@ class Create extends Component {
 
    
    
-    onSave(e) {
+    onSave = (e) => {
         e.preventDefault();
         let t = this;
         this.props.form.validateFields((err, values) => {
@@ -84,21 +84,21 @@ class Create extends Component {
         });
     }
 
-    timeConvert(date,time) {
+    timeConvert = (date,time) => {
         let timestamp = (new Date(date + ' ' + time)).getTime()/1000;
         return timestamp; 
     }
-    handOk() {
+    handOk = () => {
 
     }
-    handleReset(e) {
+    handleReset = (e) => {
         // e.preventDefault();
         this.props.form.resetFields();
         this.props.callbackParent({
             visible: false
         });
     }
-    onUploadChange(info) {
+    onUploadChange = (info) => {
         this.setState({
             uploadUrl: info.file.response
         });
@@ -112,32 +112,32 @@ class Create extends Component {
             });
         }
     }
-    onStartDateChange(date, dateString) {
+    onStartDateChange = (date, dateString) => {
         this.setState({
             startDate: dateString
         });
     }
-    onEndDateChange(date, dateString) {
+    onEndDateChange = (date, dateString) => {
         this.setState({
             endDate: dateString
         });
     }
-    onStartTimeChange(time, timeString) {
+    onStartTimeChange = (time, timeString) => {
         this.setState({
             startTime: timeString
         });
     }
-    onEndTimeChange(time, timeString) {
+    onEndTimeChange = (time, timeString) => {
         this.setState({
             endTime: timeString
         });
     }
-    onCreateForm(e) {
+    onCreateForm = (e) => {
         this.setState({
             formVisible: true
         })
     }
-    onCreateCallback(params) {
+    onCreateCallback = (params) => {
         this.setState({
             formVisible: params.visible,
             taskFormIds: params.taskFormIds,
@@ -161,9 +161,9 @@ class Create extends Component {
         return (
             <Modal id="job-create-container"
                 title="新增任务"
-                onOk = { this.handOk.bind(this) }
-                onCancel = { this.handleReset.bind(this) }
-                visible = { this.state.visible }
+                onOk = {this.handOk}
+                onCancel = {this.handleReset}
+                visible = {this.state.visible}
                 footer = {[]}>
                  <div className="">
                      <Form onSubmit={this.handleSubmit}>
@@ -193,12 +193,12 @@ class Create extends Component {
                             )}
                         </Form.Item>
                         <Form.Item label="开始时间">
-                        {getFieldDecorator('startDate', config)(<DatePicker onChange={this.onStartDateChange.bind(this)}/>)}
+                        {getFieldDecorator('startDate', config)(<DatePicker onChange={this.onStartDateChange}/>)}
                         <TimePicker onChange={this.onStartTimeChange.bind(this)} />
                         </Form.Item>
                         <Form.Item label="结束时间">
-                        {getFieldDecorator('endDate', config)(<DatePicker onChange={this.onEndDateChange.bind(this)}/>)}
-                        <TimePicker onChange={this.onEndTimeChange.bind(this)} />
+                        {getFieldDecorator('endDate', config)(<DatePicker onChange={this.onEndDateChange}/>)}
+                        <TimePicker onChange={this.onEndTimeChange} />
                         </Form.Item>
                         
                         <Form.Item label="上传安装包">
@@ -217,20 +217,20 @@ class Create extends Component {
                             <RichEditor ref='editor' {...props} />
                         </Form.Item>
                         <Form.Item>
-                            <Button className="addForm" onClick={this.onCreateForm.bind(this)}>添加表单</Button>
+                            <Button className="addForm" onClick={this.onCreateForm}>添加表单</Button>
                          </Form.Item>
                         
                         <div className="form-btn">
-                            <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
+                            <Button type="primary" className="save" onClick={this.onSave}>
                                 保存
                             </Button>
-                            <Button className="cancel" onClick={this.handleReset.bind(this)}>
+                            <Button className="cancel" onClick={this.handleReset}>
                                 取消
                             </Button>
                            </div> 
                     </Form>
-                    <FormModal {...props} init={{visible:this.state.formVisible,uploadUrl: this.state.uploadUrl}}
-                    callbackParent = { this.onCreateCallback.bind(this) }/>
+                    <FormModal {...props} init={{visible:this.state.formVisible,uploadUrl:this.state.uploadUrl}}
+                    callbackParent = {this.onCreateCallback}/>
                </div>
             </Modal>
         )

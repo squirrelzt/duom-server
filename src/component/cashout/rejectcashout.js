@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/cashout.css';
-import { Table, Form, Input, Button, Select, Divider, message } from 'antd';
+import { Table, Form, Input, Button } from 'antd';
 
 let columns = [{
     title: '提现ID',
@@ -59,7 +58,7 @@ class RejectCashout extends Component {
         }
         this.fetch();
     }
-    onQuery(e) {
+    onQuery = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -71,12 +70,11 @@ class RejectCashout extends Component {
           }
         });
       }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
         return (
             <div id="reject-cashout-container">
                  <div className="">
@@ -91,21 +89,13 @@ class RejectCashout extends Component {
                                 <Input placeholder="请输入用户ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="状态">
-                            {getFieldDecorator('status', {initialValue: "0"})(
-                                <Select>
-                                    <Select.Option value="0">启用</Select.Option>
-                                    <Select.Option value="1">禁用</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
@@ -115,7 +105,7 @@ class RejectCashout extends Component {
                     <Table columns={columns}
                         rowKey={data => data.id} 
                         dataSource={this.state.data}
-                        />
+                    />
                 </div>
             </div>
         )

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from './../../../common/auth';
 import './css/subuser.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
+import { Table } from 'antd';
 import SubUserDetail from './subuserdetail';
 
 
@@ -94,10 +93,10 @@ class SubUser extends Component {
             }
         });
     }
-    onLookUp(record) {
+    onLookUp = (record) => {
       this.fetchDetail(record.id);
     }
-    onCallback(params) {
+    onCallback = (params) => {
       this.setState({
         modalVisible: params.visible
       });
@@ -112,7 +111,8 @@ class SubUser extends Component {
                         dataSource={this.state.data}
                     />
                </div>
-               <SubUserDetail {...this.props} init={{data:this.state.modalData,visible:this.state.modalVisible}} callbackParent={this.onCallback.bind(this)}/>
+               <SubUserDetail {...this.props} init={{data:this.state.modalData,visible:this.state.modalVisible}} 
+               callbackParent={this.onCallback}/>
             </div>
         )
     }

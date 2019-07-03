@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {auth} from './../../../common/auth';
 import './css/team.css';
-import { Menu, Icon, Breadcrumb, Table, Divider, Tabs } from 'antd';
-const { TabPane } = Tabs;
+import { Table } from 'antd';
 
 let columns = [{
     title: '团队ID',
@@ -37,7 +36,7 @@ class Team extends Component {
         });
     };
 
-    callback() {
+    callback = () => {
 
     }
    

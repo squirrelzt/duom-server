@@ -24,7 +24,7 @@ class Home extends Component {
       }
     };
 
-    onMenuFold() {
+    onMenuFold = () => {
         $('#home-container aside').css('visibility', 'hidden');
         $('#home-container section').css('margin-left', '0');
         $('#home-container > .breadcrumb').css('margin-left', '0');
@@ -32,7 +32,7 @@ class Home extends Component {
         $('.menuFoldIcon').css('visibility', 'hidden');
         $('.menuUnFoldIcon').css('visibility', 'visible');
     }
-    onMenuUnFold() {
+    onMenuUnFold = () => {
         $('#home-container aside').css('visibility', 'visible');
         $('#home-container section').css('margin-left', '240px');
         $('#home-container > .breadcrumb').css('margin-left', '240px');
@@ -40,7 +40,7 @@ class Home extends Component {
         $('.menuFoldIcon').css('visibility', 'visible');
         $('.menuUnFoldIcon').css('visibility', 'hidden');
     }
-    logout() {
+    logout = () => {
         localStorage.token = "";
         localStorage.userId = "";
         window.location.href=auth.getLoginUrl();

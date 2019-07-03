@@ -82,19 +82,19 @@ class ChannelCommissionList extends Component {
           </span>
         )
       }
-      onGrantCommission(record) {
+      onGrantCommission = (record) => {
         this.setState({
           grantCommissionVisible: true,
           channelToId: record.id
         });
       }
-      onGrantCommissionCallback(params) {
+      onGrantCommissionCallback = (params) => {
         this.setState({
           grantCommissionVisible: params.visible
         });
         this.fetch();
       }
-      onQuery(e) {
+      onQuery = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -104,7 +104,7 @@ class ChannelCommissionList extends Component {
           }
         });
       }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
     render() {
@@ -124,18 +124,18 @@ class ChannelCommissionList extends Component {
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
                     </Form>
-                    <GrantCommission {...this.props} init = {{ visible: this.state.grantCommissionVisible,channelToId:this.state.channelToId }}
-                     callbackParent = { this.onGrantCommissionCallback.bind(this) }/>
+                    <GrantCommission {...this.props} init={{visible:this.state.grantCommissionVisible,channelToId:this.state.channelToId}}
+                     callbackParent={this.onGrantCommissionCallback}/>
                </div>
                 <Table columns={columns}
                     rowKey={data => data.id}

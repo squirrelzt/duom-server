@@ -35,7 +35,7 @@ class GrantCommission extends Component {
         
     };
    
-    onSave(e) {
+    onSave = (e) => {
         e.preventDefault();
         let t = this;
         this.props.form.validateFields((err, values) => {
@@ -44,10 +44,10 @@ class GrantCommission extends Component {
           }
         });
     }
-    handOk() {
+    handOk = () => {
 
     }
-    handleReset(e) {
+    handleReset = (e) => {
         e.preventDefault();
         this.props.form.resetFields();
         this.props.callbackParent({
@@ -71,10 +71,10 @@ class GrantCommission extends Component {
         return (
             <Modal id="grant-commission-container"
                 title="发放佣金"
-                onOk = { this.handOk.bind(this) }
-                onCancel = { this.handleReset.bind(this) }
-                visible = { this.state.visible }
-                footer = {[]}>
+                onOk={this.handOk}
+                onCancel={this.handleReset}
+                visible={this.state.visible}
+                footer={[]}>
                  <div className="">
                      <Form {...formItemLayout}>
                         <Form.Item label="佣金金额">
@@ -83,7 +83,7 @@ class GrantCommission extends Component {
                             )}
                         </Form.Item>
                         <div className="recharge-btn">
-                            <Button type="primary" onClick={this.onSave.bind(this)}>
+                            <Button type="primary" onClick={this.onSave}>
                                 确定
                             </Button>
                         </div> 

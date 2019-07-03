@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {auth} from './../../../../common/auth';
-// import './css/create.css';
 import { Modal, Form, Icon, Input, Button, Select, message, Upload } from 'antd';
 
 class FormModal extends Component {
@@ -56,7 +55,7 @@ class FormModal extends Component {
         
     };
    
-    onSave(e) {
+    onSave = (e) => {
         e.preventDefault();
         let t = this;
         this.props.form.validateFields((err, values) => {
@@ -70,10 +69,10 @@ class FormModal extends Component {
         });
     }
 
-    handOk() {
+    handOk = () => {
 
     }
-    handleReset(e) {
+    handleReset = (e) => {
         // e.preventDefault();
         this.props.form.resetFields();
         this.props.callbackParent({
@@ -92,7 +91,7 @@ class FormModal extends Component {
             title:''
         });
     }
-    onSelect(value) {
+    onSelect = (value) => {
         this.setState({
             selectedFormId: value
         });
@@ -108,7 +107,7 @@ class FormModal extends Component {
         }
 
     }
-    onUploadChange(info) {
+    onUploadChange = (info) => {
         this.setState({
             fileList: [...info.fileList],
             urlImg: info.file.response
@@ -129,15 +128,15 @@ class FormModal extends Component {
         return (
             <Modal id="form-create-container"
                 title="新增核销表单"
-                onOk = { this.handOk.bind(this) }
-                onCancel = { this.handleReset.bind(this) }
-                visible = { this.state.visible }
+                onOk = {this.handOk}
+                onCancel = {this.handleReset}
+                visible = {this.state.visible}
                 footer = {[]}>
                  <div className="">
                      <Form onSubmit={this.handleSubmit}>
                         <Form.Item label="表单类型">
                             {getFieldDecorator('taskFormTypeId')(
-                               <Select onChange={this.onSelect.bind(this)}>
+                               <Select onChange={this.onSelect}>
                                     <Select.Option value="1">文本</Select.Option>
                                     <Select.Option value="2">图片</Select.Option>
                                 </Select>,
@@ -157,10 +156,10 @@ class FormModal extends Component {
                             </Upload>
                         </Form.Item>
                         <div className="form-btn">
-                            <Button type="primary" className="save" onClick={this.onSave.bind(this)}>
+                            <Button type="primary" className="save" onClick={this.onSave}>
                                 保存
                             </Button>
-                            <Button className="cancel" onClick={this.handleReset.bind(this)}>
+                            <Button className="cancel" onClick={this.handleReset}>
                                 取消
                             </Button>
                            </div> 

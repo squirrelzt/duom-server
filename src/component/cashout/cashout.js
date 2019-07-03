@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/cashout.css';
-import { Table, Form, Input, Button, Select, Divider, message } from 'antd';
+import { Table, Form, Input, Button, Divider, message } from 'antd';
 
 let columns = [{
     title: '提现ID',
@@ -87,17 +86,15 @@ class Cashout extends Component {
             return  <span> 已拒绝</span>
         }
       }
-    onAgree(record) {
-        // console.log('-------------------------');
-        // console.log(record);
+    onAgree = (record) => {
         record.status=1;
         this.fetchCheck(record);
     }
-    onReject(record) {
+    onReject = (record) => {
         record.status=2;
         this.fetchCheck(record);
     }
-    fetchCheck(params) {
+    fetchCheck = (params) => {
         auth.fetch('/v1/cashout/b/users/'+params.userId+'?id='+params.id+'&administarId='+localStorage.userId+'&status='+params.status,'put',{},(result)=>{
             if ("error" != result) {
                 if (result ==0 && params.status == 1) {
@@ -112,11 +109,10 @@ class Cashout extends Component {
             }
         });
     };
-    onQuery(e) {
+    onQuery = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            // this.fetch(values);
             this.fetch({
                 id: values.id,
                 userId: values.userId
@@ -124,12 +120,11 @@ class Cashout extends Component {
           }
         });
       }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
         return (
             <div id="cashout-container">
                  <div className="">
@@ -144,21 +139,13 @@ class Cashout extends Component {
                                 <Input placeholder="请输入用户ID" />,
                             )}
                         </Form.Item>
-                        {/* <Form.Item label="状态">
-                            {getFieldDecorator('status', {initialValue: "0"})(
-                                <Select>
-                                    <Select.Option value="0">启用</Select.Option>
-                                    <Select.Option value="1">禁用</Select.Option>
-                                </Select>,
-                            )}
-                        </Form.Item> */}
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
@@ -168,7 +155,7 @@ class Cashout extends Component {
                     <Table columns={columns}
                         rowKey={data => data.id} 
                         dataSource={this.state.data}
-                        />
+                    />
                 </div>
             </div>
         )

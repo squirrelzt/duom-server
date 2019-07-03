@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {auth} from './../../../common/auth';
 import './css/channelList.css';
-import { Table, Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
-const { TabPane } = Tabs;
+import { Table, Form, Input, Button, Select } from 'antd';
 import Create from './create/create';
 
 let columns = [{
@@ -66,10 +65,9 @@ class JobManage extends Component {
         });
     };
     componentWillMount(){
-        // this.fetch(this.props.match.params.id);
         this.fetch();
     };
-    onQuery(e) {
+    onQuery = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
@@ -78,15 +76,15 @@ class JobManage extends Component {
           }
         });
       }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
-    onCreate() {
+    onCreate = () => {
         this.setState({
             createVisible: true
         });
     }
-    onCreateCallback(params) {
+    onCreateCallback = (params) => {
         this.setState({
             createVisible: params.visible
           });
@@ -113,22 +111,21 @@ class JobManage extends Component {
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>
                     </Form>
                </div>
                <div className="job-source-add">
-               {/* <Button type="primary" onClick={this.onCreate.bind(this)}>新增任务</Button> */}
                    <Link to={"/job/lists/jobtype/"+this.props.match.params.id}><Button type="primary">新增任务</Button></Link>
                </div>
-               <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent = { this.onCreateCallback.bind(this) }/>
+               <Create {...this.props} init = {{ visible: this.state.createVisible }} callbackParent={this.onCreateCallback}/>
                 <Table columns={columns}
                     rowKey={data => data.id} 
                     scroll={{x:1200}}

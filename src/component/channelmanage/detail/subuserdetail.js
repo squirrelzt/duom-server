@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from './../../../common/auth';
 import './css/subuser.css';
-import { Modal, Divider, Button } from 'antd';
+import { Modal, Button } from 'antd';
 
 class SubUserDetail extends Component {
     constructor(props) {
@@ -29,7 +28,7 @@ class SubUserDetail extends Component {
             this.props.history.push(auth.getLoginUrl());
         }
     };
-    handleReset(e) {
+    handleReset = (e) => {
       this.props.callbackParent({
           visible: false
       });
@@ -47,7 +46,7 @@ class SubUserDetail extends Component {
             visible = { this.state.visible }
             footer = {[]}>
               <div className="detail-content">
-                {this.state.userData != null ?
+                {this.state.userData?"":
                     <ul>
                       <li>用户ID:&nbsp;{this.state.userData.id}</li>
                       <li>用户名:&nbsp;{this.state.userData.username}</li>
@@ -62,9 +61,9 @@ class SubUserDetail extends Component {
                       <li>创建时间:&nbsp;{this.state.userData.createTime}</li>
                       <li>更新时间:&nbsp;{this.state.userData.updateTime}</li>
                   </ul>
-                :""}
+                }
                   <div className="check-btn">
-                      <Button type="primary" className="back" onClick={this.handleReset.bind(this)}>
+                      <Button type="primary" className="back" onClick={this.handleReset}>
                           返回
                       </Button>
                   </div> 

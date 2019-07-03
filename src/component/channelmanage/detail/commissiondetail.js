@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {auth} from './../../../common/auth';
 import './css/commissiondetail.css';
-import { Form, Input, Button, Select, Table, Divider, DatePicker } from 'antd';
+import { Form, Input, Button, Table, Divider, DatePicker } from 'antd';
 const { RangePicker } = DatePicker;
 
 let columns = [{
@@ -118,24 +118,20 @@ class CommissionDetail extends Component {
         }
         this.fetch();
     };
-    onRangeDateChange(date, dateString) {
-      // console.log(dateString);
+    onRangeDateChange = (date, dateString) => {
       this.state.rangePicker = dateString;
-      // console.log(this.state.rangePicker);
       this.state.startTime = dateString[0];
       this.state.endTime = dateString[1];
     }
-    onQuery(e) {
+    onQuery = (e) => {
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err) {
-          // console.log('------------------------------');
-          // console.log(values);
           this.fetch(values);
         }
       });
     }
-    handleReset() {
+    handleReset = () => {
         this.props.form.resetFields();
     }
     render() {
@@ -151,16 +147,16 @@ class CommissionDetail extends Component {
                         </Form.Item>
                         <Form.Item label="起止时间">
                             {getFieldDecorator('rangeDate')(
-                                <RangePicker format='YYYY-MM-DD' onChange={this.onRangeDateChange.bind(this)}/>,
+                                <RangePicker format='YYYY-MM-DD' onChange={this.onRangeDateChange}/>,
                             )}
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" onClick={this.onQuery.bind(this)}>
+                            <Button type="primary" onClick={this.onQuery}>
                                 查询
                             </Button>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick={this.handleReset.bind(this)}>
+                            <Button onClick={this.handleReset}>
                                 重置
                             </Button>
                         </Form.Item>

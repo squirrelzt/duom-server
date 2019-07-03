@@ -33,7 +33,7 @@ class Recharge extends Component {
         
     };
    
-    onSave(e) {
+    onSave = (e) => {
         e.preventDefault();
         let t = this;
         this.props.form.validateFields((err, values) => {
@@ -42,10 +42,10 @@ class Recharge extends Component {
           }
         });
     }
-    handOk() {
+    handOk = () => {
 
     }
-    handleReset(e) {
+    handleReset = (e) => {
         e.preventDefault();
         this.props.form.resetFields();
         this.props.callbackParent({
@@ -69,9 +69,9 @@ class Recharge extends Component {
         return (
             <Modal id="recharge-container"
                 title="充值"
-                onOk = { this.handOk.bind(this) }
-                onCancel = { this.handleReset.bind(this) }
-                visible = { this.state.visible }
+                onOk = {this.handOk}
+                onCancel = {this.handleReset}
+                visible = {this.state.visible}
                 footer = {[]}>
                  <div className="">
                      <Form {...formItemLayout}>
@@ -81,7 +81,7 @@ class Recharge extends Component {
                             )}
                         </Form.Item>
                         <div className="recharge-btn">
-                            <Button type="primary" onClick={this.onSave.bind(this)}>
+                            <Button type="primary" onClick={this.onSave}>
                                 充值
                             </Button>
                         </div> 

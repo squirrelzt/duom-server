@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {auth} from './../../../common/auth';
 import './css/channelList.css';
-import { Modal, Form, Input, Button, Select, message, Tabs } from 'antd';
+import {  Tabs } from 'antd';
 const { TabPane } = Tabs;
 import JobBasicInfo from './jobbasicinfo';
 import JobManage from './jobmanage';
@@ -29,13 +29,13 @@ class ChannelList extends Component {
         this.fetch(this.props.match.params.id);
     };
  
-    callback() {
+    callback = () => {
 
     }   
     render() {
         return (
             <div id="channelList-container">
-                <Tabs defaultActiveKey="1" onChange={this.callback.bind(this)}>
+                <Tabs defaultActiveKey="1" onChange={this.callback}>
                     <TabPane tab="基本信息" key="1"><JobBasicInfo  {...this.props} init={this.state.data}/></TabPane>
                     <TabPane tab="任务管理" key="2"><JobManage {...this.props} /></TabPane>
                     <TabPane tab="工单核销" key="3"><WorkOrder {...this.props}/></TabPane>
