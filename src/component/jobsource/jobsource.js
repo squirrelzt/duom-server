@@ -76,7 +76,7 @@ class JobSource extends Component {
     };
 
     componentWillMount(){
-        if (localStorage.token == null) {
+        if (!localStorage.token) {
             this.props.history.push(auth.getLoginUrl());
         }
         if(columns[columns.length-1].title != "操作"){

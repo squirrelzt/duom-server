@@ -24,10 +24,8 @@ let columns = [{
       switch (text) {
           case 0:
             return <span>启用</span>;
-            break;
           case 1:
             return <span>禁用</span>;
-            break;
         }
     }
   },{
@@ -54,7 +52,7 @@ class User extends Component {
             createVisible: false
         };
     }
-    fetch = (params = {}) => {
+    fetch = (params) => {
       auth.fetch('/v1/users/c','get',params,(result)=>{
         if ("error" != result) {
           this.setState({
@@ -64,7 +62,7 @@ class User extends Component {
       });
     };
     componentWillMount() {
-      if (localStorage.token == null) {
+      if (!localStorage.token) {
         this.props.history.push(auth.getLoginUrl());
       }
       this.fetch();
@@ -73,13 +71,13 @@ class User extends Component {
       this.setState({
         createVisible: true
       });
-    }
+    };
     onCreateCallback = (params) => {
       this.setState({
         createVisible: params.visible
       });
       this.fetch();
-    }
+    };
     render() {
         return (
             <div id="user-container">
@@ -90,10 +88,9 @@ class User extends Component {
                     <Table columns={columns}
                         rowKey={data => data.id} 
                         dataSource={this.state.data}
-                        />
+                    />
                 </div>
-                <CreateUser {...this.props} init = {{ visible: this.state.createVisible }} 
-                  callbackParent = { this.onCreateCallback }/>
+                <CreateUser {...this.props} init={{visible: this.state.createVisible}} callbackParent={this.onCreateCallback}/>
             </div>
         )
     }

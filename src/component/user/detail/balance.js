@@ -65,7 +65,7 @@ class Balance extends Component {
     }
 
     componentWillMount(){
-        if (localStorage.token == null) {
+        if (!localStorage.token) {
             this.props.history.push(auth.getLoginUrl());
           }
     };

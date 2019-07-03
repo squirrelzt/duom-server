@@ -19,7 +19,7 @@ class Homex extends Component {
 
     componentWillMount(){
       console.log(localStorage.token);
-      if (localStorage.token == null) {
+      if (!localStorage.token) {
         this.props.history.push(auth.getLoginUrl());
       }
     };

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {auth} from './../../common/auth';
 import './css/cashout.css';
-import { Table, Form, Input, Button, Select, Divider, message } from 'antd';
+import { Table, Form, Input, Button } from 'antd';
 
 let columns = [{
     title: '提现ID',
@@ -56,7 +55,7 @@ class AuditedCashout extends Component {
     };
 
     componentWillMount(){
-        if (localStorage.token == null) {
+        if (!localStorage.token) {
             this.props.history.push(auth.getLoginUrl());
         }
         this.fetch();
