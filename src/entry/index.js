@@ -22,7 +22,6 @@ import Cashout from './../component/cashout/cashout.js';
 import AuditedCashout from './../component/cashout/auditedcashout.js';
 import RejectCashout from './../component/cashout/rejectcashout.js';
 import Tag from './../component/tag/tag.js';
-import './../common/lib.js';
 import './css/index.css';
 
 function component() {
