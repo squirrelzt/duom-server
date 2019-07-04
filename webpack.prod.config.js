@@ -6,7 +6,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
 	optimization: {
 		splitChunks: {
-		  chunks: 'async',
+		  chunks: 'all',
 		  minSize: 30000,
 		  maxSize: 0,
 		  minChunks: 1,
@@ -43,17 +43,17 @@ module.exports = {
 					preserveLineBreaks: false,
 					minifyCSS: true,
 					minifyJS: true,
-					removeComments: false
+					removeComments: true
 				}
 			}),
-		new ExtractTextPlugin("styles.css"),
+		new ExtractTextPlugin("[name].css"),
 		new OptimizeCssAssetsPlugin({
 			assetNameRegExp:/\.css$/g,
   			cssProcessor:require('cssnano')
 		})
 	],
     output: {
-			filename: 'main.js',
+			filename: '[name].js',
 			path: path.resolve(__dirname, 'dist'),
 			publicPath: '/'
 		},
