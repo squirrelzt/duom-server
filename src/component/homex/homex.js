@@ -5,15 +5,24 @@ import './css/homex.css';
 import { Menu, Icon, Button, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
 import {breadcrumbconfig} from './breadcrumbconfigx';
-import $ from "jquery";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import JobSourcex from '../jobsourcex/jobsourcex.js';
+import ChannelListx from './../jobsourcex/channellistx/channellistx.js';
+import './../../entry/css/index.css';
 
 class Homex extends Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             data: [],
             currentPage: "",
-            defaultOpenKeys: []
+            defaultOpenKeys: [],
+            asideVisibility: "visible",
+            sectionMarginLeft: '240px',
+            breadcrumbMarginLeft: '240px',
+            contentContainerMarginLeft: '240px',
+            menuFoldIconVisibility: 'visible',
+            menuUnFoldIconVisibility: 'hidden'
         };
     }
 
@@ -25,20 +34,24 @@ class Homex extends Component {
     };
 
     onMenuFold = () => {
-        $('#home-container aside').css('display', 'none');
-        $('#home-container section').css('margin-left', '0');
-        $('#home-container > .breadcrumb').css('margin-left', '0');
-        $('.content-container').css('margin-left', '0');
-        $('.menuFoldIcon').css('display', 'none');
-        $('.menuUnFoldIcon').css('display', 'block');
+        this.setState({
+            asideVisibility: 'hidden',
+            sectionMarginLeft: '0',
+            breadcrumbMarginLeft: '0',
+            contentContainerMarginLeft: '0',
+            menuFoldIconVisibility: 'hidden',
+            menuUnFoldIconVisibility: 'visible'
+        });
     }
     onMenuUnFold = () => {
-        $('#home-container aside').css('display', 'block');
-        $('#home-container section').css('margin-left', '240px');
-        $('#home-container > .breadcrumb').css('margin-left', '240px');
-        $('.content-container').css('margin-left', '240px');
-        $('.menuFoldIcon').css('display', 'block');
-        $('.menuUnFoldIcon').css('display', 'none');
+        this.setState({
+            asideVisibility: 'visible',
+            sectionMarginLeft: '240px',
+            breadcrumbMarginLeft: '240px',
+            contentContainerMarginLeft: '240px',
+            menuFoldIconVisibility: 'visible',
+            menuUnFoldIconVisibility: 'hidden'
+        });
     }
     logout = () => {
         localStorage.token = "";
@@ -90,7 +103,8 @@ class Homex extends Component {
               this.state.defaultOpenKeys.push("homes-job-resource-manage");
           }
         return (
-            <div id="homex-container">
+            <div>
+            <div id="homex-container" style={{visibility: this.state.asideVisibility}}>
                 <aside>
                     <div className="aside-space"></div>
                     <Menu mode="inline"
@@ -107,21 +121,26 @@ class Homex extends Component {
                         </SubMenu>
                     </Menu>
                 </aside>
-                <section>
+                <section style={{marginLeft:this.state.sectionMarginLeft}}>
                     <div className="menu-display">
-                        <Icon className="menuFoldIcon" type="menu-fold" onClick={this.onMenuFold}/>
-                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{display: 'none'}} onClick={this.onMenuUnFold}/>
+                        <Icon className="menuFoldIcon" type="menu-fold" style={{visibility:this.state.menuFoldIconVisibility}} onClick={this.onMenuFold}/>
+                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{visibility: this.state.menuUnFoldIconVisibility}} onClick={this.onMenuUnFold}/>
                         <div className="logout">
                             <span>当前用户: {localStorage.userId}</span>
                             <Button type="primary" size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
                         </div>
                     </div>
                 </section>
-                <div className="breadcrumb">
+                <div className="breadcrumb" style={{marginLeft:this.state.breadcrumbMarginLeft}}>
                     <Breadcrumb>
                         {breadcrumbItem}
                     </Breadcrumb>
                 </div>
+            </div>
+            <div className="content-container" style={{marginLeft:this.state.contentContainerMarginLeft}}>
+                <Route path='/home/homelistx' component = { JobSourcex }/>
+                <Route path='/home/homelist/basicinfox/:id' component = { ChannelListx }/>
+            </div>
             </div>
         )
     }

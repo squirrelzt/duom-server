@@ -5,15 +5,37 @@ import './css/home.css';
 import { Menu, Icon, Button, Breadcrumb } from 'antd';
 const { SubMenu }  = Menu;
 import {breadcrumbconfig} from './breadcrumbconfig';
-import $ from "jquery";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import User from './../user/user.js';
+import Detail from './../user/detail.js';
+import JobSource from './../jobsource/jobsource.js';
+import ChannelList from './../jobsource/channellist/channellist.js';
+import SelectJobType from './../jobsource/channellist/create/SelectJobType.js';
+import CreateJob from './../jobsource/channellist/create/CreateJob.js';
+import JobWorkOrder from './../jobworkorder/jobworkorder.js';
+import ChannelCommissionList from './../channelcommissionlist/channelcommissionlist.js';
+import CommissionDetail from './../channelcommissionlist/commissiondetail/commissiondetail.js';
+import ChannelManage from './../channelmanage/channelmanage.js';
+import ExtendDetail from './../channelmanage/extenddetail.js';
+import Cashout from './../cashout/cashout.js';
+import AuditedCashout from './../cashout/auditedcashout.js';
+import RejectCashout from './../cashout/rejectcashout.js';
+import Tag from './../tag/tag.js';
+import './../../entry/css/index.css';
 
 class Home extends Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             data: [],
             currentPage: "",
-            defaultOpenKeys: []
+            defaultOpenKeys: [],
+            asideVisibility: "visible",
+            sectionMarginLeft: '240px',
+            breadcrumbMarginLeft: '240px',
+            contentContainerMarginLeft: '240px',
+            menuFoldIconVisibility: 'visible',
+            menuUnFoldIconVisibility: 'hidden'
         };
     }
 
@@ -25,20 +47,24 @@ class Home extends Component {
     };
 
     onMenuFold = () => {
-        $('#home-container aside').css('visibility', 'hidden');
-        $('#home-container section').css('margin-left', '0');
-        $('#home-container > .breadcrumb').css('margin-left', '0');
-        $('.content-container').css('margin-left', '0');
-        $('.menuFoldIcon').css('visibility', 'hidden');
-        $('.menuUnFoldIcon').css('visibility', 'visible');
+        this.setState({
+            asideVisibility: 'hidden',
+            sectionMarginLeft: '0',
+            breadcrumbMarginLeft: '0',
+            contentContainerMarginLeft: '0',
+            menuFoldIconVisibility: 'hidden',
+            menuUnFoldIconVisibility: 'visible'
+        });
     }
     onMenuUnFold = () => {
-        $('#home-container aside').css('visibility', 'visible');
-        $('#home-container section').css('margin-left', '240px');
-        $('#home-container > .breadcrumb').css('margin-left', '240px');
-        $('.content-container').css('margin-left', '240px');
-        $('.menuFoldIcon').css('visibility', 'visible');
-        $('.menuUnFoldIcon').css('visibility', 'hidden');
+        this.setState({
+            asideVisibility: 'visible',
+            sectionMarginLeft: '240px',
+            breadcrumbMarginLeft: '240px',
+            contentContainerMarginLeft: '240px',
+            menuFoldIconVisibility: 'visible',
+            menuUnFoldIconVisibility: 'hidden'
+        });
     }
     logout = () => {
         localStorage.token = "";
@@ -102,8 +128,9 @@ class Home extends Component {
             this.state.defaultOpenKeys.push("job-tag-manage");
           }
         return (
+            <div>
             <div id="home-container">
-                <aside>
+                <aside style={{visibility: this.state.asideVisibility}}>
                     <div className="aside-space"></div>
                     <Menu mode="inline"
                           selectedKeys={[this.state.currentPage]}
@@ -166,21 +193,39 @@ class Home extends Component {
                         </SubMenu>
                     </Menu>
                 </aside>
-                <section>
+                <section style={{marginLeft:this.state.sectionMarginLeft}}>
                     <div className="menu-display">
-                        <Icon className="menuFoldIcon" type="menu-fold" onClick={this.onMenuFold}/>
-                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{visibility: 'hidden'}} onClick={this.onMenuUnFold}/>
+                        <Icon className="menuFoldIcon" type="menu-fold" style={{visibility:this.state.menuFoldIconVisibility}} onClick={this.onMenuFold}/>
+                        <Icon className="menuUnFoldIcon" type="menu-unfold" style={{visibility: this.state.menuUnFoldIconVisibility}} onClick={this.onMenuUnFold}/>
                         <div className="logout">
                             <span>当前用户: {localStorage.userId}</span>
                             <Button type="primary" size="small" className="logout-btn" onClick={this.logout}><Icon type="logout"/>退出系统</Button>
                         </div>
                     </div>
                 </section>
-                <div className="breadcrumb">
+                <div className="breadcrumb" style={{marginLeft:this.state.breadcrumbMarginLeft}}>
                     <Breadcrumb>
                         {breadcrumbItem}
                     </Breadcrumb>
                 </div>
+            </div>
+            <div className="content-container" style={{marginLeft:this.state.contentContainerMarginLeft}}>
+                <Route path='/user/lists' component = { User }/>
+                <Route path='/user/list/detail/:id' component = { Detail }/>
+                <Route path='/job/channel' component = { JobSource }/>
+                <Route path='/job/list/basicinfo/:id' component = { ChannelList }/>
+                <Route path='/job/lists/jobtype/:id' component = { SelectJobType }/>
+                <Route path='/job/listsj/createjob/:id' component = { CreateJob }/>
+                <Route path='/workorder/manage' component = { JobWorkOrder }/>
+                <Route path='/channelcommission/commissionlists' component = { ChannelCommissionList }/>
+                <Route path='/channelcommission/commissionlist/comissiondetail/:id' component = { CommissionDetail }/>
+                <Route path='/extend/extendlists' component = { ChannelManage }/>
+                <Route path='/extend/extendlist/extenddetail/:id' component = { ExtendDetail }/>
+                <Route path='/cashout/cashoutlists' component = { Cashout }/>
+                <Route path='/cashout/auditedcashoutlists' component = { AuditedCashout }/>
+                <Route path='/cashout/rejectcashoutlists' component = { RejectCashout }/>
+                <Route path='/tag/taglists' component = { Tag }/>
+            </div>
             </div>
         )
     }
