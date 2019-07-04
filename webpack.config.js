@@ -8,17 +8,39 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
+	optimization: {
+		splitChunks: {
+		  chunks: 'all',
+		  minSize: 30000,
+		  maxSize: 0,
+		  minChunks: 1,
+		  maxAsyncRequests: 5,
+		  maxInitialRequests: 3,
+		  automaticNameDelimiter: '~',
+		  automaticNameMaxLength: 30,
+		  name: true,
+		  cacheGroups: {
+			vendors: {
+			  test: /[\\/]node_modules[\\/]/,
+			  priority: -10
+			},
+			default: {
+			  minChunks: 2,
+			  priority: -20,
+			  reuseExistingChunk: true
+			}
+		  }
+		}
+	},
     entry: {
         index: './src/entry/index.js'
 	},
 	mode: 'development',
-	// mode: 'production',
 	devtool: 'inline-source-map',
-	// devtool: false,
     devServer: {
-			historyApiFallback:true,
-      contentBase: './dist'
-		},
+		historyApiFallback:true,
+        contentBase: './dist'
+	},
     plugins: [
         // new CleanWebpackPlugin(),
     	new HtmlWebpackPlugin({
@@ -36,14 +58,14 @@ module.exports = {
         new ManifestPlugin(),
         new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
-		new ExtractTextPlugin("styles.css"),
+		new ExtractTextPlugin("[name].css"),
 		new OptimizeCssAssetsPlugin({
 			assetNameRegExp:/\.css$/g,
   			cssProcessor:require('cssnano')
 		})
 	],
     output: {
-			filename: 'main.js',
+			filename: '[name].js',
 			path: path.resolve(__dirname, 'dist'),
 			publicPath: '/'
 		},
