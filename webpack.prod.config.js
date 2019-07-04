@@ -62,13 +62,29 @@ module.exports = {
 	    {
 			test: /\.(png|svg|jpg|gif|ico)$/,
 			use: [
-				'file-loader'
+				{
+					loader: 'file-loader',
+					options: {
+						 name: 'images/[hash:8].[name].[ext]',
+						 context: 'dist',
+						 limit: 8192,	
+						 publicPath: './'
+					 }
+				 }
 			]
 		}, {
 			test: /\.(woff|woff2|eot|ttf|otf)$/,
 			use: [
-				'file-loader'
-				]
+				{
+					loader: 'file-loader',
+					options: {
+						 name: 'images/[hash:8].[name].[ext]',
+						 context: 'dist',
+						 limit: 8192,	
+						 publicPath: './'
+					 }
+				 }
+			]
 		}, {
 			test: /\.(csv|tsv)$/,
 			use: [
