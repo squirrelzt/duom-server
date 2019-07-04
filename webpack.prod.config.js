@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	optimization: {
@@ -50,6 +51,9 @@ module.exports = {
 		new OptimizeCssAssetsPlugin({
 			assetNameRegExp:/\.css$/g,
   			cssProcessor:require('cssnano')
+		}),
+		new BundleAnalyzerPlugin({
+			analyzerPort: 8919
 		})
 	],
     output: {
