@@ -79,6 +79,12 @@ module.exports = {
   module: {
 	  rules: [
 	    {
+			test: /\.js$/,
+			exclude: /node_modules/,
+			use: [
+				'babel-loader'
+			]
+		  },{
 			test: /\.(png|svg|jpg|gif|ico)$/,
 			use: [
 				'file-loader'
@@ -99,18 +105,19 @@ module.exports = {
 				'xml-loader'
 				]
 		}, {
-	  		test: /\.js$/,
-			exclude: /node_modules/,
-			use: [
-				'babel-loader'
-			]
-		  },{
 			test: /\.css$/,
 			use: ExtractTextPlugin.extract({
 			  fallback: "style-loader",
 			  use: "css-loader"
 			})
-		  }
+		}, {
+			test: /\.less$/,
+			use: [
+				'style-loader',
+				'css-loader',
+				'less-loader'
+			]
+		 }
 		]
   }
 };
