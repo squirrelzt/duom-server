@@ -162,10 +162,10 @@ class Loginx extends Component {
     }
     render() {
         return (
-            <div id="login-container">
+            <div id="loginx-container">
                 <nav>登录</nav>
                 <div className="telephone">
-                    <img className="telephone-img" src={require("./images/ic_phone.png")}/>
+                    <img className="telephone-img" src={require("./../login/images/ic_phone.png")}/>
                     <input className="telephone-input" placeholder="请输入手机号" value={this.state.telephoneInputValue} onChange={this.onTelephoneInputHandel}/>
                     <button className="verify-code-send-btn" disabled={this.state.verifyCodeSendBtnDisabled}onClick={this.sendVerifyCode}>{this.state.verifyCodeSendBtnValue}</button>
                 </div>
@@ -179,9 +179,9 @@ class Loginx extends Component {
                     <p>手机号格式错误</p>
                 </div>
                 <div className="verify-code">
-                    <img className="email" src={require("./images/ic_message.png")}/>
+                    <img className="email" src={require("./../login/images/ic_message.png")}/>
                     <input className="verify-code-input" value={this.state.verifyCodeInputValue} onChange={this.onVerifyCodeInputhandle}/>
-                    <img className="close" src={require("./images/btn_ic_close.png")} onClick={this.clearVerifyCode}/>
+                    <img className="close" src={require("./../login/images/btn_ic_close.png")} onClick={this.clearVerifyCode}/>
                 </div>
                 <div className="error verifyCodeError" style={{visibility:this.state.verifyCodeErrorVisibility}}>
                     <p>输入验证码错误</p>
